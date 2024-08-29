@@ -40,3 +40,12 @@ Content-Type: application/json
   "email": "user2@gmail.com",
   "password": "qwerty"
 }
+
+### charge balance
+POST http://localhost:8080/api/member/customer/charge
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNDkzODc1MywiZXhwIjoxNzI1MDI1MTUzfQ.kavfMrzWueykS0QbZ2nXU69tZyclHfzdLMTFcz5_pngvhYl5nFuIwmYsYsGzeg9MkJhCqojIqFtChIkd4n4EQQ
+
+{
+  "amount": 1000
+}

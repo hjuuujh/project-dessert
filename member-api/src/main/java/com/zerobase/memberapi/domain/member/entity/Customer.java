@@ -94,4 +94,9 @@ public class Customer extends BaseEntity implements UserDetails {
                 .build();
     }
 
+    public void changeBalance(int balance) {
+        this.balance += balance;
+    }
+
+
  }

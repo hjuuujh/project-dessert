@@ -1,6 +1,7 @@
 package com.zerobase.memberapi.service;
 
 
+import com.zerobase.memberapi.domain.member.form.ChargeForm;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.zerobase.memberapi.domain.member.dto.CustomerDto;
@@ -91,6 +92,19 @@ public class CustomerService implements UserDetailsService {
         }
 
         return CustomerDto.from(member);
+    }
+
+    @Transactional
+    public CustomerDto chargeBalance(Long id, ChargeForm form) {
+        if (form.getAmount() < 0) {
+            throw new MemberException(CHECK_AMOUNT);
+        }
+        Customer customer = customerRepository.findById(id)
+                .orElseThrow(() -> new MemberException(NOT_FOUND_USER));
+
+        customer.changeBalance(form.getAmount());
+
+        return CustomerDto.from(customer);
     }
 
 }
