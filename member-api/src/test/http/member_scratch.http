@@ -1,0 +1,42 @@
+### signup seller
+POST http://localhost:8080/api/member/signup/seller
+Content-Type: application/json
+
+{
+  "email": "user1@gmail.com",
+  "name": "user1",
+  "password": "qwerty",
+  "phone": "01012345678",
+  "roles": ["ROLE_SELLER"]
+}
+
+
+### signin seller
+POST http://localhost:8080/api/member/signin/seller
+Content-Type: application/json
+
+{
+  "email": "user1@gmail.com",
+  "password": "qwerty"
+}
+
+### signup customer
+POST http://localhost:8080/api/member/signup/customer
+Content-Type: application/json
+
+{
+  "email": "user2@gmail.com",
+  "name": "user2",
+  "password": "qwerty",
+  "phone": "01012345678",
+  "roles": ["ROLE_CUSTOMER"]
+}
+
+### signin customer
+POST http://localhost:8080/api/member/signin/customer
+Content-Type: application/json
+
+{
+  "email": "user2@gmail.com",
+  "password": "qwerty"
+}
