@@ -25,6 +25,13 @@ public class CustomerController {
     private final TokenProvider tokenProvider;
     private final ValidationErrorResponse validationErrorResponse;
 
+    /**
+     *
+     * @param token
+     * @param form amount
+     * @param errors
+     * @return
+     */
     @PostMapping("/charge")
     @BalanceLock
     public ResponseEntity<?> chargeBalance(@RequestHeader(name = "Authorization") String token,
