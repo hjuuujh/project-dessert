@@ -1,0 +1,44 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        # yml 이용해 선언적 방식으로 라우팅 구현
+      # @Configuration 이용해 프로그래밍 방식으로도 라우팅 구현 가능
+
+    config:
+      label: master
+      profile: dev
+      uri: http://localhost:8888 # jwt secret key 있는 config server와 연결
+      name: api-gateway
+
+  config:
+    import: optional:configserver:http://localhost:8888 # jwt secret key 있는 config server와 연결 & optional : config server 에서 응답을 받지 못해도 client 애플리케이션은 구동
+
+  profiles:
+    active: dev
+
+eureka: # eureka client 등록
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
+logging:
+  level:
+    org.springframework.security: debug
+#    root: debug

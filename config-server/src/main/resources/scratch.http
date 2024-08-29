@@ -1,0 +1,19 @@
+### get config
+### port/api-name/profile
+GET http://localhost:8888/api-gateway/dev
+
+### get config
+GET http://localhost:8888/member-api/dev
+
+### encrypt
+POST http://localhost:8888/encrypt
+Content-Type: application/x-www-form-urlencoded
+
+4c216af15dddd3987142b0e1a66489f464623a449d4c0d12506fd30b376e6c7dc5c3d9f50adb8b74297a0c2e863203adaf76c4f1f630b3a11902e6dc40151214
+
+### decrypt
+POST localhost:8888/decrypt
+Content-Type: application/x-www-form-urlencoded
+
+AQBpayL+t4uQ9XbKpr53Gawm2bzZyGtEeZcAcBrfL4yUr/ku5pxqsS10PKYgCfqaK4lhhR4VNBf55I1wisrmNaZQc9I4T0Gi6a4IM0loTsZD9Uy9aWFgNkRq9RcKtPq8n/SM4VF0hTDYCEHdwVTRP+xxIeif9upLpbavk6sxw1wLfnFrJpkZR+kKEql6aUmG0hFvvAfmwROe9gwFUA7f1CGTsfP/CkqlYF6G44NqhwWwous7qSTKMrl6wMRKUnTukG7vygeWKh0qHhCY7ZsXRF1IuGtzMapN9isyMvnXloFtck7vbClif5jJtl6YuSq27Wwn9GLyhugeFmSzL1eHLpciQUfHIpE9WpBH9it5OFEWmd3rSNRdiUWaKQeaVdkoPoerUIqHWGZno7vCJeSKnybkPrugnrlci4A1b3Ub2dmhfjpGr1fD+FtewTFiknqJ0dQzUFrPc4DH0F3sNFBqkLLgOO4FlfwrrmXW3SGJFoWxnQWQctQjgFNaBavgm8Q6LyrTdvz/cHRSliKJ/ya9OCD4YiWo/ia2/abG21sfFHiyjg==
+
