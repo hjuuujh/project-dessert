@@ -2,4 +2,5 @@ rootProject.name = 'project-dessert'
 include 'api-gateway'
 include 'config-server'
 include 'eureka-server'
+include 'member-api'
 

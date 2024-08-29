@@ -8,7 +8,32 @@ spring:
     gateway:
       routes:
         # yml 이용해 선언적 방식으로 라우팅 구현
-      # @Configuration 이용해 프로그래밍 방식으로도 라우팅 구현 가능
+        # @Configuration 이용해 프로그래밍 방식으로도 라우팅 구현 가능
+        - id: open-api
+          uri: http://localhost:8090
+          predicates:
+            - Path=/api/member/signup/**, /api/member/signin/** # 회원가입과 로그인은 필터 적용 안함
+        - id: customer-api
+          uri: http://localhost:8090
+          predicates:
+            - Path=/api/member/customer/*
+          filters:
+            - name: AuthorizationHeaderFilter
+              args:
+                headerName: Authorization
+                granted: Bearer
+                role: ROLE_CUSTOMER
+        - id: seller-api
+          uri: http://localhost:8090
+          predicates:
+            - Path=/api/member/seller/*
+          filters:
+            - name: AuthorizationHeaderFilter
+              args:
+                headerName: Authorization
+                granted: Bearer
+                role: ROLE_SELLER
+
 
     config:
       label: master
