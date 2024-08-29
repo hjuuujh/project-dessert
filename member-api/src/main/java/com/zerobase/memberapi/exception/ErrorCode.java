@@ -15,7 +15,13 @@ public enum ErrorCode {
 
     // 로그인, 유저정보 가져오기
     NOT_FOUND_USER(HttpStatus.BAD_REQUEST, "일치하는 회원이 없습니다."),
-    LOGIN_CHECK_FAIL(HttpStatus.BAD_REQUEST, "이메일과 패스워드를 확인해주세요.");
+    LOGIN_CHECK_FAIL(HttpStatus.BAD_REQUEST, "이메일과 패스워드를 확인해주세요."),
+    // 잔액 변경,
+    CHECK_AMOUNT(HttpStatus.BAD_REQUEST, "충전 금액을 확인해주세요."),
+
+    // Lock
+    ACCOUNT_TRANSACTION_LOCK(HttpStatus.BAD_REQUEST,"해당 계좌는 사용 중입니다.");
+
 
     private final HttpStatus httpStatus;
     private final String description;
