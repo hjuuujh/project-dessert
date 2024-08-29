@@ -1,0 +1,47 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/hjuuujh/dessert-msa-config # 설정파일 있는 git 주소
+          default-label: master # 설정파일 있는 git branch
+        encrypt:
+          enabled: true
+
+# 비대칭 암호화 위한 key-store 사용법
+# config server 폴더에서
+# key store파일(.jks) 생성
+# -> keytool -genkeypair -alias encryptionKey -keyalg RSA -keypass "storeEncryptionKey" -keystore encryptionKey.jks -storepass "storeEncryptionKey" -dname "CN=HJ Kim"
+# 생성한 key store 파일을 이용해 공개키를 위한 인증서 생성
+# -> keytool -export -alias encryptionKey -keystore encryptionKey.jks -rfc -file trust_key.cer
+# 인증서를 통해 인증된 KEY STORE 파일 생성
+# -> keytool -import -alias trust_key -file trust_key.cer -keystore publicKey.jks
+# pw는 위와 같게함
+# encrytionKey.jks는 config server가 가지고 publicKey.jks는 다른 서비스나 클라이언트에 제공됨
+encrypt:
+  key-store:
+    alias: encryptionKey
+    password: dessertEncryptionKey
+    location: encryptionKey.jks
+#    location: file:/encryptionKey.jks
+
+eureka: # eureka client 등록
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+

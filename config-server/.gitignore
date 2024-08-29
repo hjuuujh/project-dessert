@@ -1,0 +1,7 @@
+build/
+out/
+
+src/main/resources/encryprionKey.jks
+
+encryptionKey.jks
+trust_key.cer
