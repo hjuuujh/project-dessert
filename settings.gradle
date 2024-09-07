@@ -3,4 +3,5 @@ include 'api-gateway'
 include 'config-server'
 include 'eureka-server'
 include 'member-api'
+include 'store-api'
 

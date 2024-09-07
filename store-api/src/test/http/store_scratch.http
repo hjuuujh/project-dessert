@@ -1,0 +1,49 @@
+### register store
+POST http://localhost:8080/api/store
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJTdWJIZUtVUlJyZVFZK1dTT25Ca3RnPT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjU3MDk1MzksImV4cCI6MTcyNTc5NTkzOX0.gXQF1uTISmL18UczI45xyWWSBLIQksnWiird9s3_mC1H2suQQaofuuYbaFbhMdd_zrEcadbYnwhhC0Ht4I3DAw
+
+{
+  "name": "디디얌",
+  "description": "디디얌 베이커리&디저트",
+  "thumbnailUrl": "https://디디얌.png"
+}
+
+### register store
+POST http://localhost:8080/api/store
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJTdWJIZUtVUlJyZVFZK1dTT25Ca3RnPT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjU3MDk1MzksImV4cCI6MTcyNTc5NTkzOX0.gXQF1uTISmL18UczI45xyWWSBLIQksnWiird9s3_mC1H2suQQaofuuYbaFbhMdd_zrEcadbYnwhhC0Ht4I3DAw
+
+{
+  "name": "달달구리해닮",
+  "description": "해남으로 귀농해서 농부가 되었습니다",
+  "thumbnailUrl": "https://해닮.png"
+}
+
+### register store
+POST http://localhost:8080/api/store
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJTdWJIZUtVUlJyZVFZK1dTT25Ca3RnPT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjU3MDk1MzksImV4cCI6MTcyNTc5NTkzOX0.gXQF1uTISmL18UczI45xyWWSBLIQksnWiird9s3_mC1H2suQQaofuuYbaFbhMdd_zrEcadbYnwhhC0Ht4I3DAw
+
+{
+  "name": "바스켓베이커리",
+  "description": "#노밀가루, #노정제설탕, #노글루텐",
+  "thumbnailUrl": "https://바스켓.png"
+}
+
+### update store
+PUT http://localhost:8080/api/store
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJTdWJIZUtVUlJyZVFZK1dTT25Ca3RnPT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjU3MDk1MzksImV4cCI6MTcyNTc5NTkzOX0.gXQF1uTISmL18UczI45xyWWSBLIQksnWiird9s3_mC1H2suQQaofuuYbaFbhMdd_zrEcadbYnwhhC0Ht4I3DAw
+
+{
+  "id": 6,
+  "name": "바스켓베이커리 수정",
+  "description": "#노밀가루, #노정제설탕, #노글루텐",
+  "thumbnailUrl": "https://바스켓.png"
+}
+
+### delete store
+PATCH http://localhost:8080/api/store?id=6
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJTdWJIZUtVUlJyZVFZK1dTT25Ca3RnPT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjU3MDk1MzksImV4cCI6MTcyNTc5NTkzOX0.gXQF1uTISmL18UczI45xyWWSBLIQksnWiird9s3_mC1H2suQQaofuuYbaFbhMdd_zrEcadbYnwhhC0Ht4I3DAw

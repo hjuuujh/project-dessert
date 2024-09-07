@@ -102,6 +102,17 @@ public class MemberController {
         return ResponseEntity.ok(TokenResponse.from(token));
     }
 
+    /**
+     * 사용자 정보 찾기
+     *
+     * @param token
+     * @return 토큰으로 찾은 유저 아이디
+     */
+    @GetMapping("/id")
+    public ResponseEntity<?> getMemberId(@RequestHeader(name = "Authorization") String token) {
+        Long id = tokenProvider.getUserIdFromToken(token);
+        return ResponseEntity.ok(id);
+    }
 
 
 }
