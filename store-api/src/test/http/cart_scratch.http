@@ -1,0 +1,77 @@
+### cart 등록
+POST localhost:8080/api/store/cart
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJxaWpTQWpEdVVGUVZ5WmwxZDErbGdRPT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNTcxMzg0MSwiZXhwIjoxNzI1ODAwMjQxfQ.xhlHHQAY0Czr8lCu76XMXo2_OLTjnLLu8tkgK4_KCjZmf24OtuPJC0IU281ZhwNKNo_dE01Tr-vLbJiwB54Mgw
+
+{
+  "id": 1,
+  "storeId": 1,
+  "storeName": "디디얌",
+  "name": "디디얌 마카롱 수제 뚱카롱 32종",
+  "options": [
+    {
+      "id": 1,
+      "name": "조리퐁",
+      "quantity": 1,
+      "price": 2500
+    },
+    {
+      "id": 2,
+      "name": "딸기바나나",
+      "quantity": 2,
+      "price": 2500
+    }
+  ]
+}
+
+### cart 등록
+POST localhost:8080/api/store/cart
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJxaWpTQWpEdVVGUVZ5WmwxZDErbGdRPT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNTcxMzg0MSwiZXhwIjoxNzI1ODAwMjQxfQ.xhlHHQAY0Czr8lCu76XMXo2_OLTjnLLu8tkgK4_KCjZmf24OtuPJC0IU281ZhwNKNo_dE01Tr-vLbJiwB54Mgw
+
+{
+  "id": 6,
+  "storeId": 2,
+  "storeName": "달달구리해닮",
+  "name": "샹티크림끌레오르",
+  "options": [
+    {
+      "id": 12,
+      "name": "블루베리샹티크림 끌레오르",
+      "quantity": 2,
+      "price": 26000
+    },
+    {
+      "id": 11,
+      "name": "얼그레이샹티크림 끌레오르",
+      "quantity": 2,
+      "price": 26000
+    }
+  ]
+}
+
+
+### cart 조회
+GET localhost:8080/api/store/cart
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJxaWpTQWpEdVVGUVZ5WmwxZDErbGdRPT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNTcxMzg0MSwiZXhwIjoxNzI1ODAwMjQxfQ.xhlHHQAY0Czr8lCu76XMXo2_OLTjnLLu8tkgK4_KCjZmf24OtuPJC0IU281ZhwNKNo_dE01Tr-vLbJiwB54Mgw
+
+### cart 옵션 삭제
+PATCH localhost:8080/api/store/cart
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJxaWpTQWpEdVVGUVZ5WmwxZDErbGdRPT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNTcxMzg0MSwiZXhwIjoxNzI1ODAwMjQxfQ.xhlHHQAY0Czr8lCu76XMXo2_OLTjnLLu8tkgK4_KCjZmf24OtuPJC0IU281ZhwNKNo_dE01Tr-vLbJiwB54Mgw
+
+{
+  "optionIds": [12, 2]
+}
+
+### cart 옵션 수량 변경
+PUT localhost:8080/api/store/cart
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJxaWpTQWpEdVVGUVZ5WmwxZDErbGdRPT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNTcxMzg0MSwiZXhwIjoxNzI1ODAwMjQxfQ.xhlHHQAY0Czr8lCu76XMXo2_OLTjnLLu8tkgK4_KCjZmf24OtuPJC0IU281ZhwNKNo_dE01Tr-vLbJiwB54Mgw
+
+{
+  "itemId": 6,
+  "optionId": 11,
+  "quantity": 3
+}
