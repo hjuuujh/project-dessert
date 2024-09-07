@@ -1,6 +1,8 @@
 package com.zerobase.storeapi.controller;
 
 import com.zerobase.storeapi.client.MemberClient;
+import com.zerobase.storeapi.client.from.HeartForm;
+import com.zerobase.storeapi.client.from.ItemsForm;
 import com.zerobase.storeapi.domain.form.item.CreateItem;
 import com.zerobase.storeapi.domain.form.item.UpdateItem;
 import com.zerobase.storeapi.service.StoreItemService;
@@ -49,6 +51,24 @@ public class StoreItemController {
                                         @RequestParam Long id) {
 
         return ResponseEntity.ok(storeItemService.deleteItem(memberClient.getMemberId(token), id));
+    }
+
+
+    @PostMapping("/heart")
+    public ResponseEntity<?> increaseHeart(@RequestBody HeartForm form) {
+
+        return ResponseEntity.ok(storeItemService.increaseHeart(form));
+    }
+
+    @PostMapping("/unheart")
+    public ResponseEntity<?> decreaseHeart(@RequestBody HeartForm form) {
+
+        return ResponseEntity.ok(storeItemService.decreaseHeart(form));
+    }
+
+    @PostMapping("/list")
+    public ResponseEntity<?> getItems(@RequestBody ItemsForm form, Pageable pageable) {
+        return ResponseEntity.ok(storeItemService.getItems(form, pageable));
     }
 
     /**

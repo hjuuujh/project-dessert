@@ -1,0 +1,68 @@
+### follow store
+POST http://localhost:8080/api/member/customer/follow
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJxaWpTQWpEdVVGUVZ5WmwxZDErbGdRPT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNTcxMjQ5MiwiZXhwIjoxNzI1Nzk4ODkyfQ.PSFi6wYRnpnVbttaD1dYXH3blQbSTEqSgyC5Bw8tcBxyfrKuB0fYyg2MUpOvDuMoGnbpWlLTSEOGumKq7ZWF7A
+
+{
+  "storeId": 1
+}
+
+### follow store
+POST http://localhost:8080/api/member/customer/follow
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJxaWpTQWpEdVVGUVZ5WmwxZDErbGdRPT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNTcxMjQ5MiwiZXhwIjoxNzI1Nzk4ODkyfQ.PSFi6wYRnpnVbttaD1dYXH3blQbSTEqSgyC5Bw8tcBxyfrKuB0fYyg2MUpOvDuMoGnbpWlLTSEOGumKq7ZWF7A
+
+{
+  "storeId": 3
+}
+
+### unfollow store
+POST http://localhost:8080/api/member/customer/unfollow
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJxaWpTQWpEdVVGUVZ5WmwxZDErbGdRPT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNTcxMjQ5MiwiZXhwIjoxNzI1Nzk4ODkyfQ.PSFi6wYRnpnVbttaD1dYXH3blQbSTEqSgyC5Bw8tcBxyfrKuB0fYyg2MUpOvDuMoGnbpWlLTSEOGumKq7ZWF7A
+
+{
+  "storeId": 1
+}
+
+### get follow stores
+GET http://localhost:8080/api/member/customer/stores?page=0&size=5
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJxaWpTQWpEdVVGUVZ5WmwxZDErbGdRPT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNTcxMjQ5MiwiZXhwIjoxNzI1Nzk4ODkyfQ.PSFi6wYRnpnVbttaD1dYXH3blQbSTEqSgyC5Bw8tcBxyfrKuB0fYyg2MUpOvDuMoGnbpWlLTSEOGumKq7ZWF7A
+
+### heart item
+POST http://localhost:8080/api/member/customer/heart
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJxaWpTQWpEdVVGUVZ5WmwxZDErbGdRPT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNTcxMjQ5MiwiZXhwIjoxNzI1Nzk4ODkyfQ.PSFi6wYRnpnVbttaD1dYXH3blQbSTEqSgyC5Bw8tcBxyfrKuB0fYyg2MUpOvDuMoGnbpWlLTSEOGumKq7ZWF7A
+
+{
+  "itemId": 4
+}
+
+### heart item
+POST http://localhost:8080/api/member/customer/heart
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJxaWpTQWpEdVVGUVZ5WmwxZDErbGdRPT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNTcxMjQ5MiwiZXhwIjoxNzI1Nzk4ODkyfQ.PSFi6wYRnpnVbttaD1dYXH3blQbSTEqSgyC5Bw8tcBxyfrKuB0fYyg2MUpOvDuMoGnbpWlLTSEOGumKq7ZWF7A
+
+{
+  "itemId": 5
+}
+
+### unheart item
+POST http://localhost:8080/api/member/customer/unheart
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJxaWpTQWpEdVVGUVZ5WmwxZDErbGdRPT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNTcxMjQ5MiwiZXhwIjoxNzI1Nzk4ODkyfQ.PSFi6wYRnpnVbttaD1dYXH3blQbSTEqSgyC5Bw8tcBxyfrKuB0fYyg2MUpOvDuMoGnbpWlLTSEOGumKq7ZWF7A
+
+{
+  "itemId": 4
+}
+
+### get heart items
+GET http://localhost:8080/api/member/customer/items?page=0&size=5
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJxaWpTQWpEdVVGUVZ5WmwxZDErbGdRPT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNTcxMjQ5MiwiZXhwIjoxNzI1Nzk4ODkyfQ.PSFi6wYRnpnVbttaD1dYXH3blQbSTEqSgyC5Bw8tcBxyfrKuB0fYyg2MUpOvDuMoGnbpWlLTSEOGumKq7ZWF7A
+
+### test delete follow store
+GET http://localhost:8090/api/member/customer/delete/follow?storeId=1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJxaWpTQWpEdVVGUVZ5WmwxZDErbGdRPT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNTcxMjQ5MiwiZXhwIjoxNzI1Nzk4ODkyfQ.PSFi6wYRnpnVbttaD1dYXH3blQbSTEqSgyC5Bw8tcBxyfrKuB0fYyg2MUpOvDuMoGnbpWlLTSEOGumKq7ZWF7A

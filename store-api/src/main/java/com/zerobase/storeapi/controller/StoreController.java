@@ -1,6 +1,8 @@
 package com.zerobase.storeapi.controller;
 
 import com.zerobase.storeapi.client.MemberClient;
+import com.zerobase.storeapi.client.from.FollowForm;
+import com.zerobase.storeapi.client.from.StoresForm;
 import com.zerobase.storeapi.domain.form.store.RegisterStore;
 import com.zerobase.storeapi.domain.form.store.UpdateStore;
 import com.zerobase.storeapi.service.StoreService;
@@ -55,6 +57,23 @@ public class StoreController {
     }
 
 
+    @PostMapping("/follow")
+    public ResponseEntity<?> increaseFollow(@RequestBody FollowForm form) {
+
+        return ResponseEntity.ok(storeService.increaseFollow(form));
+    }
+
+    @PostMapping("/unfollow")
+    public ResponseEntity<?> decreaseFollow(@RequestBody FollowForm form) {
+
+        return ResponseEntity.ok(storeService.decreaseFollow(form));
+    }
+
+    @PostMapping("/list")
+    public ResponseEntity<?> getStores(@RequestBody StoresForm form
+            , Pageable pageable) {
+        return ResponseEntity.ok(storeService.getStores(form, pageable));
+    }
 
     /**
      * validation 에러 메세지 리스트를 리턴하는 클래스
