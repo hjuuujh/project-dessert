@@ -1,7 +1,14 @@
 package com.zerobase.memberapi.service;
 
 
+import com.zerobase.memberapi.client.StoreClient;
+import com.zerobase.memberapi.client.from.FollowForm;
+import com.zerobase.memberapi.client.from.HeartForm;
+import com.zerobase.memberapi.client.from.ItemsForm;
+import com.zerobase.memberapi.client.from.StoresForm;
 import com.zerobase.memberapi.domain.member.form.ChargeForm;
+import com.zerobase.memberapi.domain.store.ItemDto;
+import com.zerobase.memberapi.domain.store.StoreDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.zerobase.memberapi.domain.member.dto.CustomerDto;
@@ -11,12 +18,16 @@ import com.zerobase.memberapi.domain.member.form.SignUp;
 import com.zerobase.memberapi.exception.MemberException;
 import com.zerobase.memberapi.repository.CustomerRepository;
 import com.zerobase.memberapi.repository.SellerRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static com.zerobase.memberapi.exception.ErrorCode.*;
 
@@ -29,6 +40,7 @@ public class CustomerService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private final CustomerRepository customerRepository;
     private final SellerRepository sellerRepository;
+    private final StoreClient storeClient;
 
     /**
      * Spring Security를 이용
@@ -105,6 +117,97 @@ public class CustomerService implements UserDetailsService {
         customer.changeBalance(form.getAmount());
 
         return CustomerDto.from(customer);
+    }
+
+    public CustomerDto getCustomer(Long customerId) {
+        Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new MemberException(NOT_FOUND_USER));
+        return CustomerDto.from(customer);
+    }
+
+    @Transactional
+    public CustomerDto follow(Long customerId, Long storeId) {
+        int count = customerRepository.existsFollow(storeId, customerId);
+        if(count>0){
+            throw new MemberException(ALREADY_FOLLOW_STORE);
+        }
+        FollowForm request = FollowForm.builder().storeId(storeId).build();
+        boolean existStore = storeClient.increaseFollow(request);
+        if (existStore) {
+            Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new MemberException(NOT_FOUND_USER));
+
+            customer.follow(storeId);
+
+            return CustomerDto.from(customer);
+        } else {
+            throw new MemberException(NOT_FOUND_STORE);
+        }
+    }
+
+    @Transactional
+    public CustomerDto unfollow(Long memberId, Long storeId) {
+
+        FollowForm request = FollowForm.builder().storeId(storeId).build();
+        boolean existStore = storeClient.decreaseFollow(request);
+        if (existStore) {
+            Customer customer = customerRepository.findById(memberId).orElseThrow(() -> new MemberException(NOT_FOUND_USER));
+
+            customer.unfollow(storeId);
+
+            return CustomerDto.from(customer);
+        } else {
+            throw new MemberException(NOT_FOUND_STORE);
+        }
+    }
+
+    public Page<StoreDto> getFollowStores(Long memberId, Pageable pageable) {
+        List<Long> followList = customerRepository.findFollowList(memberId);
+        StoresForm request = StoresForm.builder().followList(followList).build();
+        return storeClient.getStores(request, pageable);
+    }
+
+    @Transactional
+    public CustomerDto heart(Long customerId, HeartForm form) {
+        int count = customerRepository.existsHeart(form.getItemId(), customerId);
+        if(count>0){
+            throw new MemberException(ALREADY_HEART_ITEM);
+        }
+        boolean existItem = storeClient.increaseHeart(form);
+        if (existItem) {
+            Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new MemberException(NOT_FOUND_USER));
+
+            customer.heart(form.getItemId());
+            return CustomerDto.from(customer);
+        } else {
+            throw new MemberException(NOT_FOUND_ITEM);
+        }
+    }
+
+    @Transactional
+    public CustomerDto unheart(Long memberId, HeartForm form) {
+        boolean existItem = storeClient.decreaseHeart(form);
+        if (existItem) {
+            Customer customer = customerRepository.findById(memberId).orElseThrow(() -> new MemberException(NOT_FOUND_USER));
+
+            customer.unheart(form.getItemId());
+            return CustomerDto.from(customer);
+        } else {
+            throw new MemberException(NOT_FOUND_ITEM);
+        }
+    }
+
+    public Page<ItemDto> getHeartItems(Long memberId, Pageable pageable) {
+        List<Long> heartList = customerRepository.findHeartList(memberId);
+        ItemsForm request = ItemsForm.builder().heartList(heartList).build();
+        return storeClient.getItems(request, pageable);
+    }
+
+    public void deleteHeartItem(Long id) {
+        customerRepository.deleteHeart(id);
+    }
+
+    public void deleteFollowStore(Long storeId) {
+        customerRepository.deleteFollow(storeId);
+
     }
 
 }

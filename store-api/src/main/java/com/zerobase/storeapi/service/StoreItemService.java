@@ -1,6 +1,8 @@
 package com.zerobase.storeapi.service;
 
 import com.zerobase.storeapi.client.MemberClient;
+import com.zerobase.storeapi.client.from.HeartForm;
+import com.zerobase.storeapi.client.from.ItemsForm;
 import com.zerobase.storeapi.domain.dto.ItemDto;
 import com.zerobase.storeapi.domain.entity.Item;
 import com.zerobase.storeapi.domain.entity.Option;
@@ -10,8 +12,8 @@ import com.zerobase.storeapi.domain.form.item.DeleteItem;
 import com.zerobase.storeapi.domain.form.item.UpdateItem;
 import com.zerobase.storeapi.domain.form.option.CreateOption;
 import com.zerobase.storeapi.exception.StoreException;
-import com.zerobase.storeapi.repository.StoreItemOptionRepository;
 import com.zerobase.storeapi.repository.StoreItemRepository;
+import com.zerobase.storeapi.repository.StoreItemOptionRepository;
 import com.zerobase.storeapi.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -130,7 +132,7 @@ public class StoreItemService {
 
         storeItemRepository.delete(item);
 
-        // member 에서 삭제 필요
+        memberClient.deleteHeartItem(id);
 
         return DeleteItem.builder()
                 .itemName(item.getName())
@@ -138,4 +140,33 @@ public class StoreItemService {
                 .build();
     }
 
+    @Transactional
+    public boolean increaseHeart(HeartForm form) {
+        try {
+            Item item = storeItemRepository.findById(form.getItemId())
+                    .orElseThrow(() -> new StoreException(NOT_FOUND_ITEM));
+            item.increaseHeart();
+            return true;
+        } catch (StoreException e) {
+            return false;
+        }
+    }
+
+    @Transactional
+    public boolean decreaseHeart(HeartForm form) {
+        try {
+            Item item = storeItemRepository.findById(form.getItemId())
+                    .orElseThrow(() -> new StoreException(NOT_FOUND_ITEM));
+            item.decreaseHeart();
+            return true;
+        } catch (StoreException e) {
+            return false;
+        }
+    }
+
+    public Page<ItemDto> getItems(ItemsForm form, Pageable pageable) {
+        // itemDto에서 옵션없이 넘기도록 수정
+        return storeItemRepository.findAllByIdIn(form.getHeartList(), pageable)
+                .map(ItemDto::from);
+    }
 }

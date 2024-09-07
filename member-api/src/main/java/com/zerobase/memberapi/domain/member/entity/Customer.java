@@ -98,5 +98,20 @@ public class Customer extends BaseEntity implements UserDetails {
         this.balance += balance;
     }
 
+    public void follow(Long storeId) {
+        followList.add(storeId);
+    }
+
+    public void unfollow(Long storeId) {
+        followList.remove(storeId);
+    }
+
+    public void heart(Long itemId) {
+        heartList.add(itemId);
+    }
+
+    public void unheart(Long itemId) {
+        heartList.remove(itemId);
+    }
 
  }

@@ -14,7 +14,9 @@ import java.util.Optional;
 public interface StoreRepository extends JpaRepository<Store, Long> {
     boolean existsByName(String name);
     Optional<Store> findByIdAndSellerId(Long id, Long sellerId);
-    Page<Store> findByNameContainingIgnoreCaseAndDeletedAt(String keyword, LocalDate deletedAt, Pageable pageable);
 
+    Page<Store> findByNameContainingIgnoreCaseAndDeletedAt(String keyword, LocalDate deletedAt, Pageable pageable);
     Page<Store> findByNameContainingIgnoreCaseAndDeletedAtOrderByFollowCountDesc(String keyword, LocalDate deletedAt, Pageable pageable);
+
+    Page<Store> findAllByIdInAndDeletedAt(List<Long> ids, LocalDate deletedAt, Pageable pageable);
 }

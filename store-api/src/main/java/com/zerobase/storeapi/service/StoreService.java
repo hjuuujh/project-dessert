@@ -1,12 +1,15 @@
 package com.zerobase.storeapi.service;
 
 import com.zerobase.storeapi.client.MemberClient;
+import com.zerobase.storeapi.client.from.FollowForm;
+import com.zerobase.storeapi.client.from.StoresForm;
 import com.zerobase.storeapi.domain.dto.StoreDto;
 import com.zerobase.storeapi.domain.entity.Store;
 import com.zerobase.storeapi.domain.form.store.DeleteStore;
 import com.zerobase.storeapi.domain.form.store.RegisterStore;
 import com.zerobase.storeapi.domain.form.store.UpdateStore;
 import com.zerobase.storeapi.exception.StoreException;
+import com.zerobase.storeapi.repository.StoreItemRepository;
 import com.zerobase.storeapi.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+
 import java.time.LocalDate;
 
 import static com.zerobase.storeapi.exception.ErrorCode.*;
@@ -24,6 +28,7 @@ import static com.zerobase.storeapi.exception.ErrorCode.*;
 @RequiredArgsConstructor
 public class StoreService {
     private final StoreRepository storeRepository;
+    private final StoreItemRepository storeItemRepository;
     private final MemberClient memberClient;
 
     public StoreDto registerStore(Long sellerId, RegisterStore form) {
@@ -75,6 +80,40 @@ public class StoreService {
         store.delete();
 
         // 아이템 삭제 코드 추가 필요
+        storeItemRepository.deleteAllByStoreId(id);
+
+        memberClient.deleteFollowStore(id);
         return DeleteStore.builder().deletedAt(store.getDeletedAt()).build();
     }
+
+    @Transactional
+    public boolean increaseFollow(FollowForm form) {
+        try {
+            Store store = storeRepository.findById(form.getStoreId())
+                    .orElseThrow(() -> new StoreException(NOT_FOUND_STORE));
+            store.increaseFollow();
+            return true;
+        }catch (StoreException e) {
+            return false;
+        }
+
+    }
+
+    @Transactional
+    public boolean decreaseFollow(FollowForm form) {
+        try {
+            Store store = storeRepository.findById(form.getStoreId())
+                    .orElseThrow(() -> new StoreException(NOT_FOUND_STORE));
+            store.decreaseFollow();
+            return true;
+        }catch (StoreException e) {
+            return false;
+        }
+    }
+
+    public Page<StoreDto> getStores(StoresForm form, Pageable pageable) {
+        return storeRepository.findAllByIdInAndDeletedAt(form.getFollowList(), null, pageable)
+                .map(StoreDto::from);
+    }
+
 }

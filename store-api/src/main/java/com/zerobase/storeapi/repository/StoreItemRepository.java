@@ -27,5 +27,4 @@ public interface StoreItemRepository extends JpaRepository<Item, Long> {
 
     void deleteAllByStoreId(Long storeId);
 
-    List<Item> findAllByIdIn(List<Long> ids);
 }
