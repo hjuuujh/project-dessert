@@ -1,6 +1,8 @@
 plugins {
     id 'java'
     id "io.spring.dependency-management"
+    id "org.asciidoctor.jvm.convert" version "3.3.2"
+    id 'com.epages.restdocs-api-spec' version '0.16.0'
 }
 
 group = 'com.zerobase'
@@ -10,6 +12,8 @@ version = '0.0.1-SNAPSHOT'
 ext {
     springCloudSleuthOtelVersion = "1.0.0-M1"
     releaseTrainVersion = "2021.0.1"
+    snippetsDir = file('build/generated-snippets')
+
 }
 
 repositories {
@@ -33,6 +37,9 @@ dependencyManagement {
     }
 }
 
+configurations {
+    asciidoctorExt
+}
 
 dependencies {
     // jwt
@@ -62,8 +69,12 @@ dependencies {
 
     // redis
     implementation 'org.redisson:redisson-spring-boot-starter:3.35.0'
-
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    // restdocs
+    asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+    testImplementation 'com.epages:restdocs-api-spec-mockmvc:0.16.2'
 
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
@@ -71,4 +82,42 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    outputs.dir snippetsDir
+}
+
+
+
+asciidoctor {
+    inputs.dir snippetsDir
+    baseDirFollowsSourceFile()
+    configurations 'asciidoctorExt'
+    dependsOn test
+}
+
+
+task copyDocument(type: Copy) {
+    dependsOn asciidoctor
+    delete file('src/main/resources/static/docs/asciidoc')
+
+    from file("build/docs/asciidoc")
+    into file("src/main/resources/static/docs/asciidoc")
+}
+
+build {
+    dependsOn copyDocument
+}
+
+// 이걸 실행하면 build/api-spec 이생김
+// 이렇게 생긴 파일을 swagger에서 읽으면 됨
+openapi3 {
+    server = 'http://localhost:8080'
+    title = 'My API'
+    description = 'My API description'
+    version = '0.1.0'
+    format = 'yaml'
+    delete file("src/main/resources/static/docs/openapi")
+    copy{
+        from file("build/api-spec")
+        into file("src/main/resources/static/docs/openapi")
+    }
 }

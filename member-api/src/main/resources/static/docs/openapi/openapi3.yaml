@@ -1,0 +1,233 @@
+openapi: 3.0.1
+info:
+  title: My API
+  description: My API description
+  version: 0.1.0
+servers:
+- url: http://localhost:8080
+tags: []
+paths:
+  /api/member/signin/customer:
+    post:
+      tags:
+      - api
+      summary: 고객의 로그인
+      description: role이 고객인 경우의 로그인
+      operationId: customer-signin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api-member-signin-seller-1038322066'
+            examples:
+              customer-signin:
+                value: "{\n  \"email\" : \"user1@gmail.com\",\n  \"password\" : \"\
+                  qwerty\"\n}"
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-member-signin-seller-1899160560'
+              examples:
+                customer-signin:
+                  value: "{\n  \"token\" : \"token\"\n}"
+  /api/member/signin/seller:
+    post:
+      tags:
+      - api
+      summary: 셀러의 로그인
+      description: role이 셀러인 경우의 로그인
+      operationId: seller-signin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api-member-signin-seller-1038322066'
+            examples:
+              seller-signin:
+                value: "{\n  \"email\" : \"user2@gmail.com\",\n  \"password\" : \"\
+                  qwerty\"\n}"
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-member-signin-seller-1899160560'
+              examples:
+                seller-signin:
+                  value: "{\n  \"token\" : \"token\"\n}"
+  /api/member/signup/customer:
+    post:
+      tags:
+      - api
+      summary: 고객의 화원 가입
+      description: role이 고객인 경우의 회원가입
+      operationId: customer-signup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api-member-signup-customer1612773051'
+            examples:
+              customer-signup:
+                value: "{\n  \"email\" : \"user1@gmail.com\",\n  \"name\" : \"user1\"\
+                  ,\n  \"password\" : \"qwerty\",\n  \"phone\" : \"01012345678\",\n\
+                  \  \"roles\" : [ \"ROLE_CUSTOMER\" ]\n}"
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-member-signup-customer-1573650217'
+              examples:
+                customer-signup:
+                  value: "{\n  \"id\" : 1,\n  \"email\" : \"user1@gmail.com\",\n \
+                    \ \"name\" : \"user1\",\n  \"phone\" : \"01012345678\",\n  \"\
+                    roles\" : [ \"ROLE_CUSTOMER\" ],\n  \"followList\" : [ ],\n  \"\
+                    heartList\" : [ ],\n  \"balance\" : 0\n}"
+  /api/member/signup/seller:
+    post:
+      tags:
+      - api
+      summary: 셀러의 회원가입
+      description: role이 셀러인 경우의 회원가입
+      operationId: seller-signup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api-member-signup-customer1612773051'
+            examples:
+              seller-signup:
+                value: "{\n  \"email\" : \"user2@gmail.com\",\n  \"name\" : \"user2\"\
+                  ,\n  \"password\" : \"qwerty\",\n  \"phone\" : \"01012345678\",\n\
+                  \  \"roles\" : [ \"ROLE_SELLER\" ]\n}"
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-member-signup-seller118240911'
+              examples:
+                seller-signup:
+                  value: "{\n  \"id\" : 2,\n  \"email\" : \"user2@gmail.com\",\n \
+                    \ \"name\" : \"user2\",\n  \"phone\" : \"01012345678\",\n  \"\
+                    roles\" : [ \"ROLE_SELLER\" ],\n  \"income\" : 0\n}"
+components:
+  schemas:
+    api-member-signin-seller-1038322066:
+      type: object
+      properties:
+        password:
+          type: string
+          description: 사용자 비밀번호
+        email:
+          type: string
+          description: 사용자 email
+    api-member-signup-customer-1573650217:
+      type: object
+      properties:
+        balance:
+          type: number
+          description: 잔여 포인트
+        followList:
+          type: array
+          description: 팔로우 스토어 리스트
+          items:
+            oneOf:
+            - type: object
+            - type: boolean
+            - type: string
+            - type: number
+        phone:
+          type: string
+          description: 사용자 번호
+        roles:
+          type: array
+          description: 사용자 역할 (고객)
+          items:
+            oneOf:
+            - type: object
+            - type: boolean
+            - type: string
+            - type: number
+        name:
+          type: string
+          description: 사용자 이름
+        heartList:
+          type: array
+          description: 좋아요 아이템 리스트
+          items:
+            oneOf:
+            - type: object
+            - type: boolean
+            - type: string
+            - type: number
+        id:
+          type: number
+          description: 사용자 id
+        email:
+          type: string
+          description: 사용자 이메일
+    api-member-signup-seller118240911:
+      type: object
+      properties:
+        income:
+          type: number
+          description: 수입
+        phone:
+          type: string
+          description: 사용자 번호
+        roles:
+          type: array
+          description: 사용자 역할 (고객)
+          items:
+            oneOf:
+            - type: object
+            - type: boolean
+            - type: string
+            - type: number
+        name:
+          type: string
+          description: 사용자 이름
+        id:
+          type: number
+          description: 사용자 id
+        email:
+          type: string
+          description: 사용자 이메일
+    api-member-signup-customer1612773051:
+      type: object
+      properties:
+        password:
+          type: string
+          description: 사용자 비밀번호
+        phone:
+          type: string
+          description: 사용자 번호
+        roles:
+          type: array
+          description: 사용자 역할
+          items:
+            oneOf:
+            - type: object
+            - type: boolean
+            - type: string
+            - type: number
+        name:
+          type: string
+          description: 사용자 이름
+        email:
+          type: string
+          description: 사용자 email
+    api-member-signin-seller-1899160560:
+      type: object
+      properties:
+        token:
+          type: string
+          description: 로그인 성공해 얻은 토큰

@@ -1,0 +1,219 @@
+:basedir: {docdir}/../../../
+:snippets: {basedir}/build/generated-snippets
+
+= RESTful Notes API Guide
+:doctype: store
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectnums:
+:sectlinks:
+:sectanchors:
+
+[[api]]
+== Store Api
+=== Register Store
+include::{snippets}/register-store/curl-request.adoc[]
+- header
+include::{snippets}/register-store/request-headers.adoc[]
+- request
+include::{snippets}/register-store/http-request.adoc[]
+include::{snippets}/register-store/request-fields.adoc[]
+- response
+include::{snippets}/register-store/http-response.adoc[]
+include::{snippets}/register-store/response-fields.adoc[]
+
+=== Update Store
+include::{snippets}/update-store/curl-request.adoc[]
+- header
+include::{snippets}/update-store/request-headers.adoc[]
+- request
+include::{snippets}/update-store/http-request.adoc[]
+include::{snippets}/update-store/request-fields.adoc[]
+- response
+include::{snippets}/update-store/http-response.adoc[]
+include::{snippets}/update-store/response-fields.adoc[]
+
+=== Delete Store
+include::{snippets}/delete-store/curl-request.adoc[]
+- header
+include::{snippets}/delete-store/request-headers.adoc[]
+- request
+include::{snippets}/delete-store/http-request.adoc[]
+include::{snippets}/delete-store/request-parameters.adoc[]
+- response
+include::{snippets}/delete-store/http-response.adoc[]
+include::{snippets}/delete-store/response-fields.adoc[]
+
+== Store Search Api
+=== Search Store By Keyword
+include::{snippets}/search-store-by-keyword/curl-request.adoc[]
+- request
+include::{snippets}/search-store-by-keyword/http-request.adoc[]
+include::{snippets}/search-store-by-keyword/request-parameters.adoc[]
+- response
+include::{snippets}/search-store-by-keyword/http-response.adoc[]
+include::{snippets}/search-store-by-keyword/response-fields.adoc[]
+
+=== Search Store By Follower
+include::{snippets}/search-store-by-follower/curl-request.adoc[]
+- request
+include::{snippets}/search-store-by-follower/http-request.adoc[]
+include::{snippets}/search-store-by-follower/request-parameters.adoc[]
+- response
+include::{snippets}/search-store-by-follower/http-response.adoc[]
+include::{snippets}/search-store-by-follower/response-fields.adoc[]
+
+=== Search Store Detail
+include::{snippets}/search-store-detail/curl-request.adoc[]
+- request
+include::{snippets}/search-store-detail/http-request.adoc[]
+include::{snippets}/search-store-detail/request-parameters.adoc[]
+- response
+include::{snippets}/search-store-detail/http-response.adoc[]
+include::{snippets}/search-store-detail/response-fields.adoc[]
+
+== Store Item Api
+=== Create Item
+include::{snippets}/create-item/curl-request.adoc[]
+- header
+include::{snippets}/create-item/request-headers.adoc[]
+- request
+include::{snippets}/create-item/http-request.adoc[]
+include::{snippets}/create-item/request-fields.adoc[]
+- response
+include::{snippets}/create-item/http-response.adoc[]
+include::{snippets}/create-item/response-fields.adoc[]
+
+=== Update Item
+include::{snippets}/update-item/curl-request.adoc[]
+- header
+include::{snippets}/update-item/request-headers.adoc[]
+- request
+include::{snippets}/update-item/http-request.adoc[]
+include::{snippets}/update-item/request-fields.adoc[]
+- response
+include::{snippets}/update-item/http-response.adoc[]
+include::{snippets}/update-item/response-fields.adoc[]
+
+=== Delete Item
+include::{snippets}/delete-item/curl-request.adoc[]
+- header
+include::{snippets}/delete-item/request-headers.adoc[]
+- request
+include::{snippets}/delete-item/http-request.adoc[]
+include::{snippets}/delete-item/request-parameters.adoc[]
+- response
+include::{snippets}/delete-item/http-response.adoc[]
+include::{snippets}/delete-item/response-fields.adoc[]
+
+== Store Item Search Api
+=== Search Item By Keyword Order By Order Count
+include::{snippets}/search-item-by-keyword/curl-request.adoc[]
+- request
+include::{snippets}/search-item-by-keyword/http-request.adoc[]
+include::{snippets}/search-item-by-keyword/request-parameters.adoc[]
+- response
+include::{snippets}/search-item-by-keyword/http-response.adoc[]
+include::{snippets}/search-item-by-keyword/response-fields.adoc[]
+
+=== Search Item By Category
+include::{snippets}/search-item-by-category/curl-request.adoc[]
+- request
+include::{snippets}/search-item-by-category/http-request.adoc[]
+include::{snippets}/search-item-by-category/request-parameters.adoc[]
+- response
+include::{snippets}/search-item-by-category/http-response.adoc[]
+include::{snippets}/search-item-by-category/response-fields.adoc[]
+
+=== Search Item By Lower Price
+include::{snippets}/search-item-by-low-price/curl-request.adoc[]
+- request
+include::{snippets}/search-item-by-low-price/http-request.adoc[]
+include::{snippets}/search-item-by-low-price/request-parameters.adoc[]
+- response
+include::{snippets}/search-item-by-low-price/http-response.adoc[]
+include::{snippets}/search-item-by-low-price/response-fields.adoc[]
+
+=== Search Item By High Price
+include::{snippets}/search-item-by-high-price/curl-request.adoc[]
+- request
+include::{snippets}/search-item-by-high-price/http-request.adoc[]
+include::{snippets}/search-item-by-high-price/request-parameters.adoc[]
+- response
+include::{snippets}/search-item-by-high-price/http-response.adoc[]
+include::{snippets}/search-item-by-high-price/response-fields.adoc[]
+
+=== Search Item By Store
+include::{snippets}/search-store-item/curl-request.adoc[]
+- request
+include::{snippets}/search-store-item/http-request.adoc[]
+include::{snippets}/search-store-item/request-parameters.adoc[]
+- response
+include::{snippets}/search-store-item/http-response.adoc[]
+include::{snippets}/search-store-item/response-fields.adoc[]
+
+=== Search Item Detail
+include::{snippets}/search-store-item-detail/curl-request.adoc[]
+- request
+include::{snippets}/search-store-item-detail/http-request.adoc[]
+include::{snippets}/search-store-item-detail/request-parameters.adoc[]
+- response
+include::{snippets}/search-store-item-detail/http-response.adoc[]
+include::{snippets}/search-store-item-detail/response-fields.adoc[]
+
+== Store Cart Api
+=== Add Cart
+include::{snippets}/add-cart/curl-request.adoc[]
+- header
+include::{snippets}/add-cart/request-headers.adoc[]
+- request
+include::{snippets}/add-cart/http-request.adoc[]
+include::{snippets}/add-cart/request-fields.adoc[]
+- response
+include::{snippets}/add-cart/http-response.adoc[]
+include::{snippets}/add-cart/response-fields.adoc[]
+
+=== Get Cart
+include::{snippets}/get-cart/curl-request.adoc[]
+- header
+include::{snippets}/get-cart/request-headers.adoc[]
+- request
+include::{snippets}/get-cart/http-request.adoc[]
+- response
+include::{snippets}/get-cart/http-response.adoc[]
+include::{snippets}/get-cart/response-fields.adoc[]
+
+=== Delete Cart Option
+include::{snippets}/delete-cart-option/curl-request.adoc[]
+- header
+include::{snippets}/delete-cart-option/request-headers.adoc[]
+- request
+include::{snippets}/delete-cart-option/http-request.adoc[]
+include::{snippets}/delete-cart-option/request-fields.adoc[]
+- response
+include::{snippets}/delete-cart-option/http-response.adoc[]
+include::{snippets}/delete-cart-option/response-fields.adoc[]
+
+=== Update Cart Option
+include::{snippets}/update-cart-option/curl-request.adoc[]
+- header
+include::{snippets}/update-cart-option/request-headers.adoc[]
+- request
+include::{snippets}/update-cart-option/http-request.adoc[]
+include::{snippets}/update-cart-option/request-fields.adoc[]
+- response
+include::{snippets}/update-cart-option/http-response.adoc[]
+include::{snippets}/update-cart-option/response-fields.adoc[]
+
+=== Order Cart
+include::{snippets}/order-cart/curl-request.adoc[]
+- header
+include::{snippets}/order-cart/request-headers.adoc[]
+- request
+include::{snippets}/order-cart/http-request.adoc[]
+include::{snippets}/order-cart/request-fields.adoc[]
+- response
+include::{snippets}/order-cart/http-response.adoc[]
+include::{snippets}/order-cart/response-fields.adoc[]

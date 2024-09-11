@@ -1,0 +1,102 @@
+:basedir: {docdir}/../../../
+:snippets: {basedir}/build/generated-snippets
+
+= RESTful Notes API Guide
+:doctype: order
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectnums:
+:sectlinks:
+:sectanchors:
+
+[[api]]
+== Order Api
+=== Get Order Detail
+include::{snippets}/get-order/curl-request.adoc[]
+- header
+include::{snippets}/get-order/request-headers.adoc[]
+- request
+include::{snippets}/get-order/http-request.adoc[]
+include::{snippets}/get-order/request-parameters.adoc[]
+- response
+include::{snippets}/get-order/http-response.adoc[]
+include::{snippets}/get-order/response-fields.adoc[]
+
+=== Customer Get Orders Between Period
+include::{snippets}/get-orders-between-period/curl-request.adoc[]
+- header
+include::{snippets}/get-orders-between-period/request-headers.adoc[]
+- request
+include::{snippets}/get-orders-between-period/http-request.adoc[]
+include::{snippets}/get-orders-between-period/request-parameters.adoc[]
+- response
+include::{snippets}/get-orders-between-period/http-response.adoc[]
+include::{snippets}/get-orders-between-period/response-fields.adoc[]
+
+=== Customer Cancel Order
+include::{snippets}/cancel-order/curl-request.adoc[]
+- header
+include::{snippets}/cancel-order/request-headers.adoc[]
+- request
+include::{snippets}/cancel-order/http-request.adoc[]
+include::{snippets}/cancel-order/request-parameters.adoc[]
+- response
+include::{snippets}/cancel-order/http-response.adoc[]
+include::{snippets}/cancel-order/response-fields.adoc[]
+
+=== Seller Get Orders Between Period
+include::{snippets}/get-orders-by-store-between-period/curl-request.adoc[]
+- header
+include::{snippets}/get-orders-by-store-between-period/request-headers.adoc[]
+- request
+include::{snippets}/get-orders-by-store-between-period/http-request.adoc[]
+include::{snippets}/get-orders-by-store-between-period/request-parameters.adoc[]
+- response
+include::{snippets}/get-orders-by-store-between-period/http-response.adoc[]
+include::{snippets}/get-orders-by-store-between-period/response-fields.adoc[]
+
+=== Customer Request Refund
+include::{snippets}/request-refund/curl-request.adoc[]
+- header
+include::{snippets}/request-refund/request-headers.adoc[]
+- request
+include::{snippets}/request-refund/http-request.adoc[]
+include::{snippets}/request-refund/path-parameters.adoc[]
+- response
+include::{snippets}/request-refund/http-response.adoc[]
+include::{snippets}/request-refund/response-fields.adoc[]
+
+=== Customer Request Refund Cancel
+include::{snippets}/cancel-request-refund/curl-request.adoc[]
+- header
+include::{snippets}/cancel-request-refund/request-headers.adoc[]
+- request
+include::{snippets}/cancel-request-refund/http-request.adoc[]
+include::{snippets}/cancel-request-refund/path-parameters.adoc[]
+- response
+include::{snippets}/cancel-request-refund/http-response.adoc[]
+include::{snippets}/cancel-request-refund/response-fields.adoc[]
+
+=== Seller Approve Refund Request
+include::{snippets}/approve-request-refund/curl-request.adoc[]
+- header
+include::{snippets}/approve-request-refund/request-headers.adoc[]
+- request
+include::{snippets}/approve-request-refund/http-request.adoc[]
+include::{snippets}/approve-request-refund/request-fields.adoc[]
+- response
+include::{snippets}/approve-request-refund/http-response.adoc[]
+include::{snippets}/approve-request-refund/response-fields.adoc[]
+
+=== Seller Reject Refund Request
+include::{snippets}/reject-request-refund/curl-request.adoc[]
+- header
+include::{snippets}/reject-request-refund/request-headers.adoc[]
+- request
+include::{snippets}/reject-request-refund/http-request.adoc[]
+include::{snippets}/reject-request-refund/path-parameters.adoc[]
+- response
+include::{snippets}/reject-request-refund/http-response.adoc[]
+include::{snippets}/reject-request-refund/response-fields.adoc[]

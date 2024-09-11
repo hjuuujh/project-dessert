@@ -1,0 +1,525 @@
+openapi: 3.0.1
+info:
+  title: My API
+  description: My API description
+  version: 0.1.0
+servers:
+- url: http://localhost:8080
+tags: []
+paths:
+  /api/order/customer/order:
+    get:
+      tags:
+      - api
+      summary: 주문 상세정보 확인
+      description: 주문 상세정보 확인
+      operationId: get-order
+      parameters:
+      - name: id
+        in: query
+        description: 주문 id
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: JWT Bearer 인증 token
+        required: true
+        schema:
+          type: string
+        example: token
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-order-customer-order285516329'
+              examples:
+                get-order:
+                  value: "{\n  \"id\" : 1,\n  \"sellerId\" : 1,\n  \"customerId\"\
+                    \ : 1,\n  \"storeId\" : 2,\n  \"itemId\" : 6,\n  \"itemName\"\
+                    \ : \"샹티크림끌레오르\",\n  \"optionId\" : 11,\n  \"optionName\" : \"\
+                    얼그레이샹티크림 끌레오르\",\n  \"price\" : 52000,\n  \"quantity\" : 2,\n\
+                    \  \"orderStatus\" : \"ORDERED\",\n  \"createdAt\" : \"2024-09-11T16:17:39.468477\"\
+                    ,\n  \"modifiedAt\" : \"2024-09-11T16:17:39.468488\"\n}"
+  /api/order/customer/orders:
+    get:
+      tags:
+      - api
+      summary: 기간별 주문내역 확인
+      description: 설정한 기간내에 고객이 자신의 주문 내역 확인
+      operationId: get-orders-between-period
+      parameters:
+      - name: start
+        in: query
+        description: 검색 원하는 시작 날짜
+        required: true
+        schema:
+          type: string
+      - name: end
+        in: query
+        description: 검색 원하는 마지막 날짜
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: 검색 페이지
+        required: true
+        schema:
+          type: string
+      - name: size
+        in: query
+        description: 검색 사이즈
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: JWT Bearer 인증 token
+        required: true
+        schema:
+          type: string
+        example: token
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-order-customer-orders-905029747'
+              examples:
+                get-orders-between-period:
+                  value: "{\n  \"content\" : [ {\n    \"orderId\" : 3,\n    \"itemName\"\
+                    \ : \"샹티크림끌레오르\",\n    \"optionName\" : \"얼그레이샹티크림 끌레오르\",\n \
+                    \   \"optionPrice\" : 26000,\n    \"optionQuantity\" : 2,\n  \
+                    \  \"orderStatus\" : \"ORDERED\",\n    \"createdAt\" : \"2024-09-11T16:17:39.233123\"\
+                    \n  }, {\n    \"orderId\" : 4,\n    \"itemName\" : \"샹티크림끌레오르\"\
+                    ,\n    \"optionName\" : \"블루베리샹티크림 끌레오르\",\n    \"optionPrice\"\
+                    \ : 26000,\n    \"optionQuantity\" : 1,\n    \"orderStatus\" :\
+                    \ \"ORDERED\",\n    \"createdAt\" : \"2024-09-11T16:17:39.233148\"\
+                    \n  } ],\n  \"pageable\" : {\n    \"sort\" : {\n      \"empty\"\
+                    \ : true,\n      \"sorted\" : false,\n      \"unsorted\" : true\n\
+                    \    },\n    \"offset\" : 0,\n    \"pageNumber\" : 0,\n    \"\
+                    pageSize\" : 5,\n    \"paged\" : true,\n    \"unpaged\" : false\n\
+                    \  },\n  \"last\" : true,\n  \"totalPages\" : 1,\n  \"totalElements\"\
+                    \ : 2,\n  \"sort\" : {\n    \"empty\" : true,\n    \"sorted\"\
+                    \ : false,\n    \"unsorted\" : true\n  },\n  \"size\" : 5,\n \
+                    \ \"number\" : 0,\n  \"first\" : true,\n  \"numberOfElements\"\
+                    \ : 2,\n  \"empty\" : false\n}"
+  /api/order/seller/orders:
+    get:
+      tags:
+      - api
+      summary: 기간/스토어별 주문내역 확인
+      description: 설정한 기간내에 셀러가 자신의 스토어 주문 확인
+      operationId: get-orders-by-store-between-period
+      parameters:
+      - name: storeId
+        in: query
+        description: 검색 원하는 스토어 id
+        required: true
+        schema:
+          type: string
+      - name: start
+        in: query
+        description: 검색 원하는 시작 날짜
+        required: true
+        schema:
+          type: string
+      - name: end
+        in: query
+        description: 검색 원하는 마지막 날짜
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: 검색 페이지
+        required: true
+        schema:
+          type: string
+      - name: size
+        in: query
+        description: 검색 사이즈
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: JWT Bearer 인증 token
+        required: true
+        schema:
+          type: string
+        example: token
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-order-customer-orders-905029747'
+              examples:
+                get-orders-by-store-between-period:
+                  value: "{\n  \"content\" : [ {\n    \"orderId\" : 3,\n    \"itemName\"\
+                    \ : \"샹티크림끌레오르\",\n    \"optionName\" : \"얼그레이샹티크림 끌레오르\",\n \
+                    \   \"optionPrice\" : 26000,\n    \"optionQuantity\" : 2,\n  \
+                    \  \"orderStatus\" : \"ORDERED\",\n    \"createdAt\" : \"2024-09-11T16:17:39.339438\"\
+                    \n  }, {\n    \"orderId\" : 4,\n    \"itemName\" : \"샹티크림끌레오르\"\
+                    ,\n    \"optionName\" : \"블루베리샹티크림 끌레오르\",\n    \"optionPrice\"\
+                    \ : 26000,\n    \"optionQuantity\" : 1,\n    \"orderStatus\" :\
+                    \ \"ORDERED\",\n    \"createdAt\" : \"2024-09-11T16:17:39.33945\"\
+                    \n  } ],\n  \"pageable\" : {\n    \"sort\" : {\n      \"empty\"\
+                    \ : true,\n      \"sorted\" : false,\n      \"unsorted\" : true\n\
+                    \    },\n    \"offset\" : 0,\n    \"pageNumber\" : 0,\n    \"\
+                    pageSize\" : 5,\n    \"paged\" : true,\n    \"unpaged\" : false\n\
+                    \  },\n  \"last\" : true,\n  \"totalPages\" : 1,\n  \"totalElements\"\
+                    \ : 2,\n  \"sort\" : {\n    \"empty\" : true,\n    \"sorted\"\
+                    \ : false,\n    \"unsorted\" : true\n  },\n  \"size\" : 5,\n \
+                    \ \"number\" : 0,\n  \"first\" : true,\n  \"numberOfElements\"\
+                    \ : 2,\n  \"empty\" : false\n}"
+  /api/order/customer/order/cancel:
+    delete:
+      tags:
+      - api
+      summary: 주문 취소
+      description: 고객이 주문 id로 주문 취소
+      operationId: cancel-order
+      parameters:
+      - name: id
+        in: query
+        description: 취소 원하는 주문 id
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: JWT Bearer 인증 token
+        required: true
+        schema:
+          type: string
+        example: token
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-order-customer-order-cancel-1185196285'
+              examples:
+                cancel-order:
+                  value: "{\n  \"itemName\" : \"샹티크림끌레오르\",\n  \"optionName\" : \"\
+                    얼그레이샹티크림 끌레오르\",\n  \"cancelTime\" : \"2024-09-11T16:17:39.136824\"\
+                    \n}"
+  /api/order/customer/refund/{id}:
+    patch:
+      tags:
+      - api
+      summary: 환불 신청
+      description: 고객의 자신의 주문 환불 신청
+      operationId: request-refund
+      parameters:
+      - name: id
+        in: path
+        description: 환불 신청원하는 주문 id
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: JWT Bearer 인증 token
+        required: true
+        schema:
+          type: string
+        example: token
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-order-customer-order285516329'
+              examples:
+                request-refund:
+                  value: "{\n  \"id\" : 1,\n  \"sellerId\" : 1,\n  \"customerId\"\
+                    \ : 1,\n  \"storeId\" : 2,\n  \"itemId\" : 6,\n  \"itemName\"\
+                    \ : \"샹티크림끌레오르\",\n  \"optionId\" : 11,\n  \"optionName\" : \"\
+                    얼그레이샹티크림 끌레오르\",\n  \"price\" : 52000,\n  \"quantity\" : 2,\n\
+                    \  \"orderStatus\" : \"ORDERED\",\n  \"createdAt\" : \"2024-09-11T16:17:39.44834\"\
+                    ,\n  \"modifiedAt\" : \"2024-09-11T16:17:39.448351\"\n}"
+  /api/order/seller/refund/approve:
+    patch:
+      tags:
+      - api
+      summary: 환불 요청 수락
+      description: 셀러가 주문 환불 요청 수락
+      operationId: approve-request-refund
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer 인증 token
+        required: true
+        schema:
+          type: string
+        example: token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api-order-seller-refund-approve-1637589649'
+            examples:
+              approve-request-refund:
+                value: "{\n  \"id\" : 1,\n  \"date\" : \"2024-09-11\"\n}"
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-order-customer-order285516329'
+              examples:
+                approve-request-refund:
+                  value: "{\n  \"id\" : 1,\n  \"sellerId\" : 1,\n  \"customerId\"\
+                    \ : 1,\n  \"storeId\" : 2,\n  \"itemId\" : 6,\n  \"itemName\"\
+                    \ : \"샹티크림끌레오르\",\n  \"optionId\" : 11,\n  \"optionName\" : \"\
+                    얼그레이샹티크림 끌레오르\",\n  \"price\" : 52000,\n  \"quantity\" : 2,\n\
+                    \  \"orderStatus\" : \"ORDERED\",\n  \"createdAt\" : \"2024-09-11T16:17:38.736968\"\
+                    ,\n  \"modifiedAt\" : \"2024-09-11T16:17:38.736991\"\n}"
+  /api/order/customer/refund/cancel/{id}:
+    patch:
+      tags:
+      - api
+      summary: 환불 신청 취소
+      description: 고객의 자신의 주문 환불 신청 취소
+      operationId: cancel-request-refund
+      parameters:
+      - name: id
+        in: path
+        description: 환불 신청원하는 주문 id
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: JWT Bearer 인증 token
+        required: true
+        schema:
+          type: string
+        example: token
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-order-customer-order285516329'
+              examples:
+                cancel-request-refund:
+                  value: "{\n  \"id\" : 1,\n  \"sellerId\" : 1,\n  \"customerId\"\
+                    \ : 1,\n  \"storeId\" : 2,\n  \"itemId\" : 6,\n  \"itemName\"\
+                    \ : \"샹티크림끌레오르\",\n  \"optionId\" : 11,\n  \"optionName\" : \"\
+                    얼그레이샹티크림 끌레오르\",\n  \"price\" : 52000,\n  \"quantity\" : 2,\n\
+                    \  \"orderStatus\" : \"ORDERED\",\n  \"createdAt\" : \"2024-09-11T16:17:39.205793\"\
+                    ,\n  \"modifiedAt\" : \"2024-09-11T16:17:39.205805\"\n}"
+  /api/order/seller/refund/reject/{id}:
+    patch:
+      tags:
+      - api
+      summary: 환불 요청 거절
+      description: 셀러가 주문 환불 요청 거절
+      operationId: reject-request-refund
+      parameters:
+      - name: id
+        in: path
+        description: 환불 거절 원하는 주문 id
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: JWT Bearer 인증 token
+        required: true
+        schema:
+          type: string
+        example: token
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-order-customer-order285516329'
+              examples:
+                reject-request-refund:
+                  value: "{\n  \"id\" : 1,\n  \"sellerId\" : 1,\n  \"customerId\"\
+                    \ : 1,\n  \"storeId\" : 2,\n  \"itemId\" : 6,\n  \"itemName\"\
+                    \ : \"샹티크림끌레오르\",\n  \"optionId\" : 11,\n  \"optionName\" : \"\
+                    얼그레이샹티크림 끌레오르\",\n  \"price\" : 52000,\n  \"quantity\" : 2,\n\
+                    \  \"orderStatus\" : \"ORDERED\",\n  \"createdAt\" : \"2024-09-11T16:17:39.171487\"\
+                    ,\n  \"modifiedAt\" : \"2024-09-11T16:17:39.171498\"\n}"
+components:
+  schemas:
+    api-order-customer-orders-905029747:
+      type: object
+      properties:
+        number:
+          type: number
+          description: 현재 페이지 번호
+        size:
+          type: number
+          description: 한 페이지 당 조회할 데이터 개수
+        numberOfElements:
+          type: number
+          description: 요청 페이지에서 조회된 데이터 개수
+        last:
+          type: boolean
+          description: 마지막 페이지인지 여부
+        totalPages:
+          type: number
+          description: 전체 페이지 개수
+        pageable:
+          type: object
+          properties:
+            paged:
+              type: boolean
+              description: 페이징 정보를 포함하는지 여부
+            pageNumber:
+              type: number
+              description: 현재페이지 번호
+            offset:
+              type: number
+              description: 몇번째 데이터인지 (0부터 시작)
+            pageSize:
+              type: number
+              description: 한 페이지당 조회할 데이터 개수
+            unpaged:
+              type: boolean
+              description: 페이징 정보를 안포함하는지 여부
+            sort:
+              type: object
+              properties:
+                unsorted:
+                  type: boolean
+                  description: 정렬 안됐는지 여부
+                sorted:
+                  type: boolean
+                  description: 정렬 됐는지 여부
+                empty:
+                  type: boolean
+                  description: 데이터가 비어있는지 여부
+          description: pageable type
+        sort:
+          type: object
+          properties:
+            unsorted:
+              type: boolean
+              description: 정렬 됐는지 여부
+            sorted:
+              type: boolean
+              description: 정렬 안됐는지 여부
+            empty:
+              type: boolean
+              description: 데이터가 비었는지 여부
+        first:
+          type: boolean
+          description: 첫번째 페이지인지 여부
+        content:
+          type: array
+          items:
+            type: object
+            properties:
+              createdAt:
+                type: string
+                description: 주문 생성 날짜
+              itemName:
+                type: string
+                description: 주문 아이템 이름
+              orderId:
+                type: number
+                description: 주문 id
+              orderStatus:
+                type: string
+                description: "주문 상태 - ORDERED : 주문 완료     ORDERED_COMPLETED : 주문/정\
+                  산 완료,    REFUND_REQUEST : 환불 신청,    REFUND_APPROVED : 환불 승인,   \
+                  \ REFUND_REJECTED : 환불 거절"
+              optionPrice:
+                type: number
+                description: 주문 옵션 가격
+              optionQuantity:
+                type: number
+                description: 주문 옵션 수량
+              optionName:
+                type: string
+                description: 주문 옵션 이름
+        empty:
+          type: boolean
+          description: 데이터가 비었는지 여부
+        totalElements:
+          type: number
+          description: 테이블 총 데이터 개수
+    api-order-customer-order-cancel-1185196285:
+      type: object
+      properties:
+        itemName:
+          type: string
+          description: 주문 취소한 아이템 이름
+        cancelTime:
+          type: string
+          description: 주문 취소 날짜/시간
+        optionName:
+          type: string
+          description: 주문 취소한 옵션 이름
+    api-order-seller-refund-approve-1637589649:
+      type: object
+      properties:
+        date:
+          type: string
+          description: 환불 수락 원하는 주문 날짜
+        id:
+          type: number
+          description: 환불 수락 원하는 주문 id
+    api-order-customer-order285516329:
+      type: object
+      properties:
+        quantity:
+          type: number
+          description: 주문 옵션 수량
+        modifiedAt:
+          type: string
+          description: 주문 수정 날짜
+        orderStatus:
+          type: string
+          description: "주문 상태 - ORDERED : 주문 완료     ORDERED_COMPLETED : 주문/정산 완료,\
+            \    REFUND_REQUEST : 환불 신청,    REFUND_APPROVED : 환불 승인,    REFUND_REJECTED\
+            \ : 환불 거절"
+        storeId:
+          type: number
+          description: 스토어 이름
+        createdAt:
+          type: string
+          description: 주문 생성 날짜
+        itemId:
+          type: number
+          description: 주문 아이템 id
+        itemName:
+          type: string
+          description: 주문 아이템 이름
+        sellerId:
+          type: number
+          description: 셀러 id
+        price:
+          type: number
+          description: 주문 옵션 가격
+        customerId:
+          type: number
+          description: 주문 고객 id
+        optionId:
+          type: number
+          description: 주문 옵션 id
+        id:
+          type: number
+          description: 주문 id
+        optionName:
+          type: string
+          description: 주문 옵션 이름

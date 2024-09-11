@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class OrderResult {
     private Long orderId;
     private String itemName;

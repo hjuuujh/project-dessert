@@ -19,6 +19,7 @@ public class OrderResult {
     private String optionName;
     private Integer optionPrice;
     private Integer optionQuantity;
+    private OrderStatus orderStatus;
     private LocalDateTime createdAt;
 
     public static OrderResult from(Orders order) {
@@ -28,6 +29,7 @@ public class OrderResult {
                 .optionName(order.getOptionName())
                 .optionPrice(order.getPrice())
                 .optionQuantity(order.getQuantity())
+                .orderStatus(order.getOrderStatus())
                 .createdAt(order.getCreatedAt())
                 .build();
     }
