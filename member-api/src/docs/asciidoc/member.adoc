@@ -1,0 +1,44 @@
+:basedir: {docdir}/../../../
+:snippets: {basedir}/build/generated-snippets
+
+= RESTful Notes API Guide
+:doctype: user
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectnums:
+:sectlinks:
+:sectanchors:
+
+[[api]]
+== Customer Api
+=== SignUp
+include::{snippets}/customer-signup/curl-request.adoc[]
+include::{snippets}/customer-signup/http-request.adoc[]
+include::{snippets}/customer-signup/request-fields.adoc[]
+include::{snippets}/customer-signup/http-response.adoc[]
+include::{snippets}/customer-signup/response-fields.adoc[]
+
+=== SignIn
+include::{snippets}/customer-signup/curl-request.adoc[]
+include::{snippets}/customer-signup/http-request.adoc[]
+include::{snippets}/customer-signup/request-fields.adoc[]
+include::{snippets}/customer-signup/http-response.adoc[]
+include::{snippets}/customer-signup/response-fields.adoc[]
+
+== Seller Api
+=== SignUp
+include::{snippets}/seller-signup/curl-request.adoc[]
+include::{snippets}/seller-signup/http-request.adoc[]
+include::{snippets}/seller-signup/request-fields.adoc[]
+include::{snippets}/seller-signup/http-response.adoc[]
+include::{snippets}/seller-signup/response-fields.adoc[]
+
+=== SignIn
+include::{snippets}/seller-signin/curl-request.adoc[]
+include::{snippets}/seller-signin/http-request.adoc[]
+include::{snippets}/seller-signin/request-fields.adoc[]
+include::{snippets}/seller-signin/http-response.adoc[]
+include::{snippets}/seller-signin/response-fields.adoc[]
+

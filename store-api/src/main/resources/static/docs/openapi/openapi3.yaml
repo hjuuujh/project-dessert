@@ -1,0 +1,1473 @@
+openapi: 3.0.1
+info:
+  title: My API
+  description: My API description
+  version: 0.1.0
+servers:
+- url: http://localhost:8080
+tags: []
+paths:
+  /api/store:
+    put:
+      tags:
+      - api
+      summary: 스토어 정보 변경
+      description: 셀러가 자신의 스토어 정보를 변경
+      operationId: update-store
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer 인증 token
+        required: true
+        schema:
+          type: string
+        example: token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api-store-677271823'
+            examples:
+              update-store:
+                value: "{\n  \"id\" : 1,\n  \"name\" : \"수제청 청이\",\n  \"description\"\
+                  \ : \"신선한 과일과 채소에 정성을 더한 핸드메이드 과일청&주스\",\n  \"thumbnailUrl\" : \"\
+                  https://청이.png\"\n}"
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-store-512395915'
+              examples:
+                update-store:
+                  value: "{\n  \"id\" : 1,\n  \"sellerId\" : 1,\n  \"name\" : \"수제\
+                    청 청이\",\n  \"description\" : \"신선한 과일과 채소에 정성을 더한 핸드메이드 과일청&주스\
+                    \",\n  \"thumbnailUrl\" : \"https://청이.png\",\n  \"followCount\"\
+                    \ : 0,\n  \"deletedAt\" : null\n}"
+    post:
+      tags:
+      - api
+      summary: 스토어 등록
+      description: 셀러가 자신의 스토어를 등록
+      operationId: register-store
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer 인증 token
+        required: true
+        schema:
+          type: string
+        example: token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api-store2048631988'
+            examples:
+              register-store:
+                value: "{\n  \"name\" : \"수제청 청이\",\n  \"description\" : \"신선한 과일과\
+                  \ 채소에 정성을 더한 핸드메이드 과일청&주스\",\n  \"thumbnailUrl\" : \"https://청이\
+                  .png\"\n}"
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-store-512395915'
+              examples:
+                register-store:
+                  value: "{\n  \"id\" : 1,\n  \"sellerId\" : 1,\n  \"name\" : \"수제\
+                    청 청이\",\n  \"description\" : \"신선한 과일과 채소에 정성을 더한 핸드메이드 과일청&주스\
+                    \",\n  \"thumbnailUrl\" : \"https://청이.png\",\n  \"followCount\"\
+                    \ : 0,\n  \"deletedAt\" : null\n}"
+    patch:
+      tags:
+      - api
+      summary: 스토어 정보 삭제
+      description: 셀러가 자신의 스토어를 소프트 삭제
+      operationId: delete-store
+      parameters:
+      - name: id
+        in: query
+        description: 삭제 원하는 스토어 id
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: JWT Bearer 인증 token
+        required: true
+        schema:
+          type: string
+        example: token
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-store1003335903'
+              examples:
+                delete-store:
+                  value: "{\n  \"deletedAt\" : \"2024-09-11\"\n}"
+  /api/store/cart:
+    get:
+      tags:
+      - api
+      summary: 장바구니 확인
+      description: 고객이 자신이 장바구니에 담은 아이템과 옵션을 확인
+      operationId: get-cart
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer 인증 token
+        required: true
+        schema:
+          type: string
+        example: token
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-store-cart-796878112'
+              examples:
+                get-cart:
+                  value: "{\n  \"customerId\" : 1,\n  \"items\" : [ {\n    \"id\"\
+                    \ : 6,\n    \"storeId\" : 2,\n    \"sellerId\" : 1,\n    \"storeName\"\
+                    \ : \"달달구리해닮\",\n    \"name\" : \"샹티크림끌레오르\",\n    \"options\"\
+                    \ : [ {\n      \"id\" : 12,\n      \"name\" : \"블루베리샹티크림 끌레오르\"\
+                    ,\n      \"quantity\" : 2,\n      \"price\" : 26000\n    }, {\n\
+                    \      \"id\" : 11,\n      \"name\" : \"얼그레이샹티크림 끌레오르\",\n   \
+                    \   \"quantity\" : 2,\n      \"price\" : 26000\n    } ]\n  } ],\n\
+                    \  \"messages\" : [ ],\n  \"totalPrice\" : 104000\n}"
+    put:
+      tags:
+      - api
+      summary: 장바구니 옵션 변경
+      description: 고객이 자신이 장바구니에 담은 아이템의 옵션 수량을 변경
+      operationId: update-cart-option
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer 인증 token
+        required: true
+        schema:
+          type: string
+        example: token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api-store-cart1723749874'
+            examples:
+              update-cart-option:
+                value: "{\n  \"itemId\" : 6,\n  \"optionId\" : 12,\n  \"quantity\"\
+                  \ : 5\n}"
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-store-cart-796878112'
+              examples:
+                update-cart-option:
+                  value: "{\n  \"customerId\" : 1,\n  \"items\" : [ {\n    \"id\"\
+                    \ : 6,\n    \"storeId\" : 2,\n    \"sellerId\" : 1,\n    \"storeName\"\
+                    \ : \"달달구리해닮\",\n    \"name\" : \"샹티크림끌레오르\",\n    \"options\"\
+                    \ : [ {\n      \"id\" : 12,\n      \"name\" : \"블루베리샹티크림 끌레오르\"\
+                    ,\n      \"quantity\" : 2,\n      \"price\" : 26000\n    }, {\n\
+                    \      \"id\" : 11,\n      \"name\" : \"얼그레이샹티크림 끌레오르\",\n   \
+                    \   \"quantity\" : 2,\n      \"price\" : 26000\n    } ]\n  } ],\n\
+                    \  \"messages\" : [ ],\n  \"totalPrice\" : 104000\n}"
+    post:
+      tags:
+      - api
+      summary: 장바구니 추가
+      description: 고객이 아이템의 옵션을 장바구니에 담음
+      operationId: add-cart
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer 인증 token
+        required: true
+        schema:
+          type: string
+        example: token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api-store-cart222986948'
+            examples:
+              add-cart:
+                value: "{\n  \"id\" : 6,\n  \"storeId\" : 2,\n  \"storeName\" : \"\
+                  달달구리해닮\",\n  \"name\" : \"샹티크림끌레오르\",\n  \"options\" : [ {\n   \
+                  \ \"id\" : 12,\n    \"name\" : \"블루베리샹티크림 끌레오르\",\n    \"quantity\"\
+                  \ : 2,\n    \"price\" : 26000\n  }, {\n    \"id\" : 11,\n    \"\
+                  name\" : \"얼그레이샹티크림 끌레오르\",\n    \"quantity\" : 2,\n    \"price\"\
+                  \ : 26000\n  } ]\n}"
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-store-cart-1787131417'
+              examples:
+                add-cart:
+                  value: "{\n  \"storeName\" : \"달달구리해닮\",\n  \"name\" : \"샹티크림끌레오\
+                    르\",\n  \"price\" : 26000\n}"
+    patch:
+      tags:
+      - api
+      summary: 장바구니 옵션 삭제
+      description: 고객이 자신이 장바구니에 담은 아이템을 옵션 아이디 이용해 삭제 (리스트로 여러개 삭제 가능)
+      operationId: delete-cart-option
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer 인증 token
+        required: true
+        schema:
+          type: string
+        example: token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api-store-cart-1495183134'
+            examples:
+              delete-cart-option:
+                value: "{\n  \"optionIds\" : [ 1, 3, 6 ]\n}"
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-store-cart-796878112'
+              examples:
+                delete-cart-option:
+                  value: "{\n  \"customerId\" : 1,\n  \"items\" : [ {\n    \"id\"\
+                    \ : 6,\n    \"storeId\" : 2,\n    \"sellerId\" : 1,\n    \"storeName\"\
+                    \ : \"달달구리해닮\",\n    \"name\" : \"샹티크림끌레오르\",\n    \"options\"\
+                    \ : [ {\n      \"id\" : 12,\n      \"name\" : \"블루베리샹티크림 끌레오르\"\
+                    ,\n      \"quantity\" : 2,\n      \"price\" : 26000\n    }, {\n\
+                    \      \"id\" : 11,\n      \"name\" : \"얼그레이샹티크림 끌레오르\",\n   \
+                    \   \"quantity\" : 2,\n      \"price\" : 26000\n    } ]\n  } ],\n\
+                    \  \"messages\" : [ ],\n  \"totalPrice\" : 104000\n}"
+  /api/store/item:
+    put:
+      tags:
+      - api
+      summary: 아이템 업데이트
+      description: 셀러가 자신의 스토어에 아이템과 옵션을 업데이트
+      operationId: update-item
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer 인증 token
+        required: true
+        schema:
+          type: string
+        example: token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api-store-item-1815248255'
+            examples:
+              update-item:
+                value: "{\n  \"id\" : 1,\n  \"storeId\" : 1,\n  \"name\" : \"디디얌 마\
+                  카롱 수제 뚱카롱 32종\",\n  \"thumbnailUrl\" : \"https://마카롱.png\",\n  \"\
+                  description\" : \"마카롱에 최고급프랑스산 발효버터를 사용합니다:)\",\n  \"descriptionUrl\"\
+                  \ : \"https://마카롱.png\",\n  \"category\" : \"macaron\",\n  \"options\"\
+                  \ : [ {\n    \"name\" : \"조리퐁\",\n    \"quantity\" : 100,\n    \"\
+                  price\" : 2500\n  }, {\n    \"name\" : \"딸기바나나\",\n    \"quantity\"\
+                  \ : 100,\n    \"price\" : 2500\n  }, {\n    \"name\" : \"레드벨벳\"\
+                  ,\n    \"quantity\" : 100,\n    \"price\" : 2500\n  } ]\n}"
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-store-item-1994752808'
+              examples:
+                update-item:
+                  value: "{\n  \"id\" : 1,\n  \"storeId\" : 1,\n  \"name\" : \"디디얌\
+                    \ 마카롱 수제 뚱카롱 32종\",\n  \"thumbnailUrl\" : \"https://마카롱.png\"\
+                    ,\n  \"description\" : \"마카롱에 최고급프랑스산 발효버터를 사용합니다:)\",\n  \"descriptionUrl\"\
+                    \ : \"https://마카롱.png\",\n  \"price\" : 2500,\n  \"category\"\
+                    \ : \"macaron\",\n  \"options\" : [ {\n    \"id\" : 1,\n    \"\
+                    name\" : \"조리퐁\",\n    \"quantity\" : 100,\n    \"price\" : 2500\n\
+                    \  }, {\n    \"id\" : 2,\n    \"name\" : \"딸기바나나\",\n    \"quantity\"\
+                    \ : 100,\n    \"price\" : 2500\n  }, {\n    \"id\" : 3,\n    \"\
+                    name\" : \"레드벨벳\",\n    \"quantity\" : 100,\n    \"price\" : 2500\n\
+                    \  } ],\n  \"orderCount\" : 0,\n  \"heartCount\" : 0\n}"
+    post:
+      tags:
+      - api
+      summary: 아이템 등록
+      description: 셀러가 자신의 스토어에 아이템과 옵션을 등록
+      operationId: create-item
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer 인증 token
+        required: true
+        schema:
+          type: string
+        example: token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api-store-item1111777950'
+            examples:
+              create-item:
+                value: "{\n  \"storeId\" : 1,\n  \"name\" : \"디디얌 마카롱 수제 뚱카롱 32종\"\
+                  ,\n  \"category\" : \"macaron\",\n  \"thumbnailUrl\" : \"https://마\
+                  카롱.png\",\n  \"description\" : \"마카롱에 최고급프랑스산 발효버터를 사용합니다:)\",\n\
+                  \  \"descriptionUrl\" : \"https://마카롱.png\",\n  \"options\" : [\
+                  \ {\n    \"name\" : \"조리퐁\",\n    \"quantity\" : 100,\n    \"price\"\
+                  \ : 2500\n  }, {\n    \"name\" : \"딸기바나나\",\n    \"quantity\" :\
+                  \ 100,\n    \"price\" : 2500\n  }, {\n    \"name\" : \"레드벨벳\",\n\
+                  \    \"quantity\" : 100,\n    \"price\" : 2500\n  } ]\n}"
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-store-item-1994752808'
+              examples:
+                create-item:
+                  value: "{\n  \"id\" : 1,\n  \"storeId\" : 1,\n  \"name\" : \"디디얌\
+                    \ 마카롱 수제 뚱카롱 32종\",\n  \"thumbnailUrl\" : \"https://마카롱.png\"\
+                    ,\n  \"description\" : \"마카롱에 최고급프랑스산 발효버터를 사용합니다:)\",\n  \"descriptionUrl\"\
+                    \ : \"https://마카롱.png\",\n  \"price\" : 2500,\n  \"category\"\
+                    \ : \"macaron\",\n  \"options\" : [ {\n    \"id\" : 1,\n    \"\
+                    name\" : \"조리퐁\",\n    \"quantity\" : 100,\n    \"price\" : 2500\n\
+                    \  }, {\n    \"id\" : 2,\n    \"name\" : \"딸기바나나\",\n    \"quantity\"\
+                    \ : 100,\n    \"price\" : 2500\n  }, {\n    \"id\" : 3,\n    \"\
+                    name\" : \"레드벨벳\",\n    \"quantity\" : 100,\n    \"price\" : 2500\n\
+                    \  } ],\n  \"orderCount\" : 0,\n  \"heartCount\" : 0\n}"
+    delete:
+      tags:
+      - api
+      summary: 아이템 삭제
+      description: 셀러가 자신의 스토어에서 아이템과 옵션을 삭제
+      operationId: delete-item
+      parameters:
+      - name: id
+        in: query
+        description: 삭제 원하는 아이템 id
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: JWT Bearer 인증 token
+        required: true
+        schema:
+          type: string
+        example: token
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-store-item-1614922877'
+              examples:
+                delete-item:
+                  value: "{\n  \"itemName\" : \"디디얌 마카롱 수제 뚱카롱 32종\",\n  \"deletedAt\"\
+                    \ : \"2024-09-11T16:17:45.653393\"\n}"
+  /api/store/search:
+    get:
+      tags:
+      - api
+      summary: 키워드로 스토어 검색
+      description: 키워드가 포함된 스토어 검색
+      operationId: search-store-by-keyword
+      parameters:
+      - name: keyword
+        in: query
+        description: 검색 키워드
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: 검색 페이지
+        required: true
+        schema:
+          type: string
+      - name: size
+        in: query
+        description: 검색 사이즈
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-store-search2011854845'
+              examples:
+                search-store-by-keyword:
+                  value: "{\n  \"content\" : [ {\n    \"id\" : 1,\n    \"sellerId\"\
+                    \ : 1,\n    \"name\" : \"매장1\",\n    \"description\" : \"매장1 설\
+                    명\",\n    \"thumbnailUrl\" : \"썸네일 url\",\n    \"followCount\"\
+                    \ : 20,\n    \"deletedAt\" : null\n  }, {\n    \"id\" : 4,\n \
+                    \   \"sellerId\" : 1,\n    \"name\" : \"매장11\",\n    \"description\"\
+                    \ : \"매장1 설명\",\n    \"thumbnailUrl\" : \"썸네일 url\",\n    \"followCount\"\
+                    \ : 100,\n    \"deletedAt\" : null\n  } ],\n  \"pageable\" : {\n\
+                    \    \"sort\" : {\n      \"empty\" : true,\n      \"sorted\" :\
+                    \ false,\n      \"unsorted\" : true\n    },\n    \"offset\" :\
+                    \ 0,\n    \"pageNumber\" : 0,\n    \"pageSize\" : 5,\n    \"paged\"\
+                    \ : true,\n    \"unpaged\" : false\n  },\n  \"last\" : true,\n\
+                    \  \"totalElements\" : 2,\n  \"totalPages\" : 1,\n  \"first\"\
+                    \ : true,\n  \"sort\" : {\n    \"empty\" : true,\n    \"sorted\"\
+                    \ : false,\n    \"unsorted\" : true\n  },\n  \"size\" : 5,\n \
+                    \ \"number\" : 0,\n  \"numberOfElements\" : 2,\n  \"empty\" :\
+                    \ false\n}"
+  /api/store/cart/order:
+    post:
+      tags:
+      - api
+      summary: 장바구니 주문
+      description: 고객이 자신이 장바구니에 담은 아이템 일부 또는 전체를 주문
+      operationId: order-cart
+      parameters:
+      - name: Authorization
+        in: header
+        description: JWT Bearer 인증 token
+        required: true
+        schema:
+          type: string
+        example: token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api-store-cart-796878112'
+            examples:
+              order-cart:
+                value: "{\n  \"customerId\" : 1,\n  \"items\" : [ {\n    \"id\" :\
+                  \ 6,\n    \"storeId\" : 2,\n    \"sellerId\" : 1,\n    \"storeName\"\
+                  \ : \"달달구리해닮\",\n    \"name\" : \"샹티크림끌레오르\",\n    \"options\" :\
+                  \ [ {\n      \"id\" : 12,\n      \"name\" : \"블루베리샹티크림 끌레오르\",\n\
+                  \      \"quantity\" : 2,\n      \"price\" : 26000\n    }, {\n  \
+                  \    \"id\" : 11,\n      \"name\" : \"얼그레이샹티크림 끌레오르\",\n      \"\
+                  quantity\" : 2,\n      \"price\" : 26000\n    } ]\n  } ],\n  \"\
+                  messages\" : [ ],\n  \"totalPrice\" : 104000\n}"
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-store-cart-order-564204975'
+              examples:
+                order-cart:
+                  value: "[ {\n  \"orderId\" : 2,\n  \"itemName\" : \"샹티크림끌레오르\",\n\
+                    \  \"optionName\" : \"얼그레이샹티크림 끌레오르\",\n  \"optionPrice\" : 26000,\n\
+                    \  \"optionQuantity\" : 2,\n  \"createdAt\" : \"2024-09-11T16:17:43.423519\"\
+                    \n} ]"
+  /api/store/search/detail:
+    get:
+      tags:
+      - api
+      summary: 스토어 상세정보 검색
+      description: 스토어의 상세정보 검색
+      operationId: search-store-detail
+      parameters:
+      - name: id
+        in: query
+        description: 상세 정보를 알고싶은 스토어의 id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-store-search-detail674353241'
+              examples:
+                search-store-detail:
+                  value: "{\n  \"id\" : 1,\n  \"sellerId\" : 1,\n  \"name\" : \"매장\
+                    1\",\n  \"description\" : \"매장1 설명\",\n  \"thumbnailUrl\" : \"\
+                    썸네일 url\",\n  \"followCount\" : 20,\n  \"deletedAt\" : null\n}"
+  /api/store/search/follow:
+    get:
+      tags:
+      - api
+      summary: 팔로우순 스토어 검색
+      description: 키워드가 포함된 검색 결과를 팔로우 순으로 정렬
+      operationId: search-store-by-follower
+      parameters:
+      - name: keyword
+        in: query
+        description: 검색 키워드
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: 검색 페이지
+        required: true
+        schema:
+          type: string
+      - name: size
+        in: query
+        description: 검색 사이즈
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-store-search2011854845'
+              examples:
+                search-store-by-follower:
+                  value: "{\n  \"content\" : [ {\n    \"id\" : 4,\n    \"sellerId\"\
+                    \ : 1,\n    \"name\" : \"매장11\",\n    \"description\" : \"매장1\
+                    \ 설명\",\n    \"thumbnailUrl\" : \"썸네일 url\",\n    \"followCount\"\
+                    \ : 100,\n    \"deletedAt\" : null\n  }, {\n    \"id\" : 1,\n\
+                    \    \"sellerId\" : 1,\n    \"name\" : \"매장1\",\n    \"description\"\
+                    \ : \"매장1 설명\",\n    \"thumbnailUrl\" : \"썸네일 url\",\n    \"followCount\"\
+                    \ : 20,\n    \"deletedAt\" : null\n  } ],\n  \"pageable\" : {\n\
+                    \    \"sort\" : {\n      \"empty\" : true,\n      \"sorted\" :\
+                    \ false,\n      \"unsorted\" : true\n    },\n    \"offset\" :\
+                    \ 0,\n    \"pageNumber\" : 0,\n    \"pageSize\" : 5,\n    \"paged\"\
+                    \ : true,\n    \"unpaged\" : false\n  },\n  \"last\" : true,\n\
+                    \  \"totalElements\" : 2,\n  \"totalPages\" : 1,\n  \"first\"\
+                    \ : true,\n  \"sort\" : {\n    \"empty\" : true,\n    \"sorted\"\
+                    \ : false,\n    \"unsorted\" : true\n  },\n  \"size\" : 5,\n \
+                    \ \"number\" : 0,\n  \"numberOfElements\" : 2,\n  \"empty\" :\
+                    \ false\n}"
+  /api/store/item/search/category:
+    get:
+      tags:
+      - api
+      summary: 카테고리로 검색
+      description: 키워드가 포함된 아이템 검색후 카테고리로 필터
+      operationId: search-item-by-category
+      parameters:
+      - name: keyword
+        in: query
+        description: 검색 키워드
+        required: true
+        schema:
+          type: string
+      - name: category
+        in: query
+        description: 검색 카테고리
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: 검색 페이지
+        required: true
+        schema:
+          type: string
+      - name: size
+        in: query
+        description: 검색 사이즈
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-store-item-search-category1495994139'
+              examples:
+                search-item-by-category:
+                  value: "{\n  \"content\" : [ {\n    \"storeId\" : 2,\n    \"storeName\"\
+                    \ : \"달달구리해닮\",\n    \"itemId\" : 4,\n    \"itemName\" : \"꿀고구\
+                    마 티그레\",\n    \"thumbnailUrl\" : \"https://티그레.png\",\n    \"\
+                    price\" : 17000\n  }, {\n    \"storeId\" : 2,\n    \"storeName\"\
+                    \ : \"달달구리해닮\",\n    \"itemId\" : 5,\n    \"itemName\" : \"카라멜\
+                    버터샌드쿠키세트\",\n    \"thumbnailUrl\" : \"https://카라멜버터샌드쿠키세트.png\"\
+                    ,\n    \"price\" : 27500\n  }, {\n    \"storeId\" : 2,\n    \"\
+                    storeName\" : \"달달구리해닮\",\n    \"itemId\" : 6,\n    \"itemName\"\
+                    \ : \"샹티크림끌레오르쿠키\",\n    \"thumbnailUrl\" : \"https://샹티크림끌레오르\
+                    .png\",\n    \"price\" : 26000\n  } ],\n  \"pageable\" : {\n \
+                    \   \"sort\" : {\n      \"empty\" : true,\n      \"sorted\" :\
+                    \ false,\n      \"unsorted\" : true\n    },\n    \"offset\" :\
+                    \ 0,\n    \"pageNumber\" : 0,\n    \"pageSize\" : 5,\n    \"paged\"\
+                    \ : true,\n    \"unpaged\" : false\n  },\n  \"last\" : true,\n\
+                    \  \"totalElements\" : 3,\n  \"totalPages\" : 1,\n  \"first\"\
+                    \ : true,\n  \"sort\" : {\n    \"empty\" : true,\n    \"sorted\"\
+                    \ : false,\n    \"unsorted\" : true\n  },\n  \"size\" : 5,\n \
+                    \ \"number\" : 0,\n  \"numberOfElements\" : 3,\n  \"empty\" :\
+                    \ false\n}"
+  /api/store/item/search/detail:
+    get:
+      tags:
+      - api
+      summary: 특정 스토어의 아이템 확인
+      description: 특정 아이템의 옵션 포함 상세정보 확인
+      operationId: search-store-item-detail
+      parameters:
+      - name: itemId
+        in: query
+        description: 상세 정보 원하는 아이템 id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-store-item-search-detail267013123'
+              examples:
+                search-store-item-detail:
+                  value: "{\n  \"id\" : 1,\n  \"storeId\" : 1,\n  \"name\" : \"디디얌\
+                    \ 마카롱 수제 뚱카롱 32종\",\n  \"thumbnailUrl\" : \"https://마카롱.png\"\
+                    ,\n  \"description\" : null,\n  \"descriptionUrl\" : null,\n \
+                    \ \"price\" : 2500,\n  \"category\" : \"macaron\",\n  \"options\"\
+                    \ : [ {\n    \"id\" : 1,\n    \"name\" : \"조리퐁\",\n    \"quantity\"\
+                    \ : 100,\n    \"price\" : 2500\n  }, {\n    \"id\" : 2,\n    \"\
+                    name\" : \"딸기바나나\",\n    \"quantity\" : 10,\n    \"price\" : 2500\n\
+                    \  }, {\n    \"id\" : 3,\n    \"name\" : \"레드벨벳\",\n    \"quantity\"\
+                    \ : 10,\n    \"price\" : 2500\n  } ],\n  \"orderCount\" : 1,\n\
+                    \  \"heartCount\" : 6\n}"
+  /api/store/item/search/order:
+    get:
+      tags:
+      - api
+      summary: 키워드로 아이템 검색
+      description: 키워드가 포함된 아이템 검색후 주문순으로 정렬
+      operationId: search-item-by-keyword
+      parameters:
+      - name: keyword
+        in: query
+        description: 검색 키워드
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: 검색 페이지
+        required: true
+        schema:
+          type: string
+      - name: size
+        in: query
+        description: 검색 사이즈
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-store-item-search-category1495994139'
+              examples:
+                search-item-by-keyword:
+                  value: "{\n  \"content\" : [ {\n    \"storeId\" : 2,\n    \"storeName\"\
+                    \ : \"달달구리해닮\",\n    \"itemId\" : 6,\n    \"itemName\" : \"샹티크\
+                    림끌레오르쿠키\",\n    \"thumbnailUrl\" : \"https://샹티크림끌레오르.png\",\n\
+                    \    \"price\" : 26000\n  }, {\n    \"storeId\" : 3,\n    \"storeName\"\
+                    \ : \"바스켓베이커리\",\n    \"itemId\" : 7,\n    \"itemName\" : \"노밀\
+                    가루,글루텐프리 바스켓베이커리 스콘 쿠키\",\n    \"thumbnailUrl\" : \"https://스콘\
+                    .png\",\n    \"price\" : 5200\n  }, {\n    \"storeId\" : 3,\n\
+                    \    \"storeName\" : \"바스켓베이커리\",\n    \"itemId\" : 9,\n    \"\
+                    itemName\" : \"노밀가루 바스켓베이커리 쌀피칸쿠키\",\n    \"thumbnailUrl\" : \"\
+                    https://쌀피칸브라우니.png\",\n    \"price\" : 5500\n  }, {\n    \"storeId\"\
+                    \ : 2,\n    \"storeName\" : \"달달구리해닮\",\n    \"itemId\" : 5,\n\
+                    \    \"itemName\" : \"카라멜버터샌드쿠키세트\",\n    \"thumbnailUrl\" : \"\
+                    https://카라멜버터샌드쿠키세트.png\",\n    \"price\" : 27500\n  }, {\n  \
+                    \  \"storeId\" : 1,\n    \"storeName\" : \"디디얌\",\n    \"itemId\"\
+                    \ : 2,\n    \"itemName\" : \"촉촉한 쿠키 에그타르트\",\n    \"thumbnailUrl\"\
+                    \ : \"https://에그타르트.png\",\n    \"price\" : 3000\n  } ],\n  \"\
+                    pageable\" : {\n    \"sort\" : {\n      \"empty\" : true,\n  \
+                    \    \"sorted\" : false,\n      \"unsorted\" : true\n    },\n\
+                    \    \"offset\" : 0,\n    \"pageNumber\" : 0,\n    \"pageSize\"\
+                    \ : 5,\n    \"paged\" : true,\n    \"unpaged\" : false\n  },\n\
+                    \  \"last\" : true,\n  \"totalElements\" : 5,\n  \"totalPages\"\
+                    \ : 1,\n  \"first\" : true,\n  \"sort\" : {\n    \"empty\" : true,\n\
+                    \    \"sorted\" : false,\n    \"unsorted\" : true\n  },\n  \"\
+                    size\" : 5,\n  \"number\" : 0,\n  \"numberOfElements\" : 5,\n\
+                    \  \"empty\" : false\n}"
+  /api/store/item/search/store:
+    get:
+      tags:
+      - api
+      summary: 특정 스토어의 아이템 확인
+      description: 특정 스토어의 모든 아이템 페이지 형식으로 리턴
+      operationId: search-store-item
+      parameters:
+      - name: storeId
+        in: query
+        description: 아이템 정보 원하는 스토어 id
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: 검색 페이지
+        required: true
+        schema:
+          type: string
+      - name: size
+        in: query
+        description: 검색 사이즈
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-store-item-search-category1495994139'
+              examples:
+                search-store-item:
+                  value: "{\n  \"content\" : [ {\n    \"storeId\" : 1,\n    \"storeName\"\
+                    \ : \"디디얌\",\n    \"itemId\" : 1,\n    \"itemName\" : \"디디얌 마카\
+                    롱 수제 뚱카롱 32종\",\n    \"thumbnailUrl\" : \"https://마카롱.png\",\n\
+                    \    \"price\" : 2500\n  }, {\n    \"storeId\" : 1,\n    \"storeName\"\
+                    \ : \"디디얌\",\n    \"itemId\" : 2,\n    \"itemName\" : \"촉촉한 쿠키\
+                    \ 에그타르트\",\n    \"thumbnailUrl\" : \"https://에그타르트.png\",\n  \
+                    \  \"price\" : 3000\n  }, {\n    \"storeId\" : 1,\n    \"storeName\"\
+                    \ : \"디디얌\",\n    \"itemId\" : 3,\n    \"itemName\" : \"새콤달콤\\\
+                    uD83D\\uDE16 레몬케이크\",\n    \"thumbnailUrl\" : \"https://레몬케이크\
+                    .png\",\n    \"price\" : 2800\n  } ],\n  \"pageable\" : {\n  \
+                    \  \"sort\" : {\n      \"empty\" : true,\n      \"sorted\" : false,\n\
+                    \      \"unsorted\" : true\n    },\n    \"offset\" : 0,\n    \"\
+                    pageNumber\" : 0,\n    \"pageSize\" : 5,\n    \"paged\" : true,\n\
+                    \    \"unpaged\" : false\n  },\n  \"last\" : true,\n  \"totalElements\"\
+                    \ : 3,\n  \"totalPages\" : 1,\n  \"first\" : true,\n  \"sort\"\
+                    \ : {\n    \"empty\" : true,\n    \"sorted\" : false,\n    \"\
+                    unsorted\" : true\n  },\n  \"size\" : 5,\n  \"number\" : 0,\n\
+                    \  \"numberOfElements\" : 3,\n  \"empty\" : false\n}"
+  /api/store/item/search/price/high:
+    get:
+      tags:
+      - api
+      summary: 높은 가격순으로 아이템 검색
+      description: 키워드가 포함된 아이템 검색후 높은 가격순으로 정렬
+      operationId: search-item-by-high-price
+      parameters:
+      - name: keyword
+        in: query
+        description: 검색 키워드
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: 검색 페이지
+        required: true
+        schema:
+          type: string
+      - name: size
+        in: query
+        description: 검색 사이즈
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-store-item-search-category1495994139'
+              examples:
+                search-item-by-high-price:
+                  value: "{\n  \"content\" : [ {\n    \"storeId\" : 2,\n    \"storeName\"\
+                    \ : \"달달구리해닮\",\n    \"itemId\" : 5,\n    \"itemName\" : \"카라멜\
+                    버터샌드쿠키세트\",\n    \"thumbnailUrl\" : \"https://카라멜버터샌드쿠키세트.png\"\
+                    ,\n    \"price\" : 27500\n  }, {\n    \"storeId\" : 2,\n    \"\
+                    storeName\" : \"달달구리해닮\",\n    \"itemId\" : 6,\n    \"itemName\"\
+                    \ : \"샹티크림끌레오르쿠키\",\n    \"thumbnailUrl\" : \"https://샹티크림끌레오르\
+                    .png\",\n    \"price\" : 26000\n  }, {\n    \"storeId\" : 3,\n\
+                    \    \"storeName\" : \"바스켓베이커리\",\n    \"itemId\" : 9,\n    \"\
+                    itemName\" : \"노밀가루 바스켓베이커리 쌀피칸쿠키\",\n    \"thumbnailUrl\" : \"\
+                    https://쌀피칸브라우니.png\",\n    \"price\" : 5500\n  }, {\n    \"storeId\"\
+                    \ : 3,\n    \"storeName\" : \"바스켓베이커리\",\n    \"itemId\" : 7,\n\
+                    \    \"itemName\" : \"노밀가루,글루텐프리 바스켓베이커리 스콘 쿠키\",\n    \"thumbnailUrl\"\
+                    \ : \"https://스콘.png\",\n    \"price\" : 5200\n  }, {\n    \"\
+                    storeId\" : 1,\n    \"storeName\" : \"디디얌\",\n    \"itemId\" :\
+                    \ 2,\n    \"itemName\" : \"촉촉한 쿠키 에그타르트\",\n    \"thumbnailUrl\"\
+                    \ : \"https://에그타르트.png\",\n    \"price\" : 3000\n  } ],\n  \"\
+                    pageable\" : {\n    \"sort\" : {\n      \"empty\" : true,\n  \
+                    \    \"sorted\" : false,\n      \"unsorted\" : true\n    },\n\
+                    \    \"offset\" : 0,\n    \"pageNumber\" : 0,\n    \"pageSize\"\
+                    \ : 5,\n    \"paged\" : true,\n    \"unpaged\" : false\n  },\n\
+                    \  \"last\" : true,\n  \"totalElements\" : 5,\n  \"totalPages\"\
+                    \ : 1,\n  \"first\" : true,\n  \"sort\" : {\n    \"empty\" : true,\n\
+                    \    \"sorted\" : false,\n    \"unsorted\" : true\n  },\n  \"\
+                    size\" : 5,\n  \"number\" : 0,\n  \"numberOfElements\" : 5,\n\
+                    \  \"empty\" : false\n}"
+  /api/store/item/search/price/low:
+    get:
+      tags:
+      - api
+      summary: 낮은 가격순으로 아이템 검색
+      description: 키워드가 포함된 아이템 검색후 낮은 가격순으로 정렬
+      operationId: search-item-by-low-price
+      parameters:
+      - name: keyword
+        in: query
+        description: 검색 키워드
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: 검색 페이지
+        required: true
+        schema:
+          type: string
+      - name: size
+        in: query
+        description: 검색 사이즈
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-store-item-search-category1495994139'
+              examples:
+                search-item-by-low-price:
+                  value: "{\n  \"content\" : [ {\n    \"storeId\" : 1,\n    \"storeName\"\
+                    \ : \"디디얌\",\n    \"itemId\" : 2,\n    \"itemName\" : \"촉촉한 쿠키\
+                    \ 에그타르트\",\n    \"thumbnailUrl\" : \"https://에그타르트.png\",\n  \
+                    \  \"price\" : 3000\n  }, {\n    \"storeId\" : 3,\n    \"storeName\"\
+                    \ : \"바스켓베이커리\",\n    \"itemId\" : 7,\n    \"itemName\" : \"노밀\
+                    가루,글루텐프리 바스켓베이커리 스콘 쿠키\",\n    \"thumbnailUrl\" : \"https://스콘\
+                    .png\",\n    \"price\" : 5200\n  }, {\n    \"storeId\" : 3,\n\
+                    \    \"storeName\" : \"바스켓베이커리\",\n    \"itemId\" : 9,\n    \"\
+                    itemName\" : \"노밀가루 바스켓베이커리 쌀피칸쿠키\",\n    \"thumbnailUrl\" : \"\
+                    https://쌀피칸브라우니.png\",\n    \"price\" : 5500\n  }, {\n    \"storeId\"\
+                    \ : 2,\n    \"storeName\" : \"달달구리해닮\",\n    \"itemId\" : 6,\n\
+                    \    \"itemName\" : \"샹티크림끌레오르쿠키\",\n    \"thumbnailUrl\" : \"\
+                    https://샹티크림끌레오르.png\",\n    \"price\" : 26000\n  }, {\n    \"\
+                    storeId\" : 2,\n    \"storeName\" : \"달달구리해닮\",\n    \"itemId\"\
+                    \ : 5,\n    \"itemName\" : \"카라멜버터샌드쿠키세트\",\n    \"thumbnailUrl\"\
+                    \ : \"https://카라멜버터샌드쿠키세트.png\",\n    \"price\" : 27500\n  } ],\n\
+                    \  \"pageable\" : {\n    \"sort\" : {\n      \"empty\" : true,\n\
+                    \      \"sorted\" : false,\n      \"unsorted\" : true\n    },\n\
+                    \    \"offset\" : 0,\n    \"pageNumber\" : 0,\n    \"pageSize\"\
+                    \ : 5,\n    \"paged\" : true,\n    \"unpaged\" : false\n  },\n\
+                    \  \"last\" : true,\n  \"totalElements\" : 5,\n  \"totalPages\"\
+                    \ : 1,\n  \"first\" : true,\n  \"sort\" : {\n    \"empty\" : true,\n\
+                    \    \"sorted\" : false,\n    \"unsorted\" : true\n  },\n  \"\
+                    size\" : 5,\n  \"number\" : 0,\n  \"numberOfElements\" : 5,\n\
+                    \  \"empty\" : false\n}"
+components:
+  schemas:
+    api-store-cart-796878112:
+      type: object
+      properties:
+        totalPrice:
+          type: number
+          description: 담은 총 금액
+        customerId:
+          type: number
+          description: 고객 id
+        messages:
+          type: array
+          description: 장바구니에 담은 아이템과 옵션에 변경 사항이 있는 경우 메세지로 알림
+          items:
+            oneOf:
+            - type: object
+            - type: boolean
+            - type: string
+            - type: number
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              sellerId:
+                type: number
+                description: 스토어 셀러 id
+              options:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    quantity:
+                      type: number
+                      description: 아이템 옵션 수량
+                    price:
+                      type: number
+                      description: 아이템 옵션 가격
+                    name:
+                      type: string
+                      description: 아이템 옵션 이름
+                    id:
+                      type: number
+                      description: 아이템 옵션 id
+              name:
+                type: string
+                description: 아이템 이름
+              storeName:
+                type: string
+                description: 스토어 이름
+              id:
+                type: number
+                description: 아이템 id
+              storeId:
+                type: number
+                description: 스토어 id
+    api-store-512395915:
+      type: object
+      properties:
+        followCount:
+          type: number
+          description: 스토어가 팔로우된 횟수
+        sellerId:
+          type: number
+          description: 스토어 셀러 id
+        name:
+          type: string
+          description: 스토어 이름
+        description:
+          type: string
+          description: 스토어 설명
+        id:
+          type: number
+          description: 스토어 id
+        thumbnailUrl:
+          type: string
+          description: 스토어 썸네일 url
+    api-store-item-1994752808:
+      type: object
+      properties:
+        price:
+          type: number
+          description: 아이템 첫번째 옵션 가격
+        orderCount:
+          type: number
+          description: 아이템 주문 횟수
+        options:
+          type: array
+          items:
+            type: object
+            properties:
+              quantity:
+                type: number
+                description: 아이템 옵션 수량
+              price:
+                type: number
+                description: 아이템 옵션 가격
+              name:
+                type: string
+                description: 아이템 옵션 이름
+              id:
+                type: number
+                description: 아이템 옵션 id
+        descriptionUrl:
+          type: string
+          description: 아이템 설명 이미지 url
+        name:
+          type: string
+          description: 아이템 이름
+        description:
+          type: string
+          description: 아이템 설명
+        id:
+          type: number
+          description: 아이쳄 id
+        category:
+          type: string
+          description: 아이템 카테고리
+        storeId:
+          type: number
+          description: 스토어 id
+        heartCount:
+          type: number
+          description: 아이템 찜 횟수
+        thumbnailUrl:
+          type: string
+          description: 아이템 썸네일 이미지 url
+    api-store-cart-1495183134:
+      type: object
+      properties:
+        optionIds:
+          type: array
+          description: 삭제할 옵션 id 리스트
+          items:
+            oneOf:
+            - type: object
+            - type: boolean
+            - type: string
+            - type: number
+    api-store-search-detail674353241:
+      type: object
+      properties:
+        followCount:
+          type: number
+          description: 스토어 팔로우된 횟수
+        sellerId:
+          type: number
+          description: 스토어 셀러 아이디
+        name:
+          type: string
+          description: 스토어 이름
+        description:
+          type: string
+          description: 스토어 설명
+        id:
+          type: number
+          description: 스토어 아이디
+        thumbnailUrl:
+          type: string
+          description: 스토어 썸네일 url
+    api-store-item-search-detail267013123:
+      type: object
+      properties:
+        price:
+          type: number
+          description: 아이템 첫번째 옵션 가격
+        orderCount:
+          type: number
+          description: 아이템 주문 횟수
+        options:
+          type: array
+          items:
+            type: object
+            properties:
+              quantity:
+                type: number
+                description: 아이템 옵션 수량
+              price:
+                type: number
+                description: 아이템 옵션 가격
+              name:
+                type: string
+                description: 아이템 옵션 이름
+              id:
+                type: number
+                description: 아이템 옵션 id
+        name:
+          type: string
+          description: 아이템 이름
+        id:
+          type: number
+          description: 아이템 id
+        category:
+          type: string
+          description: 아이템 카테고리
+        storeId:
+          type: number
+          description: 스토어 id
+        heartCount:
+          type: number
+          description: 아이템 찜 횟수
+        thumbnailUrl:
+          type: string
+          description: 아이템 썸네일 이미지 url
+    api-store-cart1723749874:
+      type: object
+      properties:
+        itemId:
+          type: number
+          description: 아이템 id
+        quantity:
+          type: number
+          description: 변경원하는 수량
+        optionId:
+          type: number
+          description: 옵션 id
+    api-store-item-1815248255:
+      type: object
+      properties:
+        options:
+          type: array
+          items:
+            type: object
+            properties:
+              quantity:
+                type: number
+                description: 아이템 옵션 수량
+              price:
+                type: number
+                description: 아이템 옵션 가격
+              name:
+                type: string
+                description: 아이템 옵션 이름
+        descriptionUrl:
+          type: string
+          description: 아이템 설명 이미지 url
+        name:
+          type: string
+          description: 아이템 이름
+        description:
+          type: string
+          description: 아이템 설명
+        id:
+          type: number
+          description: 아이템 id
+        category:
+          type: string
+          description: 아이템 카테고리
+        storeId:
+          type: number
+          description: 스토어 id
+        thumbnailUrl:
+          type: string
+          description: 아이템 썸네일 이미지 url
+    api-store-cart222986948:
+      type: object
+      properties:
+        options:
+          type: array
+          items:
+            type: object
+            properties:
+              quantity:
+                type: number
+                description: 아이템 옵션 수량
+              price:
+                type: number
+                description: 아이템 옵션 가격
+              name:
+                type: string
+                description: 아이템 옵션 이름
+              id:
+                type: number
+                description: 아이템 옵션 id
+        name:
+          type: string
+          description: 아이템 이름
+        storeName:
+          type: string
+          description: 스토어 이름
+        id:
+          type: number
+          description: 아이템 id
+        storeId:
+          type: number
+          description: 스토어 id
+    api-store-cart-order-564204975:
+      type: array
+      items:
+        type: object
+        properties:
+          createdAt:
+            type: string
+            description: 주문 날짜/시간
+          itemName:
+            type: string
+            description: 아이템 이름
+          orderId:
+            type: number
+            description: 주문 id
+          optionPrice:
+            type: number
+            description: 아이템 옵션 가격
+          optionQuantity:
+            type: number
+            description: 아이템 옵션 수량
+          optionName:
+            type: string
+            description: 아이템 옵션 이름
+    api-store2048631988:
+      type: object
+      properties:
+        name:
+          type: string
+          description: 스토어 이름
+        description:
+          type: string
+          description: 스토어 설명
+        thumbnailUrl:
+          type: string
+          description: 스토어 썸네일 url
+    api-store-item-search-category1495994139:
+      type: object
+      properties:
+        number:
+          type: number
+          description: 현재 페이지 번호
+        size:
+          type: number
+          description: 한 페이지 당 조회할 데이터 개수
+        numberOfElements:
+          type: number
+          description: 요청 페이지에서 조회된 데이터 개수
+        last:
+          type: boolean
+          description: 마지막 페이지인지 여부
+        totalPages:
+          type: number
+          description: 전체 페이지 개수
+        pageable:
+          type: object
+          properties:
+            paged:
+              type: boolean
+              description: 페이징 정보를 포함하는지 여부
+            pageNumber:
+              type: number
+              description: 현재페이지 번호
+            offset:
+              type: number
+              description: 몇번째 데이터인지 (0부터 시작)
+            pageSize:
+              type: number
+              description: 한 페이지당 조회할 데이터 개수
+            unpaged:
+              type: boolean
+              description: 페이징 정보를 안포함하는지 여부
+            sort:
+              type: object
+              properties:
+                unsorted:
+                  type: boolean
+                  description: 정렬 안됐는지 여부
+                sorted:
+                  type: boolean
+                  description: 정렬 됐는지 여부
+                empty:
+                  type: boolean
+                  description: 데이터가 비어있는지 여부
+          description: pageable type
+        sort:
+          type: object
+          properties:
+            unsorted:
+              type: boolean
+              description: 정렬 됐는지 여부
+            sorted:
+              type: boolean
+              description: 정렬 안됐는지 여부
+            empty:
+              type: boolean
+              description: 데이터가 비었는지 여부
+        first:
+          type: boolean
+          description: 첫번째 페이지인지 여부
+        content:
+          type: array
+          items:
+            type: object
+            properties:
+              itemId:
+                type: number
+                description: 아이템 id
+              itemName:
+                type: string
+                description: 아이템 이름
+              price:
+                type: number
+                description: 아이템 가격
+              storeName:
+                type: string
+                description: 스토어 이름
+              storeId:
+                type: number
+                description: 스토어 id
+              thumbnailUrl:
+                type: string
+                description: 아이템 썸네일 url
+        empty:
+          type: boolean
+          description: 데이터가 비었는지 여부
+        totalElements:
+          type: number
+          description: 테이블 총 데이터 개수
+    api-store-677271823:
+      type: object
+      properties:
+        name:
+          type: string
+          description: 변경할 스토어 이름
+        description:
+          type: string
+          description: 변경할 스토어 설명
+        id:
+          type: number
+          description: 수정원하는 스토어의 id
+        thumbnailUrl:
+          type: string
+          description: 변경할 스토어 썸네일 url
+    api-store1003335903:
+      type: object
+      properties:
+        deletedAt:
+          type: string
+          description: 스토어가 삭제된 경우 날짜 정보
+    api-store-search2011854845:
+      type: object
+      properties:
+        number:
+          type: number
+          description: 현재 페이지 번호
+        size:
+          type: number
+          description: 한 페이지 당 조회할 데이터 개수
+        numberOfElements:
+          type: number
+          description: 요청 페이지에서 조회된 데이터 개수
+        last:
+          type: boolean
+          description: 마지막 페이지인지 여부
+        totalPages:
+          type: number
+          description: 전체 페이지 개수
+        pageable:
+          type: object
+          properties:
+            paged:
+              type: boolean
+              description: 페이징 정보를 포함하는지 여부
+            pageNumber:
+              type: number
+              description: 현재페이지 번호
+            offset:
+              type: number
+              description: 몇번째 데이터인지 (0부터 시작)
+            pageSize:
+              type: number
+              description: 한 페이지당 조회할 데이터 개수
+            unpaged:
+              type: boolean
+              description: 페이징 정보를 안포함하는지 여부
+            sort:
+              type: object
+              properties:
+                unsorted:
+                  type: boolean
+                  description: 정렬 안됐는지 여부
+                sorted:
+                  type: boolean
+                  description: 정렬 됐는지 여부
+                empty:
+                  type: boolean
+                  description: 데이터가 비어있는지 여부
+          description: pageable type
+        sort:
+          type: object
+          properties:
+            unsorted:
+              type: boolean
+              description: 정렬 됐는지 여부
+            sorted:
+              type: boolean
+              description: 정렬 안됐는지 여부
+            empty:
+              type: boolean
+              description: 데이터가 비었는지 여부
+        first:
+          type: boolean
+          description: 첫번째 페이지인지 여부
+        content:
+          type: array
+          items:
+            type: object
+            properties:
+              followCount:
+                type: number
+                description: 스토어 팔로우된 횟수
+              sellerId:
+                type: number
+                description: 스토어 셀러 아이디
+              name:
+                type: string
+                description: 스토어 이름
+              description:
+                type: string
+                description: 스토어 설명
+              id:
+                type: number
+                description: 스토어 아이디
+              thumbnailUrl:
+                type: string
+                description: 스토어 썸네일 url
+        empty:
+          type: boolean
+          description: 데이터가 비었는지 여부
+        totalElements:
+          type: number
+          description: 테이블 총 데이터 개수
+    api-store-item1111777950:
+      type: object
+      properties:
+        options:
+          type: array
+          items:
+            type: object
+            properties:
+              quantity:
+                type: number
+                description: 아이템 옵션 수량
+              price:
+                type: number
+                description: 아이템 옵션 가격
+              name:
+                type: string
+                description: 아이템 옵션 이름
+        descriptionUrl:
+          type: string
+          description: 아이템 설명 이미지 url
+        name:
+          type: string
+          description: 아이템 이름
+        description:
+          type: string
+          description: 아이템 설명
+        category:
+          type: string
+          description: 아이템 카테고리
+        storeId:
+          type: number
+          description: 스토어 id
+        thumbnailUrl:
+          type: string
+          description: 아이템 썸네일 이미지 url
+    api-store-cart-1787131417:
+      type: object
+      properties:
+        price:
+          type: number
+          description: 첫번째 옵션 가격
+        name:
+          type: string
+          description: 아이템 이름
+        storeName:
+          type: string
+          description: 스토어 이름
+    api-store-item-1614922877:
+      type: object
+      properties:
+        deletedAt:
+          type: string
+          description: 삭제 날짜/시간 정보
+        itemName:
+          type: string
+          description: 삭제된 아이템 이름
