@@ -11,10 +11,13 @@ import com.zerobase.orderapi.domain.form.CancelOrder;
 import com.zerobase.orderapi.domain.form.RefundForm;
 import com.zerobase.orderapi.domain.order.Orders;
 import com.zerobase.orderapi.domain.order.OrdersDto;
+import com.zerobase.orderapi.domain.order.Settlement;
+import com.zerobase.orderapi.domain.order.SettlementResult;
 import com.zerobase.orderapi.domain.type.OrderStatus;
 import com.zerobase.orderapi.domain.type.SettlementStatus;
 import com.zerobase.orderapi.exception.OrderException;
 import com.zerobase.orderapi.repository.OrdersRepository;
+import com.zerobase.orderapi.repository.SettlementRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,6 +38,7 @@ import static com.zerobase.orderapi.exception.ErrorCode.ALREADY_REFUND_REJECTED;
 public class OrderService {
 
     private final OrdersRepository orderRepository;
+    private final SettlementRepository settlementRepository;
     private final MemberClient memberClient;
     private final StoreClient storeClient;
 
@@ -150,7 +154,18 @@ public class OrderService {
 
         // 셀러 인컴 감소
         // 정산 시스템 구현후 수정
-
+        Optional<Settlement> optionalSettlement = settlementRepository.findBySellerIdAndDate(sellerId, form.getDate());
+        if (optionalSettlement.isPresent()) {
+            Settlement settlement = optionalSettlement.get();
+            if (SettlementStatus.YET.equals(settlement.getStatus())) {
+                settlement.decreaseSettlementAmount(orders.getTotalPrice());
+            } else {
+                DecreaseBalanceForm requestSeller = DecreaseBalanceForm.builder()
+                        .totalPrice(orders.getTotalPrice())
+                        .build();
+                memberClient.refund(token, requestSeller);
+            }
+        }
         return OrdersDto.from(orders);
     }
 
@@ -192,5 +207,23 @@ public class OrderService {
         return orders;
     }
 
+    @Transactional
+    public SettlementResult requestSettlement(String token, Long sellerId, LocalDate start, LocalDate end) {
+        List<Settlement> settlements = settlementRepository.findBySellerIdAndStatusAndDateBetween(sellerId, SettlementStatus.YET, start, end);
+        int settlementAmount = 0;
+        for (Settlement settlement : settlements) {
+            System.out.println(settlement.getDate());
+            settlementAmount += settlement.getSettlementAmount();
+            settlement.updateStatus();
+        }
 
+        IncreaseBalanceForm request = IncreaseBalanceForm.builder()
+                .totalPrice(settlementAmount)
+                .build();
+        memberClient.income(token, request);
+        return SettlementResult.builder()
+                .sellerId(sellerId)
+                .settlementAmount(settlementAmount)
+                .build();
+    }
 }

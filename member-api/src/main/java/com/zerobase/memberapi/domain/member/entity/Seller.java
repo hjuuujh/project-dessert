@@ -85,5 +85,12 @@ public class Seller extends BaseEntity implements UserDetails {
                 .roles(form.getRoles())
                 .build();
     }
+    public void updateIncome(Integer price) {
+        this.income += price;
+    }
+
+    public void refund(Integer amount) {
+        this.income -= amount;
+    }
 
 }

@@ -1,6 +1,8 @@
 package com.zerobase.memberapi.service;
 
 
+import com.zerobase.memberapi.client.from.DecreaseBalanceForm;
+import com.zerobase.memberapi.client.from.IncreaseBalanceForm;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.zerobase.memberapi.domain.member.dto.SellerDto;
@@ -87,6 +89,25 @@ public class SellerService implements UserDetailsService {
         if (!passwordEncoder.matches(form.getPassword(), seller.getPassword())) {
             throw new MemberException(LOGIN_CHECK_FAIL);
         }
+        return SellerDto.from(seller);
+    }
+
+
+    @Transactional
+    public void income(Long sellerId, IncreaseBalanceForm form) {
+        System.out.println("###################" + sellerId);
+        Seller seller = sellerRepository.findById(sellerId).orElseThrow(() -> new MemberException(NOT_FOUND_USER));
+        seller.updateIncome(form.getTotalPrice());
+    }
+
+    @Transactional
+    public void refund(Long sellerId, DecreaseBalanceForm form) {
+        Seller seller = sellerRepository.findById(sellerId).orElseThrow(() -> new MemberException(NOT_FOUND_USER));
+        seller.refund(form.getTotalPrice());
+    }
+
+    public SellerDto getSeller(Long sellerId) {
+        Seller seller = sellerRepository.findById(sellerId).orElseThrow(() -> new MemberException(NOT_FOUND_USER));
         return SellerDto.from(seller);
     }
 

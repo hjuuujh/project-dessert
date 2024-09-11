@@ -55,5 +55,19 @@ public class LockAopAspect {
         }
     }
 
+    @Around(value = "@annotation(com.zerobase.memberapi.aop.IncomeLock) && args(token, ..)")
+    public Object sellerAroundMethod(ProceedingJoinPoint joinPoint,
+                                     String token) throws Throwable{
+
+        // lock 취득 시도
+        lockService.lock(tokenProvider.getUsernameFromToken(token.substring(7))); // Bearer 제외
+
+        try {
+            return joinPoint.proceed();
+        }finally {
+            // lock 해제
+            lockService.unlock(tokenProvider.getUsernameFromToken(token.substring(7)));
+        }
+    }
 
 }
