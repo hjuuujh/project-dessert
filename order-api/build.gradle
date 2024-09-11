@@ -1,0 +1,56 @@
+
+plugins {
+    id 'java'
+    id "io.spring.dependency-management"
+}
+
+group = 'com.zerobase'
+version = '0.0.1-SNAPSHOT'
+
+ext {
+    springCloudSleuthOtelVersion = "1.0.0-M1"
+    releaseTrainVersion = "2021.0.1"
+
+}
+
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://repo.spring.io/snapshot"
+    }
+    maven {
+        url "https://repo.spring.io/milestone"
+    }
+    maven {
+        url "https://repo.spring.io/release"
+    }
+}
+// MSA 용
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${releaseTrainVersion}"
+        mavenBom "org.springframework.cloud:spring-cloud-sleuth-otel-dependencies:${springCloudSleuthOtelVersion}"
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'io.github.openfeign:feign-httpclient'
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.cloud:spring-cloud-config-client'
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+
+

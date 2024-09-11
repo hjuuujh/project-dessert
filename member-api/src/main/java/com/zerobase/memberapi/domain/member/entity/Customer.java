@@ -113,5 +113,8 @@ public class Customer extends BaseEntity implements UserDetails {
     public void unheart(Long itemId) {
         heartList.remove(itemId);
     }
+    public void decreaseBalance(Integer totalPrice) {
+        this.balance -= totalPrice;
+    }
 
  }
