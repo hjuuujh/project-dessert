@@ -61,6 +61,26 @@ spring:
                 headerName: Authorization
                 granted: Bearer
                 role: ROLE_SELLER
+        - id: order-customer-api
+          uri: http://localhost:8092
+          predicates:
+            - Path=/api/order/customer/**
+          filters:
+            - name: AuthorizationHeaderFilter
+              args:
+                headerName: Authorization
+                granted: Bearer
+                role: ROLE_CUSTOMER
+        - id: order-seller-api
+          uri: http://localhost:8092
+          predicates:
+            - Path=/api/order/seller/**
+          filters:
+            - name: AuthorizationHeaderFilter
+              args:
+                headerName: Authorization
+                granted: Bearer
+                role: ROLE_SELLER
 
     config:
       label: master

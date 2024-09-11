@@ -1,18 +1,30 @@
 package com.zerobase.orderapi.service;
 
 import com.zerobase.orderapi.client.MemberClient;
+import com.zerobase.orderapi.client.StoreClient;
 import com.zerobase.orderapi.client.from.Cart;
 import com.zerobase.orderapi.client.from.DecreaseBalanceForm;
+import com.zerobase.orderapi.client.from.MatchForm;
 import com.zerobase.orderapi.client.to.OrderResult;
+import com.zerobase.orderapi.domain.form.CancelOrder;
 import com.zerobase.orderapi.domain.order.Orders;
+import com.zerobase.orderapi.domain.order.OrdersDto;
 import com.zerobase.orderapi.domain.type.OrderStatus;
+import com.zerobase.orderapi.exception.OrderException;
 import com.zerobase.orderapi.repository.OrdersRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.zerobase.orderapi.exception.ErrorCode.*;
+import static com.zerobase.orderapi.exception.ErrorCode.ALREADY_REFUND_REJECTED;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +32,7 @@ public class OrderService {
 
     private final OrdersRepository orderRepository;
     private final MemberClient memberClient;
+    private final StoreClient storeClient;
 
     @Transactional
     public List<OrderResult> order(String token, Cart cart) {
@@ -56,4 +69,46 @@ public class OrderService {
         return results;
     }
 
+    public Page<OrderResult> getOrders(Long customerId, LocalDate start, LocalDate end, Pageable pageable) {
+
+        return orderRepository.findAllByCustomerIdAndModifiedAtBetween(customerId, start.atStartOfDay(), end.plusDays(1).atStartOfDay(), pageable)
+                .map(OrderResult::from);
+    }
+
+    public Page<OrderResult> getOrdersByStore(Long sellerId, Long storeId, LocalDate start, LocalDate end, Pageable pageable) {
+        // 확인하려는 셀러의 매장인지 확인
+        MatchForm request = MatchForm.builder()
+                .sellerId(sellerId)
+                .storeId(storeId)
+                .build();
+        if (!storeClient.isMatchedStoreAndSeller(request)) {
+            throw new OrderException(UNMATCHED_SELLER_STORE);
+        }
+
+        return orderRepository.findAllByStoreIdAndModifiedAtBetween(storeId, start.atStartOfDay(), end.plusDays(1).atStartOfDay(), pageable)
+                .map(OrderResult::from);
+    }
+
+    public OrdersDto getOrderById(Long memberId, Long id) {
+        Orders orders = orderRepository.findByIdAndCustomerId(id, memberId)
+                .orElseThrow(() -> new OrderException(UNMATCHED_MEMBER_ORDER));
+        return OrdersDto.from(orders);
+    }
+
+    public CancelOrder cancelOrder(Long memberId, Long id) {
+        Orders orders = orderRepository.findByIdAndCustomerId(id, memberId)
+                .orElseThrow(() -> new OrderException(UNMATCHED_MEMBER_ORDER));
+        if (OrderStatus.REFUND_APPROVED.equals(orders.getOrderStatus())) {
+            throw new OrderException(ALREADY_REFUND_APPROVED);
+        } else if (OrderStatus.REFUND_REJECTED.equals(orders.getOrderStatus())) {
+            throw new OrderException(ALREADY_REFUND_REJECTED);
+        }
+        orderRepository.delete(orders);
+
+        return CancelOrder.builder()
+                .itemName(orders.getItemName())
+                .optionName(orders.getOptionName())
+                .cancelTime(LocalDateTime.now())
+                .build();
+    }
 }
