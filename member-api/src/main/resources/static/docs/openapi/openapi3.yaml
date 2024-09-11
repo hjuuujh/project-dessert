@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
-  title: My API
-  description: My API description
+  title: Dessert Commerce API
+  description: Dessert Commerce API description
   version: 0.1.0
 servers:
 - url: http://localhost:8080

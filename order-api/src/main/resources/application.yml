@@ -31,12 +31,12 @@ management:
         include: "*"
 
 external-api:
-  member:
-    url: http://localhost:8090/api/member
 #  member:
-#    url: http://member-api:8090/api/member
-  store:
-    url: http://localhost:8091/api/store
+#    url: http://localhost:8090/api/member
+  member:
+    url: http://member-api:8090/api/member
 #  store:
-#    url: http://store-api:8091/api/store
+#    url: http://localhost:8091/api/store
+  store:
+    url: http://store-api:8091/api/store
 

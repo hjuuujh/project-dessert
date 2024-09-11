@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
-  title: My API
-  description: My API description
+  title: Dessert Commerce API
+  description: Dessert Commerce API description
   version: 0.1.0
 servers:
 - url: http://localhost:8080
@@ -41,8 +41,8 @@ paths:
                     \ : 1,\n  \"storeId\" : 2,\n  \"itemId\" : 6,\n  \"itemName\"\
                     \ : \"샹티크림끌레오르\",\n  \"optionId\" : 11,\n  \"optionName\" : \"\
                     얼그레이샹티크림 끌레오르\",\n  \"price\" : 52000,\n  \"quantity\" : 2,\n\
-                    \  \"orderStatus\" : \"ORDERED\",\n  \"createdAt\" : \"2024-09-11T16:17:39.468477\"\
-                    ,\n  \"modifiedAt\" : \"2024-09-11T16:17:39.468488\"\n}"
+                    \  \"orderStatus\" : \"ORDERED\",\n  \"createdAt\" : \"2024-09-11T20:23:09.169167\"\
+                    ,\n  \"modifiedAt\" : \"2024-09-11T20:23:09.169183\"\n}"
   /api/order/customer/orders:
     get:
       tags:
@@ -88,17 +88,17 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api-order-customer-orders-905029747'
+                $ref: '#/components/schemas/api-order-seller-orders-905029747'
               examples:
                 get-orders-between-period:
                   value: "{\n  \"content\" : [ {\n    \"orderId\" : 3,\n    \"itemName\"\
                     \ : \"샹티크림끌레오르\",\n    \"optionName\" : \"얼그레이샹티크림 끌레오르\",\n \
                     \   \"optionPrice\" : 26000,\n    \"optionQuantity\" : 2,\n  \
-                    \  \"orderStatus\" : \"ORDERED\",\n    \"createdAt\" : \"2024-09-11T16:17:39.233123\"\
+                    \  \"orderStatus\" : \"ORDERED\",\n    \"createdAt\" : \"2024-09-11T20:23:08.989786\"\
                     \n  }, {\n    \"orderId\" : 4,\n    \"itemName\" : \"샹티크림끌레오르\"\
                     ,\n    \"optionName\" : \"블루베리샹티크림 끌레오르\",\n    \"optionPrice\"\
                     \ : 26000,\n    \"optionQuantity\" : 1,\n    \"orderStatus\" :\
-                    \ \"ORDERED\",\n    \"createdAt\" : \"2024-09-11T16:17:39.233148\"\
+                    \ \"ORDERED\",\n    \"createdAt\" : \"2024-09-11T20:23:08.989814\"\
                     \n  } ],\n  \"pageable\" : {\n    \"sort\" : {\n      \"empty\"\
                     \ : true,\n      \"sorted\" : false,\n      \"unsorted\" : true\n\
                     \    },\n    \"offset\" : 0,\n    \"pageNumber\" : 0,\n    \"\
@@ -159,17 +159,17 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api-order-customer-orders-905029747'
+                $ref: '#/components/schemas/api-order-seller-orders-905029747'
               examples:
                 get-orders-by-store-between-period:
                   value: "{\n  \"content\" : [ {\n    \"orderId\" : 3,\n    \"itemName\"\
                     \ : \"샹티크림끌레오르\",\n    \"optionName\" : \"얼그레이샹티크림 끌레오르\",\n \
                     \   \"optionPrice\" : 26000,\n    \"optionQuantity\" : 2,\n  \
-                    \  \"orderStatus\" : \"ORDERED\",\n    \"createdAt\" : \"2024-09-11T16:17:39.339438\"\
+                    \  \"orderStatus\" : \"ORDERED\",\n    \"createdAt\" : \"2024-09-11T20:23:09.111903\"\
                     \n  }, {\n    \"orderId\" : 4,\n    \"itemName\" : \"샹티크림끌레오르\"\
                     ,\n    \"optionName\" : \"블루베리샹티크림 끌레오르\",\n    \"optionPrice\"\
                     \ : 26000,\n    \"optionQuantity\" : 1,\n    \"orderStatus\" :\
-                    \ \"ORDERED\",\n    \"createdAt\" : \"2024-09-11T16:17:39.33945\"\
+                    \ \"ORDERED\",\n    \"createdAt\" : \"2024-09-11T20:23:09.111916\"\
                     \n  } ],\n  \"pageable\" : {\n    \"sort\" : {\n      \"empty\"\
                     \ : true,\n      \"sorted\" : false,\n      \"unsorted\" : true\n\
                     \    },\n    \"offset\" : 0,\n    \"pageNumber\" : 0,\n    \"\
@@ -210,7 +210,7 @@ paths:
               examples:
                 cancel-order:
                   value: "{\n  \"itemName\" : \"샹티크림끌레오르\",\n  \"optionName\" : \"\
-                    얼그레이샹티크림 끌레오르\",\n  \"cancelTime\" : \"2024-09-11T16:17:39.136824\"\
+                    얼그레이샹티크림 끌레오르\",\n  \"cancelTime\" : \"2024-09-11T20:23:08.890544\"\
                     \n}"
   /api/order/customer/refund/{id}:
     patch:
@@ -246,8 +246,8 @@ paths:
                     \ : 1,\n  \"storeId\" : 2,\n  \"itemId\" : 6,\n  \"itemName\"\
                     \ : \"샹티크림끌레오르\",\n  \"optionId\" : 11,\n  \"optionName\" : \"\
                     얼그레이샹티크림 끌레오르\",\n  \"price\" : 52000,\n  \"quantity\" : 2,\n\
-                    \  \"orderStatus\" : \"ORDERED\",\n  \"createdAt\" : \"2024-09-11T16:17:39.44834\"\
-                    ,\n  \"modifiedAt\" : \"2024-09-11T16:17:39.448351\"\n}"
+                    \  \"orderStatus\" : \"ORDERED\",\n  \"createdAt\" : \"2024-09-11T20:23:09.145224\"\
+                    ,\n  \"modifiedAt\" : \"2024-09-11T20:23:09.145238\"\n}"
   /api/order/seller/refund/approve:
     patch:
       tags:
@@ -284,8 +284,8 @@ paths:
                     \ : 1,\n  \"storeId\" : 2,\n  \"itemId\" : 6,\n  \"itemName\"\
                     \ : \"샹티크림끌레오르\",\n  \"optionId\" : 11,\n  \"optionName\" : \"\
                     얼그레이샹티크림 끌레오르\",\n  \"price\" : 52000,\n  \"quantity\" : 2,\n\
-                    \  \"orderStatus\" : \"ORDERED\",\n  \"createdAt\" : \"2024-09-11T16:17:38.736968\"\
-                    ,\n  \"modifiedAt\" : \"2024-09-11T16:17:38.736991\"\n}"
+                    \  \"orderStatus\" : \"ORDERED\",\n  \"createdAt\" : \"2024-09-11T20:23:08.448724\"\
+                    ,\n  \"modifiedAt\" : \"2024-09-11T20:23:08.448752\"\n}"
   /api/order/customer/refund/cancel/{id}:
     patch:
       tags:
@@ -320,8 +320,8 @@ paths:
                     \ : 1,\n  \"storeId\" : 2,\n  \"itemId\" : 6,\n  \"itemName\"\
                     \ : \"샹티크림끌레오르\",\n  \"optionId\" : 11,\n  \"optionName\" : \"\
                     얼그레이샹티크림 끌레오르\",\n  \"price\" : 52000,\n  \"quantity\" : 2,\n\
-                    \  \"orderStatus\" : \"ORDERED\",\n  \"createdAt\" : \"2024-09-11T16:17:39.205793\"\
-                    ,\n  \"modifiedAt\" : \"2024-09-11T16:17:39.205805\"\n}"
+                    \  \"orderStatus\" : \"ORDERED\",\n  \"createdAt\" : \"2024-09-11T20:23:08.959855\"\
+                    ,\n  \"modifiedAt\" : \"2024-09-11T20:23:08.959867\"\n}"
   /api/order/seller/refund/reject/{id}:
     patch:
       tags:
@@ -356,11 +356,11 @@ paths:
                     \ : 1,\n  \"storeId\" : 2,\n  \"itemId\" : 6,\n  \"itemName\"\
                     \ : \"샹티크림끌레오르\",\n  \"optionId\" : 11,\n  \"optionName\" : \"\
                     얼그레이샹티크림 끌레오르\",\n  \"price\" : 52000,\n  \"quantity\" : 2,\n\
-                    \  \"orderStatus\" : \"ORDERED\",\n  \"createdAt\" : \"2024-09-11T16:17:39.171487\"\
-                    ,\n  \"modifiedAt\" : \"2024-09-11T16:17:39.171498\"\n}"
+                    \  \"orderStatus\" : \"ORDERED\",\n  \"createdAt\" : \"2024-09-11T20:23:08.92453\"\
+                    ,\n  \"modifiedAt\" : \"2024-09-11T20:23:08.924543\"\n}"
 components:
   schemas:
-    api-order-customer-orders-905029747:
+    api-order-seller-orders-905029747:
       type: object
       properties:
         number:

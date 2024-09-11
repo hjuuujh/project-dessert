@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
-  title: My API
-  description: My API description
+  title: Dessert Commerce API
+  description: Dessert Commerce API description
   version: 0.1.0
 servers:
 - url: http://localhost:8080
@@ -388,7 +388,7 @@ paths:
               examples:
                 delete-item:
                   value: "{\n  \"itemName\" : \"디디얌 마카롱 수제 뚱카롱 32종\",\n  \"deletedAt\"\
-                    \ : \"2024-09-11T16:17:45.653393\"\n}"
+                    \ : \"2024-09-11T20:23:13.61283\"\n}"
   /api/store/search:
     get:
       tags:
@@ -421,7 +421,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api-store-search2011854845'
+                $ref: '#/components/schemas/api-store-search-follow2011854845'
               examples:
                 search-store-by-keyword:
                   value: "{\n  \"content\" : [ {\n    \"id\" : 1,\n    \"sellerId\"\
@@ -435,7 +435,7 @@ paths:
                     \ false,\n      \"unsorted\" : true\n    },\n    \"offset\" :\
                     \ 0,\n    \"pageNumber\" : 0,\n    \"pageSize\" : 5,\n    \"paged\"\
                     \ : true,\n    \"unpaged\" : false\n  },\n  \"last\" : true,\n\
-                    \  \"totalElements\" : 2,\n  \"totalPages\" : 1,\n  \"first\"\
+                    \  \"totalPages\" : 1,\n  \"totalElements\" : 2,\n  \"first\"\
                     \ : true,\n  \"sort\" : {\n    \"empty\" : true,\n    \"sorted\"\
                     \ : false,\n    \"unsorted\" : true\n  },\n  \"size\" : 5,\n \
                     \ \"number\" : 0,\n  \"numberOfElements\" : 2,\n  \"empty\" :\
@@ -481,7 +481,7 @@ paths:
                 order-cart:
                   value: "[ {\n  \"orderId\" : 2,\n  \"itemName\" : \"샹티크림끌레오르\",\n\
                     \  \"optionName\" : \"얼그레이샹티크림 끌레오르\",\n  \"optionPrice\" : 26000,\n\
-                    \  \"optionQuantity\" : 2,\n  \"createdAt\" : \"2024-09-11T16:17:43.423519\"\
+                    \  \"optionQuantity\" : 2,\n  \"createdAt\" : \"2024-09-11T20:23:12.47894\"\
                     \n} ]"
   /api/store/search/detail:
     get:
@@ -541,7 +541,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api-store-search2011854845'
+                $ref: '#/components/schemas/api-store-search-follow2011854845'
               examples:
                 search-store-by-follower:
                   value: "{\n  \"content\" : [ {\n    \"id\" : 4,\n    \"sellerId\"\
@@ -555,7 +555,7 @@ paths:
                     \ false,\n      \"unsorted\" : true\n    },\n    \"offset\" :\
                     \ 0,\n    \"pageNumber\" : 0,\n    \"pageSize\" : 5,\n    \"paged\"\
                     \ : true,\n    \"unpaged\" : false\n  },\n  \"last\" : true,\n\
-                    \  \"totalElements\" : 2,\n  \"totalPages\" : 1,\n  \"first\"\
+                    \  \"totalPages\" : 1,\n  \"totalElements\" : 2,\n  \"first\"\
                     \ : true,\n  \"sort\" : {\n    \"empty\" : true,\n    \"sorted\"\
                     \ : false,\n    \"unsorted\" : true\n  },\n  \"size\" : 5,\n \
                     \ \"number\" : 0,\n  \"numberOfElements\" : 2,\n  \"empty\" :\
@@ -598,7 +598,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api-store-item-search-category1495994139'
+                $ref: '#/components/schemas/api-store-item-search-price-high1495994139'
               examples:
                 search-item-by-category:
                   value: "{\n  \"content\" : [ {\n    \"storeId\" : 2,\n    \"storeName\"\
@@ -615,7 +615,7 @@ paths:
                     \ false,\n      \"unsorted\" : true\n    },\n    \"offset\" :\
                     \ 0,\n    \"pageNumber\" : 0,\n    \"pageSize\" : 5,\n    \"paged\"\
                     \ : true,\n    \"unpaged\" : false\n  },\n  \"last\" : true,\n\
-                    \  \"totalElements\" : 3,\n  \"totalPages\" : 1,\n  \"first\"\
+                    \  \"totalPages\" : 1,\n  \"totalElements\" : 3,\n  \"first\"\
                     \ : true,\n  \"sort\" : {\n    \"empty\" : true,\n    \"sorted\"\
                     \ : false,\n    \"unsorted\" : true\n  },\n  \"size\" : 5,\n \
                     \ \"number\" : 0,\n  \"numberOfElements\" : 3,\n  \"empty\" :\
@@ -685,7 +685,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api-store-item-search-category1495994139'
+                $ref: '#/components/schemas/api-store-item-search-price-high1495994139'
               examples:
                 search-item-by-keyword:
                   value: "{\n  \"content\" : [ {\n    \"storeId\" : 2,\n    \"storeName\"\
@@ -708,8 +708,8 @@ paths:
                     \    \"sorted\" : false,\n      \"unsorted\" : true\n    },\n\
                     \    \"offset\" : 0,\n    \"pageNumber\" : 0,\n    \"pageSize\"\
                     \ : 5,\n    \"paged\" : true,\n    \"unpaged\" : false\n  },\n\
-                    \  \"last\" : true,\n  \"totalElements\" : 5,\n  \"totalPages\"\
-                    \ : 1,\n  \"first\" : true,\n  \"sort\" : {\n    \"empty\" : true,\n\
+                    \  \"last\" : true,\n  \"totalPages\" : 1,\n  \"totalElements\"\
+                    \ : 5,\n  \"first\" : true,\n  \"sort\" : {\n    \"empty\" : true,\n\
                     \    \"sorted\" : false,\n    \"unsorted\" : true\n  },\n  \"\
                     size\" : 5,\n  \"number\" : 0,\n  \"numberOfElements\" : 5,\n\
                     \  \"empty\" : false\n}"
@@ -745,7 +745,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api-store-item-search-category1495994139'
+                $ref: '#/components/schemas/api-store-item-search-price-high1495994139'
               examples:
                 search-store-item:
                   value: "{\n  \"content\" : [ {\n    \"storeId\" : 1,\n    \"storeName\"\
@@ -761,8 +761,8 @@ paths:
                     \  \"sort\" : {\n      \"empty\" : true,\n      \"sorted\" : false,\n\
                     \      \"unsorted\" : true\n    },\n    \"offset\" : 0,\n    \"\
                     pageNumber\" : 0,\n    \"pageSize\" : 5,\n    \"paged\" : true,\n\
-                    \    \"unpaged\" : false\n  },\n  \"last\" : true,\n  \"totalElements\"\
-                    \ : 3,\n  \"totalPages\" : 1,\n  \"first\" : true,\n  \"sort\"\
+                    \    \"unpaged\" : false\n  },\n  \"last\" : true,\n  \"totalPages\"\
+                    \ : 1,\n  \"totalElements\" : 3,\n  \"first\" : true,\n  \"sort\"\
                     \ : {\n    \"empty\" : true,\n    \"sorted\" : false,\n    \"\
                     unsorted\" : true\n  },\n  \"size\" : 5,\n  \"number\" : 0,\n\
                     \  \"numberOfElements\" : 3,\n  \"empty\" : false\n}"
@@ -798,7 +798,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api-store-item-search-category1495994139'
+                $ref: '#/components/schemas/api-store-item-search-price-high1495994139'
               examples:
                 search-item-by-high-price:
                   value: "{\n  \"content\" : [ {\n    \"storeId\" : 2,\n    \"storeName\"\
@@ -821,8 +821,8 @@ paths:
                     \    \"sorted\" : false,\n      \"unsorted\" : true\n    },\n\
                     \    \"offset\" : 0,\n    \"pageNumber\" : 0,\n    \"pageSize\"\
                     \ : 5,\n    \"paged\" : true,\n    \"unpaged\" : false\n  },\n\
-                    \  \"last\" : true,\n  \"totalElements\" : 5,\n  \"totalPages\"\
-                    \ : 1,\n  \"first\" : true,\n  \"sort\" : {\n    \"empty\" : true,\n\
+                    \  \"last\" : true,\n  \"totalPages\" : 1,\n  \"totalElements\"\
+                    \ : 5,\n  \"first\" : true,\n  \"sort\" : {\n    \"empty\" : true,\n\
                     \    \"sorted\" : false,\n    \"unsorted\" : true\n  },\n  \"\
                     size\" : 5,\n  \"number\" : 0,\n  \"numberOfElements\" : 5,\n\
                     \  \"empty\" : false\n}"
@@ -858,7 +858,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/api-store-item-search-category1495994139'
+                $ref: '#/components/schemas/api-store-item-search-price-high1495994139'
               examples:
                 search-item-by-low-price:
                   value: "{\n  \"content\" : [ {\n    \"storeId\" : 1,\n    \"storeName\"\
@@ -881,8 +881,8 @@ paths:
                     \      \"sorted\" : false,\n      \"unsorted\" : true\n    },\n\
                     \    \"offset\" : 0,\n    \"pageNumber\" : 0,\n    \"pageSize\"\
                     \ : 5,\n    \"paged\" : true,\n    \"unpaged\" : false\n  },\n\
-                    \  \"last\" : true,\n  \"totalElements\" : 5,\n  \"totalPages\"\
-                    \ : 1,\n  \"first\" : true,\n  \"sort\" : {\n    \"empty\" : true,\n\
+                    \  \"last\" : true,\n  \"totalPages\" : 1,\n  \"totalElements\"\
+                    \ : 5,\n  \"first\" : true,\n  \"sort\" : {\n    \"empty\" : true,\n\
                     \    \"sorted\" : false,\n    \"unsorted\" : true\n  },\n  \"\
                     size\" : 5,\n  \"number\" : 0,\n  \"numberOfElements\" : 5,\n\
                     \  \"empty\" : false\n}"
@@ -1208,7 +1208,7 @@ components:
         thumbnailUrl:
           type: string
           description: 스토어 썸네일 url
-    api-store-item-search-category1495994139:
+    api-store-item-search-price-high1495994139:
       type: object
       properties:
         number:
@@ -1322,7 +1322,7 @@ components:
         deletedAt:
           type: string
           description: 스토어가 삭제된 경우 날짜 정보
-    api-store-search2011854845:
+    api-store-search-follow2011854845:
       type: object
       properties:
         number:
