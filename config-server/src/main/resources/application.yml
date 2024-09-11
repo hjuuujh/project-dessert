@@ -44,4 +44,15 @@ management:
     web:
       exposure:
         include: "*"
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
+    refresh:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
 

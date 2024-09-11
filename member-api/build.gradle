@@ -111,8 +111,8 @@ build {
 // 이렇게 생긴 파일을 swagger에서 읽으면 됨
 openapi3 {
     server = 'http://localhost:8080'
-    title = 'My API'
-    description = 'My API description'
+    title = 'Dessert Commerce API'
+    description = 'Dessert Commerce API description'
     version = '0.1.0'
     format = 'yaml'
     delete file("src/main/resources/static/docs/openapi")
