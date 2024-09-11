@@ -1,6 +1,7 @@
 package com.zerobase.orderapi.client;
 
 import com.zerobase.orderapi.client.from.DecreaseBalanceForm;
+import com.zerobase.orderapi.client.from.IncreaseBalanceForm;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,4 +19,15 @@ public interface MemberClient {
     void decreaseBalance(@RequestHeader(name = "Authorization") String token,
                          @RequestBody DecreaseBalanceForm form);
 
+    @PostMapping("/seller/income")
+    void income(@RequestHeader(name = "Authorization") String token,
+                @RequestBody IncreaseBalanceForm form);
+
+    @PostMapping("/customer/refund")
+    void increaseBalance(@RequestHeader(name = "Authorization") String token,
+                         @RequestBody IncreaseBalanceForm form);
+
+    @PostMapping("/seller/refund")
+    void refund(@RequestHeader(name = "Authorization") String token,
+                @RequestBody DecreaseBalanceForm form);
 }

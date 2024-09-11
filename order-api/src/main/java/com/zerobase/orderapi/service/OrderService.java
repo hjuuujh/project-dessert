@@ -4,12 +4,15 @@ import com.zerobase.orderapi.client.MemberClient;
 import com.zerobase.orderapi.client.StoreClient;
 import com.zerobase.orderapi.client.from.Cart;
 import com.zerobase.orderapi.client.from.DecreaseBalanceForm;
+import com.zerobase.orderapi.client.from.IncreaseBalanceForm;
 import com.zerobase.orderapi.client.from.MatchForm;
 import com.zerobase.orderapi.client.to.OrderResult;
 import com.zerobase.orderapi.domain.form.CancelOrder;
+import com.zerobase.orderapi.domain.form.RefundForm;
 import com.zerobase.orderapi.domain.order.Orders;
 import com.zerobase.orderapi.domain.order.OrdersDto;
 import com.zerobase.orderapi.domain.type.OrderStatus;
+import com.zerobase.orderapi.domain.type.SettlementStatus;
 import com.zerobase.orderapi.exception.OrderException;
 import com.zerobase.orderapi.repository.OrdersRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +25,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.zerobase.orderapi.exception.ErrorCode.*;
 import static com.zerobase.orderapi.exception.ErrorCode.ALREADY_REFUND_REJECTED;
@@ -75,19 +79,6 @@ public class OrderService {
                 .map(OrderResult::from);
     }
 
-    public Page<OrderResult> getOrdersByStore(Long sellerId, Long storeId, LocalDate start, LocalDate end, Pageable pageable) {
-        // 확인하려는 셀러의 매장인지 확인
-        MatchForm request = MatchForm.builder()
-                .sellerId(sellerId)
-                .storeId(storeId)
-                .build();
-        if (!storeClient.isMatchedStoreAndSeller(request)) {
-            throw new OrderException(UNMATCHED_SELLER_STORE);
-        }
-
-        return orderRepository.findAllByStoreIdAndModifiedAtBetween(storeId, start.atStartOfDay(), end.plusDays(1).atStartOfDay(), pageable)
-                .map(OrderResult::from);
-    }
 
     public OrdersDto getOrderById(Long memberId, Long id) {
         Orders orders = orderRepository.findByIdAndCustomerId(id, memberId)
@@ -111,4 +102,95 @@ public class OrderService {
                 .cancelTime(LocalDateTime.now())
                 .build();
     }
+
+
+    public Page<OrderResult> getOrdersByStore(Long sellerId, Long storeId, LocalDate start, LocalDate end, Pageable pageable) {
+        // 확인하려는 셀러의 매장인지 확인
+        MatchForm request = MatchForm.builder()
+                .sellerId(sellerId)
+                .storeId(storeId)
+                .build();
+        if (!storeClient.isMatchedStoreAndSeller(request)) {
+            throw new OrderException(UNMATCHED_SELLER_STORE);
+        }
+
+        return orderRepository.findAllByStoreIdAndModifiedAtBetween(storeId, start.atStartOfDay(), end.plusDays(1).atStartOfDay(), pageable)
+                .map(OrderResult::from);
+    }
+
+    @Transactional
+    public OrdersDto requestRefund(Long memberId, Long id) {
+        Orders orders = orderRepository.findByIdAndCustomerId(id, memberId)
+                .orElseThrow(() -> new OrderException(UNMATCHED_MEMBER_ORDER));
+
+        if (OrderStatus.REFUND_REQUEST.equals(orders.getOrderStatus())) {
+            throw new OrderException(ALREADY_REFUND_REQUEST);
+        } else if (OrderStatus.REFUND_APPROVED.equals(orders.getOrderStatus())) {
+            throw new OrderException(ALREADY_REFUND_APPROVED);
+        } else if (OrderStatus.REFUND_REJECTED.equals(orders.getOrderStatus())) {
+            throw new OrderException(ALREADY_REFUND_REJECTED);
+        }
+
+        orders.updateStatus(OrderStatus.REFUND_REQUEST);
+
+        return OrdersDto.from(orders);
+    }
+
+    @Transactional
+    public OrdersDto approveRequestRefund(String token, Long sellerId, RefundForm form) {
+        Orders orders = getOrders(sellerId, form.getId());
+
+        orders.updateStatus(OrderStatus.REFUND_APPROVED);
+
+        // 고객 잔액 증가
+        IncreaseBalanceForm request = IncreaseBalanceForm.builder()
+                .totalPrice(orders.getTotalPrice())
+                .build();
+        memberClient.increaseBalance(token, request);
+
+        // 셀러 인컴 감소
+        // 정산 시스템 구현후 수정
+
+        return OrdersDto.from(orders);
+    }
+
+
+    @Transactional
+    public OrdersDto rejectRequestRefund(Long memberId, Long id) {
+        Orders orders = getOrders(memberId, id);
+
+        orders.updateStatus(OrderStatus.REFUND_REJECTED);
+        return OrdersDto.from(orders);
+    }
+
+    @Transactional
+    public OrdersDto cancelRequestRefund(Long memberId, Long id) {
+        Orders orders = orderRepository.findByIdAndCustomerId(id, memberId)
+                .orElseThrow(() -> new OrderException(UNMATCHED_MEMBER_ORDER));
+        if (OrderStatus.REFUND_APPROVED.equals(orders.getOrderStatus())) {
+            throw new OrderException(ALREADY_REFUND_APPROVED);
+        } else if (OrderStatus.REFUND_REJECTED.equals(orders.getOrderStatus())) {
+            throw new OrderException(ALREADY_REFUND_REJECTED);
+        } else if (OrderStatus.ORDERED.equals(orders.getOrderStatus())) {
+            throw new OrderException(NO_REFUND_REQUEST);
+        }
+
+        orders.updateStatus(OrderStatus.ORDERED);
+        return OrdersDto.from(orders);
+    }
+
+    private Orders getOrders(Long memberId, Long id) {
+        Orders orders = orderRepository.findByIdAndSellerId(id, memberId)
+                .orElseThrow(() -> new OrderException(UNMATCHED_MEMBER_ORDER));
+        if (OrderStatus.ORDERED.equals(orders.getOrderStatus())) {
+            throw new OrderException(NO_REFUND_REQUEST);
+        } else if (OrderStatus.REFUND_APPROVED.equals(orders.getOrderStatus())) {
+            throw new OrderException(ALREADY_REFUND_APPROVED);
+        } else if (OrderStatus.REFUND_REJECTED.equals(orders.getOrderStatus())) {
+            throw new OrderException(ALREADY_REFUND_REJECTED);
+        }
+        return orders;
+    }
+
+
 }
