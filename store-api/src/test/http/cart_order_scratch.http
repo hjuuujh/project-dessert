@@ -1,0 +1,33 @@
+### cart 주문
+POST localhost:8080/api/store/cart/order
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJxaWpTQWpEdVVGUVZ5WmwxZDErbGdRPT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNjAzMjkwMiwiZXhwIjoxNzI2MTE5MzAyfQ.H5B5SM1xJCLJv1oxaXOzHRryfutsXIVWlph8VZ_QhtspNA3trZpjziGrZJQQEuw4F7zmJGZS1IYZD2BvWkN93Q
+
+{
+  "customerId": 1,
+  "items": [
+    {
+      "id": 6,
+      "storeId": 2,
+      "sellerId": 1,
+      "storeName": "달달구리해닮",
+      "name": "샹티크림끌레오르",
+      "options": [
+        {
+          "id": 11,
+          "name": "얼그레이샹티크림 끌레오르",
+          "quantity": 2,
+          "price": 26000
+        },
+        {
+          "id": 12,
+          "name": "블루베리샹티크림 끌레오르",
+          "quantity": 2,
+          "price": 26000
+        }
+      ]
+    }
+  ],
+  "messages": [],
+  "totalPrice": 212000
+}

@@ -5,6 +5,7 @@ import com.zerobase.storeapi.domain.redis.Cart;
 import com.zerobase.storeapi.domain.redis.form.AddItemCartForm;
 import com.zerobase.storeapi.domain.redis.form.DeleteOptionCartForm;
 import com.zerobase.storeapi.domain.redis.form.UpdateOptionCartForm;
+import com.zerobase.storeapi.service.CartOrderService;
 import com.zerobase.storeapi.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class CartController {
     private final CartService cartService;
+    private final CartOrderService cartOrderService;
     private final MemberClient memberClient;
 
     @PostMapping
@@ -40,4 +42,9 @@ public class CartController {
         return ResponseEntity.ok(cartService.updateCartOption(memberClient.getMemberId(token), form));
     }
 
+    @PostMapping("/order")
+    public ResponseEntity<?> orderCart(@RequestHeader(name = "Authorization") String token,
+                                       @RequestBody Cart cart) {
+        return ResponseEntity.ok(cartOrderService.orderCart(token, memberClient.getMemberId(token), cart));
+    }
 }

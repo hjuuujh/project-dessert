@@ -1,6 +1,7 @@
 package com.zerobase.memberapi.controller;
 
 import com.zerobase.memberapi.aop.BalanceLock;
+import com.zerobase.memberapi.client.from.DecreaseBalanceForm;
 import com.zerobase.memberapi.client.from.FollowForm;
 import com.zerobase.memberapi.client.from.HeartForm;
 import com.zerobase.memberapi.domain.member.form.ChargeForm;
@@ -98,4 +99,18 @@ public class CustomerController {
         return ResponseEntity.ok().build();
 
     }
+
+    @GetMapping("/balance")
+    public ResponseEntity<?> getBalance(@RequestHeader(name = "Authorization") String token) {
+        return ResponseEntity.ok(customerService.getBalance(tokenProvider.getUserIdFromToken(token)));
+    }
+
+    @PostMapping("/order")
+    @BalanceLock
+    public ResponseEntity<?> decreaseBalance(@RequestHeader(name = "Authorization") String token,
+                                             @RequestBody DecreaseBalanceForm form) {
+        customerService.decreaseBalance(tokenProvider.getUserIdFromToken(token), form);
+        return ResponseEntity.ok().build();
+    }
+
 }

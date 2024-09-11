@@ -2,10 +2,7 @@ package com.zerobase.memberapi.service;
 
 
 import com.zerobase.memberapi.client.StoreClient;
-import com.zerobase.memberapi.client.from.FollowForm;
-import com.zerobase.memberapi.client.from.HeartForm;
-import com.zerobase.memberapi.client.from.ItemsForm;
-import com.zerobase.memberapi.client.from.StoresForm;
+import com.zerobase.memberapi.client.from.*;
 import com.zerobase.memberapi.domain.member.form.ChargeForm;
 import com.zerobase.memberapi.domain.store.ItemDto;
 import com.zerobase.memberapi.domain.store.StoreDto;
@@ -208,6 +205,18 @@ public class CustomerService implements UserDetailsService {
     public void deleteFollowStore(Long storeId) {
         customerRepository.deleteFollow(storeId);
 
+    }
+
+    public int getBalance(Long customerId) {
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new MemberException(NOT_FOUND_USER));
+        return customer.getBalance();
+    }
+
+    @Transactional
+    public void decreaseBalance(Long customerId, DecreaseBalanceForm form) {
+        Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new MemberException(NOT_FOUND_USER));
+        customer.decreaseBalance(form.getTotalPrice());
     }
 
 }
