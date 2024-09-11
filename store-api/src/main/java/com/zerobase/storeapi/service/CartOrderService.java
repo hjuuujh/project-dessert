@@ -32,6 +32,8 @@ public class CartOrderService {
 
     @Transactional
     public List<OrderResult> orderCart(String token, Long customerId, Cart cart) {
+        cart.setCustomerId(customerId);
+
         // 기존 카트
         Cart oldCart = cartService.getCart(customerId);
         // 주문 카트
@@ -52,8 +54,7 @@ public class CartOrderService {
         decreaseOptionQuantity(orderCart);
 
         // 주문
-        System.out.println("###########################");
-        System.out.println(orderClient.order(token, orderCart).size());
+        System.out.println(orderCart.getCustomerId());
         List<OrderResult> orderResults = orderClient.order(token, orderCart);
 
         // cart 업데이트

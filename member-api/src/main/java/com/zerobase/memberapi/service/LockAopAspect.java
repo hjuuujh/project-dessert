@@ -43,7 +43,6 @@ public class LockAopAspect {
             // 그외 넘어온 customerid로 이메일 구해서 락 취득
             Customer customer = customerRepository.findById(form.getCustomerId()).orElseThrow(() -> new MemberException(ErrorCode.NOT_FOUND_USER));
             lockService.lock(customer.getEmail());
-
         }
 
 
