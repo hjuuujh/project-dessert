@@ -19,4 +19,6 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
     Page<Store> findByNameContainingIgnoreCaseAndDeletedAtOrderByFollowCountDesc(String keyword, LocalDate deletedAt, Pageable pageable);
 
     Page<Store> findAllByIdInAndDeletedAt(List<Long> ids, LocalDate deletedAt, Pageable pageable);
+    boolean existsByIdAndSellerId(Long id, Long sellerId);
+
 }
