@@ -89,4 +89,12 @@ public class OrderController {
                                                  @PathVariable Long id){
         return ResponseEntity.ok(orderService.rejectRequestRefund(memberClient.getMemberId(token), id));
     }
+
+    // 정산 요청
+    @PostMapping("/seller/settlement")
+    public ResponseEntity<?> requestSettlement(@RequestHeader(name = "Authorization") String token,
+                                               @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate start,
+                                               @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate end){
+        return ResponseEntity.ok(orderService.requestSettlement(token, memberClient.getMemberId(token), start, end));
+    }
 }
