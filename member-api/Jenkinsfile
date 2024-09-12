@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+    environment {
+        DOCKER = 'sudo docker'
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                checkout scm
+                echo 'Checkout Scm'
+            }
+        }
+
+        stage('Build image') {
+            steps {
+                sh 'ls -al'
+                dir('member-api') {
+                    sh 'ls -al'
+                    sh 'chmod +x ./gradlew'
+                    sh './gradlew build'
+                }
+                echo 'Build image...'
+            }
+        }
+
+        stage('Remove Previous image') {
+            steps {
+                script {
+                    try {
+                        sh 'docker stop dessert-member-api'
+                    } catch (e) {
+                        echo 'fail to stop and remove container'
+                    }
+                }
+            }
+        }
+
+        stage('Run New image') {
+            steps {
+                sh 'docker-compose up --build -d dessert-member-api'
+                echo 'Run New member image'
+            }
+        }
+    }
+}
