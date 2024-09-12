@@ -15,6 +15,27 @@ spring:
   config:
     import: optional:configserver:http://localhost:8888
 
+
+  datasource:
+    # url: jdbc:mysql://localhost:3306/store?userSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
+#    url: jdbc:mysql://dessert-db:3306/store?userSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://dessert-db.cfm2a6qgmjgw.ap-northeast-2.rds.amazonaws.com:3306/store?userSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: admin
+    password: qwer1234
+    # username: root
+    # password: '{cipher}AQAeDtv5DcgoyuaEtKp4+VkBHqcMmI21aSV5ShWhfIM6nZVhCNUzxZmLji039e7PbIMXLNgEcc90lnr/tZulZbgCJYdOYoYvV8TaI6GUtK8hEXUxOp64igwn8fUgVXOhHAPnqcfxtLAb6O5YXtX2hYEKTycB+q+ySXnusE2fkNDaHltU3mxYvoMO/WGv+Wn6RvODctdLutn8atYBj179fcN1JPakhpmT2i1NkfoqOnhBQROmwVvbyNwaPI7r0ywB+pp0zJHwnHGUiUD0Dn7qwRW5oq60RXsRC69FAUq2a/XIj8X+TLBF39wlVcUT1ex0luaFoo8fU5sRNEUuK9Q0+UdEt+x+tIlKduFZZhXs3aN0l9vTDNf+EeTTOIJHN9eZMng='
+
+  redis:
+    # host: localhost
+    host: redis
+    port: 6379
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+
 eureka: # eureka client 등록
   instance:
     prefer-ip-address: true # 컨테이너 기반 배포면 임의의 호스트이름이 부여되므로 true이용해 ip주소로 등록해 찾도록

@@ -39,3 +39,5 @@ out/
 db/
 redis/
 reids-db/
+
+terraform/
