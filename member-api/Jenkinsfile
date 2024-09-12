@@ -8,6 +8,8 @@
      stage('test'){
      steps {
      echo 'test'
+     echo 'Clone'
+                     git branch: 'member-api', credentialsId: 'github-webhook', url: 'https://github.com/hjuuujh/project-dessert'
      }
      }
 //          stage('Clone Repository') {
