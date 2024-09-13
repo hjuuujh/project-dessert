@@ -10,8 +10,9 @@
      echo 'test'
      echo 'Clone'
      git branch: 'member-api', credentialsId: 'github-webhook', url: 'https://github.com/hjuuujh/project-dessert'
+     sh 'gradle wrapper'
      dir('member-api') {
-//      sh 'gradle wrapper'
+
                      sh 'ls -al'
                      sh 'chmod +x ./gradlew'
                      sh './gradlew build'
