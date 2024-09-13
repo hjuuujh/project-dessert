@@ -4,9 +4,9 @@
          DOCKER = 'sudo docker'
      }
 
-    tools {
-        gradle 8.8
-    }
+//     tools {
+//         gradle 8.8
+//     }
 
      stages {
      stage('test'){
