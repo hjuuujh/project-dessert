@@ -15,8 +15,9 @@
      echo 'Clone'
      git branch: 'member-api', credentialsId: 'github-webhook', url: 'https://github.com/hjuuujh/project-dessert'
      sh 'ls -al'
-//      sd 'chmod +x gradlew'
+     sh 'chmod +x gradlew'
      sh './gradlew member-api:build'
+     sh 'ls -al'
 //      dir('member-api') {
 //
 //                      sh 'ls -al'
