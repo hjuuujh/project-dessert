@@ -17,6 +17,7 @@
      sh 'ls -al'
      sh 'chmod +x gradlew'
      sh './gradlew member-api:build'
+     sh 'cd member-api'
      sh 'ls -al'
 //      dir('member-api') {
 //
