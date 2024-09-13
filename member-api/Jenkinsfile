@@ -20,7 +20,7 @@
 
      dir('member-api/build/libs') {
 
-     sh 'ls -al'
+      sh 'ls -al'
      }
      }
      }
