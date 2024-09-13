@@ -19,7 +19,7 @@
      dir('member-api') {
 
                      sh 'ls -al'
-                     sh 'chmod +x ./gradlew'
+//                      sh 'chmod +x ./gradlew'
                      sh './gradlew build'
                  }
      }
