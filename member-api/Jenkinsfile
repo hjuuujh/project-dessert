@@ -4,6 +4,9 @@
          DOCKER = 'sudo docker'
      }
 
+    tools {
+        gradle 8.8
+    }
      stages {
      stage('test'){
      steps {
@@ -11,7 +14,7 @@
      echo 'Clone'
      git branch: 'member-api', credentialsId: 'github-webhook', url: 'https://github.com/hjuuujh/project-dessert'
      sh 'ls -al'
-     sh 'gradle wrapper'
+     sh 'gradle init'
      dir('member-api') {
 
                      sh 'ls -al'
