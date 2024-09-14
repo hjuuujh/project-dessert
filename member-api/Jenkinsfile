@@ -2,16 +2,14 @@ pipeline {
     agent any
     environment {
         DOCKER = 'sudo docker'
-        repository = "hjuuujh/jenkins"
+        repository = "hjuuujh/member-api"
         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
     }
 
     stages {
-        stage('test') {
+        stage('build') {
             steps {
                 echo 'Clone'
-//                git branch: 'member-api', credentialsId: 'github-webhook', url: 'https://github.com/hjuuujh/project-dessert'
-//                sh $ref
                 sh 'ls -al'
                 sh 'chmod +x gradlew'
                 sh './gradlew member-api:build'
@@ -21,7 +19,7 @@ pipeline {
             }
         }
 
-        stage('Clone Repository') {
+        stage('docker hub push') {
             steps {
 //                  echo '${ref}'
 //                  checkout scmvv
@@ -31,12 +29,12 @@ pipeline {
                         sh 'ls -al'
                         //       app = docker.build("hjuuujh/jenkins")
                         //       sh 'docker login -u hjuuujh'
-                        dockerImage = docker.build "hjuuujh/jenkins"
+                        dockerImage = docker.build repository
                         //     sh 'sudo docker build -t member-api .'
                         //     sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                         //     sh 'docker push $repository'
                         //     sh 'docker rmi $repository'
-                        docker.withRegistry('', 'dockerhub') {
+                        docker.withRegistry('', DOCKERHUB_CREDENTIALS) {
                             dockerImage.push("1.0")
                         }
                     }
@@ -44,17 +42,17 @@ pipeline {
             }
         }
 //
-//          stage('Build image') {
-//              steps {
-//                  sh 'ls -al'
-//                  dir('member-api') {
-//                      sh 'ls -al'
-//                      sh 'chmod +x ./gradlew'
-//                      sh './gradlew build'
-//                  }
-//                  echo 'Build image...'
-//              }
-//          }
+          stage('Build image') {
+              steps {
+                  sh 'ls -al'
+                  dir('member-api') {
+                      sh 'ls -al'
+                      sh 'chmod +x ./gradlew'
+                      sh './gradlew build'
+                  }
+                  echo 'Build image...'
+              }
+          }
 //
 //          stage('Remove Previous image') {
 //              steps {
