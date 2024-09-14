@@ -36,7 +36,6 @@ pipeline {
                 sshagent(credentials: ['ssh']) {
                     sh '''
                         ssh -o StrictHostKeyChecking=no ubuntu@13.209.81.60 'ls -al'
-                   
                        '''
                 }
             }
@@ -55,7 +54,7 @@ pipeline {
 //          }
 //
 //          stage('Run New image') {
-//              steps {
+//              steps {d
 //                  sh 'docker-compose up --build -d dessert-member-api'
 //                  echo 'Run New member image'
 //              }
