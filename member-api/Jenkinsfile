@@ -17,7 +17,7 @@
      git branch: 'member-api', credentialsId: 'github-webhook', url: 'https://github.com/hjuuujh/project-dessert'
      sh 'ls -al'
      sh 'chmod +x gradlew'
-     sh './gradlew member-api:build'
+     sh './gradlew clean member-api:build'
 
      dir('member-api/build/libs') {
 
