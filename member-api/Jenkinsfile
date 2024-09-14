@@ -19,7 +19,16 @@
                  sh 'chmod +x gradlew'
                  sh './gradlew clean member-api:build'
 
-                 dir('member-api') {
+
+            }
+        }
+
+         stage('Clone Repository') {
+             steps {
+//                  echo '${ref}'
+//                  checkout scm
+//                  echo 'Checkout Scm'
+dir('member-api') {
 
                   sh 'ls -al'
             //       app = docker.build("hjuuujh/jenkins")
@@ -33,16 +42,8 @@
                                     dockerImage.push("1.0")
                                     }
                     }
-            }
-        }
-
-//          stage('Clone Repository') {
-//              steps {
-//                  echo '${ref}'
-//                  checkout scm
-//                  echo 'Checkout Scm'
-//              }
-//          }
+             }
+         }
 //
 //          stage('Build image') {
 //              steps {
