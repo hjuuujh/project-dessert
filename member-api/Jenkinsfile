@@ -29,7 +29,7 @@ pipeline {
                         sh 'ls -al'
                         //       app = docker.build("hjuuujh/jenkins")
                         //       sh 'docker login -u hjuuujh'
-                        dockerImage = docker.build repository
+                        dockerImage = docker.build "hjuuujh/member-api"
                         //     sh 'sudo docker build -t member-api .'
                         //     sh 'echo  $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                         //     sh 'docker push $repository'
