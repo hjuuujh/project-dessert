@@ -15,8 +15,6 @@ pipeline {
                 sh './gradlew member-api:build'
 //                sh './gradlew clean member-api:build'
 
-                echo $DOCKERHUB_CREDENTIALS
-                echo $DOCKERHUB_CREDENTIALS_PSW
             }
         }
 
