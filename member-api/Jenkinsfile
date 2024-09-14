@@ -15,7 +15,8 @@ pipeline {
                 sh './gradlew member-api:build'
 //                sh './gradlew clean member-api:build'
 
-
+                echo $DOCKERHUB_CREDENTIALS
+                echo $DOCKERHUB_CREDENTIALS_PSW
             }
         }
 
@@ -29,7 +30,7 @@ pipeline {
                         sh 'ls -al'
                         //       app = docker.build("hjuuujh/jenkins")
                         //       sh 'docker login -u hjuuujh'
-                        dockerImage = docker.build "hjuuujh/member-api"
+                        dockerImage = docker.build repository
                         //     sh 'sudo docker build -t member-api .'
                         //     sh 'echo  $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                         //     sh 'docker push $repository'
@@ -44,13 +45,11 @@ pipeline {
 //
           stage('Build image') {
               steps {
-                  sh 'ls -al'
-                  dir('member-api') {
-                      sh 'ls -al'
-                      sh 'chmod +x ./gradlew'
-                      sh './gradlew build'
+                  sshagent(credentials: ['ssh']) {
+                      sh '''
+                        echo 'xxxx'
+                       '''
                   }
-                  echo 'Build image...'
               }
           }
 //
