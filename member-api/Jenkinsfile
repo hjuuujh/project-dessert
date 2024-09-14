@@ -7,50 +7,40 @@ pipeline {
     }
 
     stages {
-        stage('build') {
-            steps {
-                echo 'Clone'
-                sh 'ls -al'
-                sh 'chmod +x gradlew'
-                sh './gradlew member-api:build'
-//                sh './gradlew clean member-api:build'
+//        stage('build') {
+//            steps {
+//                echo 'Clone'
+//                sh 'ls -al'
+//                sh 'chmod +x gradlew'
+//                sh './gradlew member-api:build'
+//
+//            }
+//        }
+//
+//        stage('docker hub push') {
+//            steps {
+//                dir('member-api') {
+//                    script {
+//                        sh 'ls -al'
+//                        dockerImage = docker.build "hjuuujh/member-api"
+//                        docker.withRegistry('', 'dockerhub') {
+//                            dockerImage.push("1.0")
+//                        }
+//                    }
+//                }
+//            }
+//        }
 
-            }
-        }
-
-        stage('docker hub push') {
+        stage('Build image') {
             steps {
-//                  echo '${ref}'
-//                  checkout scmvv
-//                  echo 'Checkout   Scm'
-                dir('member-api') {
-                    script{
-                        sh 'ls -al'
-                        //       app = docker.build("hjuuujh/jenkins")
-                        //       sh 'docker login -u hjuuujh'
-                        dockerImage = docker.build "hjuuujh/member-api"
-                        //     sh 'sudo docker build -t member-api .'
-                        //     sh 'echo  $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                        //     sh 'docker push $repository'
-                        //     sh 'docker rmi $repository'
-                        docker.withRegistry('', 'dockerhub') {
-                            dockerImage.push("1.0")
-                        }
-                    }
+                sshagent(credentials: ['ssh']) {
+                    sh '''
+                        ssh -o StrictHostKeyChecking=no ubuntu@13.209.81.60 'ls -al'
+                   
+                       '''
                 }
             }
         }
-//
-          stage('Build image') {
-              steps {
-                  sshagent(credentials: ['ssh']) {
-                      sh '''
-                        ssh -o StrictHostKeyChecking=no ubuntu@13.209.81.60'
-                    ls -al
-                       '''
-                  }
-              }
-          }
 //
 //          stage('Remove Previous image') {
 //              steps {
