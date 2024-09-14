@@ -19,11 +19,12 @@
      sh 'chmod +x gradlew'
      sh './gradlew clean member-api:build'
 
-     dir('member-api/build/libs') {
+     dir('member-api') {
 
       sh 'ls -al'
-      dockerImage = docker.build repository
+//       dockerImage = docker.build repository
 //       sh 'docker login -u hjuuujh'
+    sh 'sudo docker build -t member-api .'
     sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
     sh 'docker push $repository'
     sh 'docker rmi $repository'
