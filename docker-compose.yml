@@ -114,8 +114,9 @@ services:
       - dessert-network
 
   member-api:
-    build:
-      context: ./member-api
+    image: hjuuujh/member-api:1.0
+#    build:
+#      context: ./member-api
     ports:
       - 8090:8090
     environment:
