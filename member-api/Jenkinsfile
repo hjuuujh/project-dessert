@@ -2,6 +2,8 @@
      agent any
      environment {
          DOCKER = 'sudo docker'
+         repository = "hjuuujh/jenkins"
+         DOCKERHUB_CREDENTIALS = credentials('dockerhub')
      }
 
 //     tools {
@@ -20,6 +22,11 @@
      dir('member-api/build/libs') {
 
       sh 'ls -al'
+      dockerImage = docker.build repository
+//       sh 'docker login -u hjuuujh'
+    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+    sh 'docker push $repository'
+    sh 'docker rmi $repository'
      }
      }
      }
