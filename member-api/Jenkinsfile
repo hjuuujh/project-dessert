@@ -31,7 +31,7 @@ pipeline {
                         //       sh 'docker login -u hjuuujh'
                         dockerImage = docker.build repository
                         //     sh 'sudo docker build -t member-api .'
-                        //     sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                        //     sh 'echo  $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
                         //     sh 'docker push $repository'
                         //     sh 'docker rmi $repository'
                         docker.withRegistry('', DOCKERHUB_CREDENTIALS) {
