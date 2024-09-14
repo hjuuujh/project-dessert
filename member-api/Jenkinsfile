@@ -33,7 +33,7 @@ pipeline {
 
         stage('Build image') {
             steps {
-                sshagent(credentials: ['ssh']) {
+                sshagent(['ssh']) {
                     sh '''
                         ssh -o StrictHostKeyChecking=no ubuntu@13.209.81.60 'ls -al'
                        '''
