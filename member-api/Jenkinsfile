@@ -46,7 +46,7 @@ pipeline {
 //                  script {
 //                      try {
 //                          sh 'docker stop dessert-member-api'
-//                      } catch (e) {
+//                      } catch (  e) {
 //                          echo 'fail to stop and remove container'
 //                      }
 //                  }
