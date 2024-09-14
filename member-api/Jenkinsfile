@@ -11,29 +11,31 @@
 //     }
 
      stages {
-     stage('test'){
-     steps {
-     echo 'Clone'
-     git branch: 'member-api', credentialsId: 'github-webhook', url: 'https://github.com/hjuuujh/project-dessert'
-     sh 'ls -al'
-     sh 'chmod +x gradlew'
-     sh './gradlew clean member-api:build'
+         stage('test'){
+            steps {
+                 echo 'Clone'
+                 git branch: 'member-api', credentialsId: 'github-webhook', url: 'https://github.com/hjuuujh/project-dessert'
+                 sh 'ls -al'
+                 sh 'chmod +x gradlew'
+                 sh './gradlew clean member-api:build'
 
-     dir('member-api') {
+                 dir('member-api') {
 
-      sh 'ls -al'
-//       app = docker.build("hjuuujh/jenkins")
-//       sh 'docker login -u hjuuujh'
-    dockerImage = docker.build "hjuuujh/jenkins"
-//     sh 'sudo docker build -t member-api .'
-//     sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-//     sh 'docker push $repository'
-//     sh 'docker rmi $repository'
-        docker.withRegistry('', 'dockerhub'){
-                        dockerImage.push("1.0")
-     }
-     }
-     }
+                  sh 'ls -al'
+            //       app = docker.build("hjuuujh/jenkins")
+            //       sh 'docker login -u hjuuujh'
+                 dockerImage = docker.build "hjuuujh/jenkins"
+            //     sh 'sudo docker build -t member-api .'
+            //     sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            //     sh 'docker push $repository'
+            //     sh 'docker rmi $repository'
+                    docker.withRegistry('', 'dockerhub'){
+                                    dockerImage.push("1.0")
+                                    }
+                    }
+            }
+        }
+    }
 //          stage('Clone Repository') {
 //              steps {
 //                  echo '${ref}'
