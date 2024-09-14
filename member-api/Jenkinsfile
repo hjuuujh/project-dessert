@@ -22,12 +22,15 @@
      dir('member-api') {
 
       sh 'ls -al'
-//       dockerImage = docker.build repository
+//       app = docker.build("hjuuujh/jenkins")
 //       sh 'docker login -u hjuuujh'
-    sh 'sudo docker build -t member-api .'
-    sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-    sh 'docker push $repository'
-    sh 'docker rmi $repository'
+    dockerImage = docker.build "hjuuujh/jenkins"
+//     sh 'sudo docker build -t member-api .'
+//     sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+//     sh 'docker push $repository'
+//     sh 'docker rmi $repository'
+        docker.withRegistry('', 'dockerhub'){
+                        dockerImage.push("1.0")
      }
      }
      }
