@@ -11,9 +11,11 @@ pipeline {
             steps {
                 echo 'Clone '
 //                git branch: 'member-api', credentialsId: 'github-webhook', url: 'https://github.com/hjuuujh/project-dessert'
+//                sh $ref
                 sh 'ls -al'
                 sh 'chmod +x gradlew'
-                sh './gradlew clean member-api:build'
+                sh './gradlew member-api:build'
+//                sh './gradlew clean member-api:build'
 
 
             }
