@@ -1,3 +1,5 @@
 echo "test"
+cd spring
 ls -al
-pwd
+#docker stop dessert-member-api
+#docker-compose up member-api --build
