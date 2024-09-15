@@ -114,7 +114,7 @@ services:
       - dessert-network
 
   member-api:
-    image: hjuuujh/member-api:1.0
+    image: hjuuujh/member-api:2.0
 #    build:
 #      context: ./member-api
     ports:

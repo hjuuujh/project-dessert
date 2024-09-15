@@ -29,7 +29,7 @@ pipeline {
                         sh 'ls -al'
                         dockerImage = docker.build "hjuuujh/member-api"
                         docker.withRegistry('', 'dockerhub') {
-                            dockerImage.push("1.0")
+                            dockerImage.push("2.0")
                         }
                     }
                 }
