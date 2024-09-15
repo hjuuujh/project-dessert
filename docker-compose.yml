@@ -1,24 +1,24 @@
 version: "3"
 services:
-#  db:
-#    image: mysql:8.0.22
-#    container_name: dessert-db
-#    cap_add:
-#      - SYS_NICE
-#    environment:
-#      MYSQL_ROOT_HOST: '%'
-#      MYSQL_ROOT_PASSWORD: 1234
-#    healthcheck:
-#      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
-#      interval: 3s
-#      timeout: 20s
-#    ports:
-#      - 3306:3306
-#    volumes:
-#      - ./db/data/member:/var/lib/mysql
-#      - ./init:/docker-entrypoint-initdb.d
-#    networks:
-#      - dessert-network
+  #  db:
+  #    image: mysql:8.0.22
+  #    container_name: dessert-db
+  #    cap_add:
+  #      - SYS_NICE
+  #    environment:
+  #      MYSQL_ROOT_HOST: '%'
+  #      MYSQL_ROOT_PASSWORD: 1234
+  #    healthcheck:
+  #      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+  #      interval: 3s
+  #      timeout: 20s
+  #    ports:
+  #      - 3306:3306
+  #    volumes:
+  #      - ./db/data/member:/var/lib/mysql
+  #      - ./init:/docker-entrypoint-initdb.d
+  #    networks:
+  #      - dessert-network
 
   redis:
     image: redis
@@ -37,24 +37,26 @@ services:
       - dessert-network
 
   config-server:
-    build:
-      context: ./config-server
+    image: hjuuujh/config-server:1.0
+    #    build:
+    #      context: ./config-server
     ports:
       - 8888:8888
     container_name: dessert-config-server
-    healthcheck:
-      test: curl --fail --silent localhost:8888/actuator/health/readiness | grep UP || exit 1
-      interval: 2s
-      timeout: 3s
-      retries: 5
+#    healthcheck:
+#      test: curl --fail --silent localhost:8888/actuator/health/readiness | grep UP || exit 1
+#      interval: 2s
+#      timeout: 3s
+#      retries: 5
     environment:
       eureka.client.serviceUrl.defaultZone: http://eureka-server:8761/eureka
     networks:
       - dessert-network
 
   eureka-server:
-    build:
-      context: ./eureka-server
+    image: hjuuujh/eureka-server:1.0
+    #    build:
+    #      context: ./eureka-server
     ports:
       - 8761:8761
     container_name: dessert-eureka-server
@@ -62,8 +64,9 @@ services:
       - dessert-network
 
   api-gateway:
-    build:
-      context: ./api-gateway
+    image: hjuuujh/api-gateway:1.0
+    #    build:
+    #      context: ./api-gateway
     ports:
       - 8088:8080
     container_name: dessert-api-gateway
@@ -71,7 +74,7 @@ services:
       eureka-server:
         condition: service_started
       config-server:
-        condition: service_healthy
+        condition: service_started
       order-api:
         condition: service_started
       store-api:
@@ -114,31 +117,32 @@ services:
       - dessert-network
 
   member-api:
-    image: hjuuujh/member-api:2.0
-#    build:
-#      context: ./member-api
+    image: hjuuujh/member-api:3.0
+    #    build:
+    #      context: ./member-api
     ports:
       - 8090:8090
-#    environment:
-#      eureka.client.serviceUrl.defaultZone: http://eureka-server:8761/eureka
-#      spring.cloud.config.uri: http://config-server:8888
-#      spring.config.import: optional:configserver:http://config-server:8888
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://eureka-server:8761/eureka
+      spring.cloud.config.uri: http://config-server:8888
+      spring.config.import: optional:configserver:http://config-server:8888
     depends_on:
-#      db:
-#        condition: service_healthy
+      #      db:
+      #        condition: service_healthy
       redis:
         condition: service_started
-#      eureka-server:
-#        condition: service_started
-#      config-server:
-#        condition: service_healthy
+      eureka-server:
+        condition: service_started
+      config-server:
+        condition: service_started
     container_name: dessert-member-api
     networks:
       - dessert-network
 
   store-api:
-    build:
-      context: ./store-api
+    image: hjuuujh/store-api:1.0
+    #    build:
+    #      context: ./store-api
     ports:
       - 8091:8091
     environment:
@@ -146,21 +150,22 @@ services:
       spring.cloud.config.uri: http://config-server:8888
       spring.config.import: optional:configserver:http://config-server:8888
     depends_on:
-#      db:
-#        condition: service_healthy
+      #      db:
+      #        condition: service_healthy
       redis:
         condition: service_started
       eureka-server:
         condition: service_started
       config-server:
-        condition: service_healthy
+        condition: service_started
     container_name: dessert-store-api
     networks:
       - dessert-network
 
   order-api:
-    build:
-      context: ./order-api
+    image: hjuuujh/order-api:1.0
+    #    build:
+    #      context: ./order-api
     ports:
       - 8092:8092
     environment:
@@ -168,12 +173,12 @@ services:
       spring.cloud.config.uri: http://config-server:8888
       spring.config.import: optional:configserver:http://config-server:8888
     depends_on:
-#      db:
-#        condition: service_healthy
+      #      db:
+      #        condition: service_healthy
       eureka-server:
         condition: service_started
       config-server:
-        condition: service_healthy
+        condition: service_started
     container_name: dessert-order-api
     networks:
       - dessert-network
