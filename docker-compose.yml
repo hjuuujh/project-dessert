@@ -37,8 +37,9 @@ services:
       - dessert-network
 
   config-server:
-    build:
-      context: ./config-server
+    image: hjuuujh/config-server:1.0
+#    build:
+#      context: ./config-server
     ports:
       - 8888:8888
     container_name: dessert-config-server
@@ -114,8 +115,9 @@ services:
       - dessert-network
 
   member-api:
-    build:
-      context: ./member-api
+    image: hjuuujh/member-api:2.0
+#    build:
+#      context: ./member-api
     ports:
       - 8090:8090
     environment:

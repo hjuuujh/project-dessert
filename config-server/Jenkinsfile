@@ -2,31 +2,31 @@ pipeline {
     agent any
 
     stages {
-        stage('build') {
-            steps {
-                sh 'java -version'
-
-                echo 'Clone'
-                sh 'ls -al'
-                sh 'chmod +x gradlew'
-                sh './gradlew config-server:build'
-
-            }
-        }
-
-        stage('docker hub push') {
-            steps {
-                dir('config-server') {
-                    script {
-                        sh 'ls -al'
-                        dockerImage = docker.build "hjuuujh/config-server"
-                        docker.withRegistry('', 'dockerhub') {
-                            dockerImage.push("1.0")
-                        }
-                    }
-                }
-            }
-        }
+//        stage('build') {
+//            steps {
+//                sh 'java -version'
+//
+//                echo 'Clone'
+//                sh 'ls -al'
+//                sh 'chmod +x gradlew'
+//                sh './gradlew config-server:build'
+//
+//            }
+//        }
+//
+//        stage('docker hub push') {
+//            steps {
+//                dir('config-server') {
+//                    script {
+//                        sh 'ls -al'
+//                        dockerImage = docker.build "hjuuujh/config-server"
+//                        docker.withRegistry('', 'dockerhub') {
+//                            dockerImage.push("1.0")
+//                        }
+//                    }
+//                }
+//            }
+//        }
 
         stage('Build image') {
             steps {
