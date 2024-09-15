@@ -36,7 +36,7 @@ pipeline {
                 sh 'ls -al'
                 sh 'scp -o StrictHostKeyChecking=no -i dessert-key-pair.pem -r docker-compose.yml ubuntu@ec2-43-201-61-191.ap-northeast-2.compute.amazonaws.com:/home/ubuntu/spring'
                 sh ''' ssh -o StrictHostKeyChecking=no -i "dessert-key-pair.pem" ubuntu@ec2-43-201-61-191.ap-northeast-2.compute.amazonaws.com -T 
-                    "./deploy.sh"
+                    "./member-api/deploy.sh"
 
                    '''
 
