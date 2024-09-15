@@ -33,13 +33,13 @@ pipeline {
 
         stage('Build image') {
             steps {
-                sh 'ls -al'
-                sh 'scp -i dessert-key-pair.pem -r docker-compose.yml ubuntu@43.201.61.191:/'
-//                sshagent(['ssh']) {
-//                    sh '''
-//                        ssh -o StrictHostKeyChecking=no ubuntu@43.201.61.191 'ls -al'
-//                       '''
-//                }
+//                sh 'ls -al'
+//                sh 'scp -i dessert-key-pair.pem -r docker-compose.yml ubuntu@43.201.61.191:/'
+                sshagent(['deploy']) {
+                    sh '''
+                        ssh -o StrictHostKeyChecking=no ubuntu@43.201.61.191 'ls -al'
+                       '''
+                }
             }
         }
 //
