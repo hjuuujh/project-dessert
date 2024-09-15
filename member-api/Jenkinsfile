@@ -35,7 +35,11 @@ pipeline {
             steps {
 //                sh 'ls -al'
 //                sh 'scp -i dessert-key-pair.pem -r docker-compose.yml ubuntu@43.201.61.191:/'
-                sh 'ssh -o StrictHostKeyChecking=no -i "dessert-key-pair.pem" ubuntu@ec2-43-201-61-191.ap-northeast-2.compute.amazonaws.com -T "ls -al" '
+                sh ''' ssh -o StrictHostKeyChecking=no -i "dessert-key-pair.pem" ubuntu@ec2-43-201-61-191.ap-northeast-2.compute.amazonaws.com -T 
+                    "ls -al; 
+                    pwd" 
+
+                   '''
 
 //                sshagent(['ssh']) {
 //                    sh '''
