@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    tools {
-        jdk 'jdk-11'
-    }
+//    tools {
+//        jdk 'jdk-11'
+//    }
     environment {
         DOCKER = 'sudo docker'
         repository = "hjuuujh/member-api"
