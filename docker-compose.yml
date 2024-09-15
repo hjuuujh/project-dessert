@@ -119,19 +119,19 @@ services:
 #      context: ./member-api
     ports:
       - 8090:8090
-    environment:
-      eureka.client.serviceUrl.defaultZone: http://eureka-server:8761/eureka
-      spring.cloud.config.uri: http://config-server:8888
-      spring.config.import: optional:configserver:http://config-server:8888
+#    environment:
+#      eureka.client.serviceUrl.defaultZone: http://eureka-server:8761/eureka
+#      spring.cloud.config.uri: http://config-server:8888
+#      spring.config.import: optional:configserver:http://config-server:8888
     depends_on:
 #      db:
 #        condition: service_healthy
       redis:
         condition: service_started
-      eureka-server:
-        condition: service_started
-      config-server:
-        condition: service_healthy
+#      eureka-server:
+#        condition: service_started
+#      config-server:
+#        condition: service_healthy
     container_name: dessert-member-api
     networks:
       - dessert-network
