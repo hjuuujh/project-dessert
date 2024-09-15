@@ -1,0 +1,66 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('build') {
+            steps {
+                sh 'java -version'
+
+                echo 'Clone'
+                sh 'ls -al'
+                sh 'chmod +x gradlew'
+                sh './gradlew config-server:build'
+
+            }
+        }
+
+        stage('docker hub push') {
+            steps {
+                dir('config-server') {
+                    script {
+                        sh 'ls -al'
+                        dockerImage = docker.build "hjuuujh/config-server"
+                        docker.withRegistry('', 'dockerhub') {
+                            dockerImage.push("1.0")
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Build image') {
+            steps {
+                sh 'ls -al'
+                sh 'scp -o StrictHostKeyChecking=no -i dessert-key-pair.pem -r docker-compose.yml ubuntu@ec2-43-201-61-191.ap-northeast-2.compute.amazonaws.com:/home/ubuntu/spring'
+                sh 'scp -o StrictHostKeyChecking=no -i dessert-key-pair.pem -r ./config-server/deploy.sh ubuntu@ec2-43-201-61-191.ap-northeast-2.compute.amazonaws.com:/home/ubuntu/spring/config-server-deploy.sh'
+                sh 'ssh -o StrictHostKeyChecking=no -i "dessert-key-pair.pem" ubuntu@ec2-43-201-61-191.ap-northeast-2.compute.amazonaws.com -T "sh ./spring/config-server-deploy.sh" '
+
+//                    "sh ./spring/member-api-deploy.sh"
+//                sshagent(['ssh']) {
+//                    sh '''
+//                        ssh -o StrictHostKeyChecking=no ubuntu@43.201.61.191 'ls -al'
+//                       '''
+//                }
+            }
+        }
+//
+//          stage('Remove Previous image') {
+//              steps {
+//                  script {
+//                      try {
+//                          sh 'docker stop dessert-member-api'
+//                      } catch (  e) {
+//                          echo 'fail to stop and remove container'
+//                      }
+//                  }
+//              }
+//          }
+//
+//          stage('Run New image') {
+//              steps {dl
+//                  sh 'docker-compose up --build -d dessert-member-api'
+//                  echo 'Run New member image'
+//              }
+//          }
+    }
+}
