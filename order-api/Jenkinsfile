@@ -44,7 +44,7 @@ pipeline {
             }
         }
 //
-//          stage('Remove Previous image') {
+//          stage('Remove fPrevious image') {
 //              steps {
 //                  script {
 //                      try {
