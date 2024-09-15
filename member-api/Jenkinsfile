@@ -33,11 +33,12 @@ pipeline {
 
         stage('Build image') {
             steps {
-                sshagent(['ssh']) {
-                    sh '''
-                        ssh -o StrictHostKeyChecking=no ubuntu@43.201.61.191 'ls -al'
-                       '''
-                }
+                sh 'ls -al'
+//                sshagent(['ssh']) {
+//                    sh '''
+//                        ssh -o StrictHostKeyChecking=no ubuntu@43.201.61.191 'ls -al'
+//                       '''
+//                }
             }
         }
 //
