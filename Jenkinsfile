@@ -16,6 +16,7 @@ pipeline {
             steps {
                 script{
                     echo "$branch"
+                    echo "$branch"
                     git branch: "$branch" , credentialsId: 'github', url: 'https://github.com/hjuuujh/project-dessert'
                 }
             }
