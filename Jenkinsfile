@@ -3,6 +3,7 @@ def getBranch(){
     st = ref.split('/')
     branch = st[st.size()-1]
     return branch
+
 }
 
 pipeline {
