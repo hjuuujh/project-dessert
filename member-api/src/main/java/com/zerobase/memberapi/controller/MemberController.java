@@ -28,6 +28,12 @@ public class MemberController {
     private final TokenProvider tokenProvider;
     private final ValidationErrorResponse validationErrorResponse;
 
+    @PostMapping("/signup/health_check")
+    public ResponseEntity<?> healthCheck() {
+
+        return ResponseEntity.ok("Load Balancer Health Check");
+    }
+
     /**
      * 고객 정보 등록
      *

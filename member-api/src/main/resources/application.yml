@@ -15,17 +15,6 @@ spring:
   config:
     import: optional:configserver:http://localhost:8888
 
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-  redis:
-    # host: localhost
-    host: redis
-    port: 6379
-  jwt:
-    secret: 4c216af15dddd3987142b0e1a66489f464623a449d4c0d12506fd30b376e6c7dc5c3d9f50adb8b74297a0c2e863203adaf76c4f1f630b3a11902e6dc40151214
-
   main:
     allow-bean-definition-overriding: true
 
