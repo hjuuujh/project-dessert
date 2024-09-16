@@ -64,7 +64,7 @@ services:
       - dessert-network
 
   eureka-server:
-    image: hjuuujh/eureka-server:4.0
+    image: hjuuujh/eureka-server:3.0
     #    build:
     #      context: ./eureka-server
     ports:
