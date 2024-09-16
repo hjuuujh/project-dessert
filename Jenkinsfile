@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         ref = "$ref"
-        st = ref.split('/')
+        def st = ref.split('/')
         branch = st[st.size()-1]
     }
 
