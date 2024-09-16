@@ -20,6 +20,15 @@ services:
   #    networks:
   #      - dessert-network
 
+  web:
+    image: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./spring/conf.d:/etc/nginx/conf.d
+    networks:
+      - dessert-network
+
   redis:
     image: redis
     container_name: dessert-redis
@@ -183,21 +192,21 @@ services:
     networks:
       - dessert-network
 
-  swagger-integrated:
-    image: swaggerapi/swagger-ui
-    container_name: swagger-integrated
-    ports:
-      - 8000:8080
-    restart: on-failure
-    environment:
-      - URLS=
-        [
-        {url:'http://localhost:8090/docs/openapi/openapi3.yaml',name:'member-api'},
-        {url:'http://localhost:8091/docs/openapi/openapi3.yaml',name:'store-api'},
-        {url:'http://localhost:8092/docs/openapi/openapi3.yaml',name:'order-api'}
-        ]
-    networks:
-      - dessert-network
+#  swagger-integrated:
+#    image: swaggerapi/swagger-ui
+#    container_name: swagger-integrated
+#    ports:
+#      - 8000:8080
+#    restart: on-failure
+#    environment:
+#      - URLS=
+#        [
+#        {url:'http://localhost:8090/docs/openapi/openapi3.yaml',name:'member-api'},
+#        {url:'http://localhost:8091/docs/openapi/openapi3.yaml',name:'store-api'},
+#        {url:'http://localhost:8092/docs/openapi/openapi3.yaml',name:'order-api'}
+#        ]
+#    networks:
+#      - dessert-network
 
 networks:
   dessert-network:
