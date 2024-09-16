@@ -1,10 +1,16 @@
+def getBranch(){
+    ref = "$ref"
+    st = ref.split('/')
+    branch = st[st.size()-1]
+    return branch
+}
 pipeline {
     agent any
     environment {
-        ref = "$ref"
-        st = ref.split('/')
-        len = ref.split('/').size()
-        branch = ref.split('/')[len-1]
+//        ref = "$ref"
+//        st = ref.split('/')
+//        len = ref.split('/').size()
+        branch = getBranch()
     }
 
     stages {
