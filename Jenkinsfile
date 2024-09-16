@@ -18,10 +18,10 @@ pipeline {
         stage('build') {
             steps {
                 script{
-                    echo 'Clone'
-                    sh 'ls -al'
-                    sh 'chmod +x gradlew'
-                    sh './gradlew '+"$branch"+':build'
+                    echo "$branch"
+//                    sh 'ls -al'
+//                    sh 'chmod +x gradlew'
+//                    sh './gradlew '+"$branch"+':build'
                 }
 
             }
