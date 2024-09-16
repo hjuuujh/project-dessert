@@ -2,8 +2,8 @@ pipeline {
     agent any
     environment {
         ref = "$ref"
-        def st = ref.split('/')
-        branch = st[st.size()-1]
+        st = ref.split('/')
+//        branch = st[st.size()-1]
     }
 
     stages {
@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script{
                     echo "$ref"
-                    echo "$branch"
+                    echo "$st"
 
 //                    echo "$branch"
 //                    git branch: "$branch" , credentialsId: 'github', url: 'https://github.com/hjuuujh/project-dessert'
