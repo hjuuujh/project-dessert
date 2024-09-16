@@ -4,7 +4,7 @@ pipeline {
         ref = "$ref"
         st = ref.split('/')
         len = ref.split('/').size()
-        branch = st[len-1]
+        branch = ref.split('/')[len-1]
     }
 
     stages {
