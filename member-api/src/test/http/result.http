@@ -1,0 +1,8 @@
+### signin seller
+POST http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/member/signin/seller
+Content-Type: application/json
+
+{
+  "email": "user1@gmail.com",
+  "password": "qwerty"
+}

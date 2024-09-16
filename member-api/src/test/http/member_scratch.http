@@ -2,7 +2,19 @@
 POST http://localhost:8080/api/member/signup/seller
 Content-Type: application/json
 
-{dsd
+{
+  "email": "user1@gmail.com",
+  "name": "user1",
+  "password": "qwerty",
+  "phone": "01012345678",
+  "roles": ["ROLE_SELLER"]
+}
+
+### signup seller
+POST http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/member/signup/seller
+Content-Type: application/json
+
+{
   "email": "user1@gmail.com",
   "name": "user1",
   "password": "qwerty",
@@ -13,6 +25,15 @@ Content-Type: application/json
 
 ### signin seller
 POST http://localhost:8080/api/member/signin/seller
+Content-Type: application/json
+
+{
+  "email": "user1@gmail.com",
+  "password": "qwerty"
+}
+
+### signin seller
+POST http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/member/signup/seller
 Content-Type: application/json
 
 {
