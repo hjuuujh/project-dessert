@@ -7,6 +7,7 @@ def getBranch(){
 
 pipeline {
     agent any
+    options { skipDefaultCheckout() }
     environment {
         branch = getBranch()
     }
