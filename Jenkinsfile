@@ -1,16 +1,20 @@
 pipeline {
     agent any
+    environment {
+        ref = "$ref"
+        st = ref.split('/')
+        branch = st[st.size()-1]
+    }
 
     stages {
         stage('checkout') {
             steps {
                 script{
                     echo "$ref"
-                    def ref = "$ref"
-                    def st = ref.split('/')
-                    def branch = st[st.size()-1]
                     echo "$branch"
-                    git branch: "$branch" , credentialsId: 'github', url: 'https://github.com/hjuuujh/project-dessert'
+
+//                    echo "$branch"
+//                    git branch: "$branch" , credentialsId: 'github', url: 'https://github.com/hjuuujh/project-dessert'
                 }
             }
         }
