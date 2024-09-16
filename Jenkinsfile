@@ -3,7 +3,8 @@ pipeline {
     environment {
         ref = "$ref"
         st = ref.split('/')
-        branch = "$st"["$st".size()-1]
+        len = ref.split('/').size()
+        branch = st[len-1]
     }
 
     stages {
