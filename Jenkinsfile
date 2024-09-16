@@ -4,12 +4,10 @@ def getBranch(){
     branch = st[st.size()-1]
     return branch
 }
+
 pipeline {
     agent any
     environment {
-//        ref = "$ref"
-//        st = ref.split('/')
-//        len = ref.split('/').size()
         branch = getBranch()
     }
 
@@ -17,11 +15,8 @@ pipeline {
         stage('checkout') {
             steps {
                 script{
-                    echo "$ref"
-                    echo "$st"
-
-//                    echo "$branch"
-//                    git branch: "$branch" , credentialsId: 'github', url: 'https://github.com/hjuuujh/project-dessert'
+                    echo "$branch"
+                    git branch: "$branch" , credentialsId: 'github', url: 'https://github.com/hjuuujh/project-dessert'
                 }
             }
         }
@@ -30,39 +25,36 @@ pipeline {
             steps {
                 script{
                     echo "$branch"
-//                    sh 'ls -al'
-//                    sh 'chmod +x gradlew'
-//                    sh './gradlew '+"$branch"+':build'
+                    sh 'ls -al'
+                    sh 'chmod +x gradlew'
+                    sh './gradlew '+"$branch"+':build'
                 }
 
             }
         }
 
-//        stage('build image and docker hub push') {
-//            steps {
-//                dir('member-api') {
-//                    script {
-//                        sh 'ls -al'
-//                        dockerImage = docker.build "hjuuujh/member-api"
-//                        docker.withRegistry('', 'dockerhub') {
-//                            dockerImage.push("5.0")
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        stage('build image and docker hub push') {
+            steps {
+                dir("$branch") {
+                    script {
+                        sh 'ls -al'
+                        dockerImage = docker.build "hjuuujh/"+"$branch"
+                        docker.withRegistry('', 'dockerhub') {
+                            dockerImage.push("5.0")
+                        }
+                    }
+                }
+            }
+        }
 
-//        stage('deploy') {
-//            steps {
-//                sh 'ls -al'
-//                sh 'scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/workspace/dessert-key-pair.pem -r docker-compose.yml ubuntu@ec2-43-201-61-191.ap-northeast-2.compute.amazonaws.com:/home/ubuntu/spring'
-//                sh 'scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/workspace/dessert-key-pair.pem -r conf.d ubuntu@ec2-43-201-61-191.ap-northeast-2.compute.amazonaws.com:/home/ubuntu/spring'
-//                sh 'scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/workspace/dessert-key-pair.pem -r ./member-api/deploy.sh ubuntu@ec2-43-201-61-191.ap-northeast-2.compute.amazonaws.com:/home/ubuntu/spring/member-api-deploy.sh'
-//                sh 'ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/workspace/dessert-key-pair.pem ubuntu@ec2-43-201-61-191.ap-northeast-2.compute.amazonaws.com -T "sh ./spring/member-api-deploy.sh" '
-//
-//
-//            }
-//        }
+        stage('deploy') {
+            steps {
+                sh 'ls -al'
+                sh 'scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/workspace/dessert-key-pair.pem -r docker-compose.yml ubuntu@ec2-43-201-61-191.ap-northeast-2.compute.amazonaws.com:/home/ubuntu/spring'
+                sh 'scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/workspace/dessert-key-pair.pem -r ./'+"$branch"+'/deploy.sh ubuntu@ec2-43-201-61-191.ap-northeast-2.compute.amazonaws.com:/home/ubuntu/spring/'+"$branch"+'-deploy.sh'
+                sh 'ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/workspace/dessert-key-pair.pem ubuntu@ec2-43-201-61-191.ap-northeast-2.compute.amazonaws.com -T "sh ./spring/'+"$branch"+'-deploy.sh" '
+            }
+        }
 
     }
 }
