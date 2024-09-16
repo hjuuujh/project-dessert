@@ -4,12 +4,14 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-                echo '$ref'
-                def ref = '$ref'
-                def st = ref.split('/')
-                def branch = st[st.size()-1]
-                echo '$branch'
-                git branch: "$branch" , credentialsId: 'github', url: 'https://github.com/hjuuujh/project-dessert'
+                script{
+                    echo '$ref'
+                    def ref = '$ref'
+                    def st = ref.split('/')
+                    def branch = st[st.size()-1]
+                    echo '$branch'
+                    git branch: "$branch" , credentialsId: 'github', url: 'https://github.com/hjuuujh/project-dessert'
+                }
             }
         }
 
