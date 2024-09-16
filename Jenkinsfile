@@ -22,7 +22,7 @@ pipeline {
                 }
             }
         }
-
+//
         stage('build') {
             steps {
                 script{
