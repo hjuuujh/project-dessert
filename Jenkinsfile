@@ -21,31 +21,31 @@ pipeline {
             }
         }
 
-        stage('build') {
-            steps {
-                script{
-                    echo "$branch"
-                    sh 'ls -al'
-                    sh 'chmod +x gradlew'
-                    sh './gradlew '+"$branch"+':build'
-                }
-
-            }
-        }
-
-        stage('build image and docker hub push') {
-            steps {
-                dir("$branch") {
-                    script {
-                        sh 'ls -al'
-                        dockerImage = docker.build "hjuuujh/"+"$branch"
-                        docker.withRegistry('', 'dockerhub') {
-                            dockerImage.push("5.0")
-                        }
-                    }
-                }
-            }
-        }
+//        stage('build') {
+//            steps {
+//                script{
+//                    echo "$branch"
+//                    sh 'ls -al'
+//                    sh 'chmod +x gradlew'
+//                    sh './gradlew '+"$branch"+':build'
+//                }
+//
+//            }
+//        }
+//
+//        stage('build image and docker hub push') {
+//            steps {
+//                dir("$branch") {
+//                    script {
+//                        sh 'ls -al'
+//                        dockerImage = docker.build "hjuuujh/"+"$branch"
+//                        docker.withRegistry('', 'dockerhub') {
+//                            dockerImage.push("5.0")
+//                        }
+//                    }
+//                }
+//            }
+//        }
 
         stage('deploy') {
             steps {
