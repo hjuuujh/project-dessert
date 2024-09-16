@@ -15,15 +15,17 @@ pipeline {
             }
         }
 
-//        stage('build') {
-//            steps {
-//                echo 'Clone'
-//                sh 'ls -al'
-//                sh 'chmod +x gradlew'
-//                sh './gradlew member-api:build'
-//
-//            }
-//        }
+        stage('build') {
+            steps {
+                script{
+                    echo 'Clone'
+                    sh 'ls -al'
+                    sh 'chmod +x gradlew'
+                    sh './gradlew '+"$branch"+':build'
+                }
+
+            }
+        }
 
 //        stage('build image and docker hub push') {
 //            steps {
