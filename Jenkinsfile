@@ -40,9 +40,6 @@ pipeline {
                 dir("$branch") {
                     script {
                         sh 'ls -al'
-                        sh 'ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/workspace/dessert-key-pair.pem ubuntu@ec2-43-201-61-191.ap-northeast-2.compute.amazonaws.com -T "sudo docker stop dessert-member-api" '
-                        sh 'ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/workspace/dessert-key-pair.pem ubuntu@ec2-43-201-61-191.ap-northeast-2.compute.amazonaws.com -T "sudo docker rmi hjuuujh/member-api:6.0" '
-
 
                         dockerImage = docker.build "hjuuujh/"+"$branch"
                         docker.withRegistry('', 'dockerhub') {
