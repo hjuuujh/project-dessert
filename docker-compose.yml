@@ -128,8 +128,6 @@ services:
 
   member-api:
     image: hjuuujh/member-api:6.0
-    #    build:
-    #      context: ./member-api
     ports:
       - 8090:8090
     environment:
