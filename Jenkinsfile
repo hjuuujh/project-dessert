@@ -18,7 +18,7 @@ pipeline {
                 script{
                     echo "$ref"
                     echo "$branch"
-                    git branch: "$branch" , credentialsId: 'github', url: 'https://github.com/hjuuujh/project-dessert'
+                    git branch: "dev/$branch" , credentialsId: 'github', url: 'https://github.com/hjuuujh/project-dessert'
                 }
             }
         }
