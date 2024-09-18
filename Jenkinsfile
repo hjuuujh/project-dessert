@@ -19,7 +19,6 @@ pipeline {
                 script{
                     echo "$branch"
                     git branch: "$branch" , credentialsId: 'github', url: 'https://github.com/hjuuujh/project-dessert'
-                    cat 'Jenkinsfile'
                 }
             }
         }
