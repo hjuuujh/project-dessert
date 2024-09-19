@@ -117,7 +117,7 @@ openapi3 {
     description = 'Dessert Commerce API description'
     version = '0.1.0'
     format = 'yaml'
-//    delete file("src/main/resources/static/docs/openapi")
+    delete file("src/main/resources/static/docs/openapi")
     copy{
         from file("build/api-spec")
         into file("src/main/resources/static/docs/openapi")

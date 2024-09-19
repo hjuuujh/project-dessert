@@ -33,6 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         protected void configure(HttpSecurity http) throws Exception {
             http.httpBasic().disable() // rest api 이므로 기본설정 사용안함
                     .csrf().disable() // rest api이므로 csrf 보안이 필요없어 disable처리
+                    .cors().disable()
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // jwt token으로 인증하므로 세션은 필요없으므로 생성안함
                     .and()
                     .authorizeRequests() // 다음 리퀘스트에 대한 사용권한 체크
@@ -55,6 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         protected void configure(HttpSecurity http) throws Exception {
             http.httpBasic().disable() // rest api 이므로 기본설정 사용안함
                     .csrf().disable() // rest api이므로 csrf 보안이 필요없어 disable처리
+                    .cors().disable()
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // jwt token으로 인증하므로 세션은 필요없으므로 생성안함
                     .and()
                     .authorizeRequests() // 다음 리퀘스트에 대한 사용권한 체크

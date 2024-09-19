@@ -127,7 +127,7 @@ services:
       - dessert-network
 
   member-api:
-    image: hjuuujh/member-api:1.0
+    image: hjuuujh/member-api:2.0
     ports:
       - 8090:8090
     environment:
@@ -200,11 +200,12 @@ services:
     environment:
       - URLS=
         [
-        {url:'docs/member-api-openapi3.yaml',name:'member-api'},
+        {url:'/docs/member-api-openapi3.yaml',name:'member-api'},
         {url:'http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8091/docs/openapi/openapi3.yaml',name:'store-api'},
         {url:'http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8092/docs/openapi/openapi3.yaml',name:'order-api'}
         ]
     volumes:
+      - ./openapi:/usr/share/nginx/html/docs
       - ./openapi:/docs
     networks:
       - dessert-network
