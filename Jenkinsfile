@@ -30,6 +30,8 @@ pipeline {
                     sh 'ls -al'
                     sh 'chmod +x gradlew'
                     sh './gradlew '+"$branch"+':build'
+                    sh './gradlew '+"$branch"+':openapi3'
+
                 }
 
             }
@@ -43,7 +45,7 @@ pipeline {
 
                         dockerImage = docker.build "hjuuujh/"+"$branch"
                         docker.withRegistry('', 'dockerhub') {
-                            dockerImage.push("2.0")
+                            dockerImage.push("3.0")
                         }
                     }
                 }
