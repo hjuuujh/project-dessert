@@ -28,6 +28,11 @@ public class MemberController {
     private final TokenProvider tokenProvider;
     private final ValidationErrorResponse validationErrorResponse;
 
+    @GetMapping("/signup/health_check")
+    public ResponseEntity<?> healthCheck() {
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     /**
      * 고객 정보 등록
      *
