@@ -28,7 +28,7 @@ public class MemberController {
     private final TokenProvider tokenProvider;
     private final ValidationErrorResponse validationErrorResponse;
 
-    @GetMapping("/signup/health_check")
+    @GetMapping("/signup/health-check")
     public ResponseEntity<?> healthCheck() {
         return new ResponseEntity<>(HttpStatus.OK);
     }

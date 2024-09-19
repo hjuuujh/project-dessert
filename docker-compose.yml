@@ -127,7 +127,7 @@ services:
       - dessert-network
 
   member-api:
-    image: hjuuujh/member-api:7.0
+    image: hjuuujh/member-api:1.0
     ports:
       - 8090:8090
     environment:

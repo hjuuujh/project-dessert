@@ -43,7 +43,7 @@ pipeline {
 
                         dockerImage = docker.build "hjuuujh/"+"$branch"
                         docker.withRegistry('', 'dockerhub') {
-                            dockerImage.push("7.0")
+                            dockerImage.push("1.0")
                         }
                     }
                 }
