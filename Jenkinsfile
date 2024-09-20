@@ -58,8 +58,8 @@ pipeline {
                 dir("$branch") {
                     script {
                         sh 'ls -al'
-
-                        // 빌드 결과 도커 이미지로 빌드
+                      
+                        // 빌드한것 도커 이미지로 빌드
                         dockerImage = docker.build "hjuuujh/"+"$branch"
 
                         // credential에서 설정한 id 이용
@@ -77,6 +77,11 @@ pipeline {
             when { expression { return "$branch".contains('-api') } }
             steps {
                 sh 'scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/workspace/dessert-key-pair.pem -r ./' + "$branch" + '/src/main/resources/static/docs/openapi/openapi3.yaml ubuntu@ec2-43-201-61-191.ap-northeast-2.compute.amazonaws.com:/home/ubuntu/spring/openapi/' + "$branch" + '-openapi3.yaml'
+            }
+        }
+                        }
+                    }
+                }
             }
         }
 
