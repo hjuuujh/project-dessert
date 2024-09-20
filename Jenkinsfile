@@ -28,11 +28,11 @@ pipeline {
                     echo "$branch"
                     sh 'ls -al'
                     sh 'chmod +x gradlew'
-                    sh './gradlew '+"$branch"+':build'
+//                    sh './gradlew '+"$branch"+':build'
 
                 sh '''
                 if [[ "$branch" == *api ]]; then
-                sh './gradlew '+"$branch"+':openapi3'
+                ./gradlew +"$branch"+':openapi3'
                 fi
                 '''
 
