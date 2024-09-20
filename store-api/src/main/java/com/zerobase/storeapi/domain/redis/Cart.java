@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.redis.core.RedisHash;
 
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,8 +21,10 @@ import java.util.stream.Collectors;
 public class Cart {
     @Id
     private Long customerId;
+    @NotNull(message = "주문 아이템은 필수입니다.")
     private List<Item> items;
     private List<String> messages;
+    @NotNull(message = "주문 가격은 필수입니다.")
     private int totalPrice;
 
     public void addMessage(String message) {
@@ -34,11 +38,17 @@ public class Cart {
     @AllArgsConstructor
     @Builder
     public static class Item implements Comparable<Item> {
+        @NotNull(message = "주문 아이템 id는 필수입니다.")
         private Long id;
+        @NotNull(message = "주문 아이템의 스토어 id는 필수입니다.")
         private Long storeId;
+        @NotNull(message = "주문 아이템의 seller id는 필수입니다.")
         private Long sellerId;
+        @NotBlank(message = "주문 매장명은 필수입니다.")
         private String storeName;
+        @NotBlank(message = "주문 아이템 명은 필수입니다.")
         private String name;
+        @NotNull(message = "주문 아이템의 옵션은 필수입니다.")
         private List<Option> options;
 
 
@@ -65,9 +75,13 @@ public class Cart {
     @AllArgsConstructor
     @Builder
     public static class Option implements Comparable<Option> {
+        @NotNull(message = "주문 옵션 id는 필수입니다.")
         private Long id;
+        @NotBlank(message = "주문 옵션명은 필수입니다.")
         private String name;
+        @NotNull(message = "주문 수량은 필수입니다.")
         private Integer quantity;
+        @NotNull(message = "주문 가격은 필수입니다.")
         private Integer price;
 
         public static Option from(AddItemCartForm.Option form) {

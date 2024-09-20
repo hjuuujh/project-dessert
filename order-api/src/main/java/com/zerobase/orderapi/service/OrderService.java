@@ -45,8 +45,9 @@ public class OrderService {
     @Transactional
     public List<OrderResult> order(String token, Cart cart) {
         // member point 감소
+        Long customerId = memberClient.getMemberId(token);
         DecreaseBalanceForm request = DecreaseBalanceForm.builder()
-                .customerId(cart.getCustomerId())
+                .customerId(customerId)
                 .totalPrice(cart.getTotalPrice())
                 .build();
         memberClient.decreaseBalance(token, request);
@@ -57,7 +58,7 @@ public class OrderService {
             for (Cart.Option option : item.getOptions()) {
                 int totalPrice = option.getPrice() * option.getQuantity();
                 Orders order = Orders.builder()
-                        .customerId(cart.getCustomerId())
+                        .customerId(customerId)
                         .storeId(item.getStoreId())
                         .sellerId(item.getSellerId())
                         .itemId(item.getId())

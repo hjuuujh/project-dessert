@@ -14,6 +14,9 @@ import javax.validation.constraints.NotBlank;
 public class RegisterStore {
     @NotBlank(message = "매장 이름은 필수입니다.")
     private String name;
+
+    @NotBlank(message = "매장 설명은 필수입니다.")
     private String description;
+
     private String thumbnailUrl;
 }
