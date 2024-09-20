@@ -171,7 +171,7 @@ services:
       - dessert-network
 
   order-api:
-    image: hjuuujh/order-api:1.0
+    image: hjuuujh/order-api:2.0
     #    build:
     #      context: ./order-api
     ports:
