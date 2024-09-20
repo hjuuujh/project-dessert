@@ -48,7 +48,7 @@ pipeline {
 //                        dockerImage = docker.build "hjuuujh/"+"$branch"
                         dockerImage = docker.build "hjuuujh/"+"api-gateway"
                         docker.withRegistry('', 'dockerhub') {
-                            dockerImage.push("1.0")
+                            dockerImage.push("2.0")
                         }
                     }
                 }

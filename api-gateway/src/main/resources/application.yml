@@ -11,11 +11,6 @@ spring:
       globalcors:
         cors-configurations:
           '[/**]':
-            allowedOrigins: 'http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8000'
-            allow-credentials: true
-            allowedHeaders: '*'
-            allowedMethods:
-              - GET
       routes:
         # yml 이용해 선언적 방식으로 라우팅 구현
         # @Configuration 이용해 프로그래밍 방식으로도 라우팅 구현 가능
@@ -103,9 +98,6 @@ spring:
 
   profiles:
     active: dev
-
-  jwt:
-    secret: 4c216af15dddd3987142b0e1a66489f464623a449d4c0d12506fd30b376e6c7dc5c3d9f50adb8b74297a0c2e863203adaf76c4f1f630b3a11902e6dc40151214
 
 eureka: # eureka client 등록
   instance:
