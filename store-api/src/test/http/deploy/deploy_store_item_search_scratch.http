@@ -1,0 +1,20 @@
+### search item by keyword + order count
+GET http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/store/item/search/order?keyword=&page=0&size=5
+
+### search item by keyword + newest
+GET http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/store/item/search/new?keyword=노밀가루&page=0&size=5
+
+### search item by keyword + low price
+GET http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/store/item/search/price/low?keyword=&page=0&size=5
+
+### search item by keyword + high price
+GET http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/store/item/search/price/high?keyword=&page=0&size=5
+
+### search item by keyword + category
+GET http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/store/item/search/category?keyword=&category=cookie&page=0&size=5
+
+### search item by store
+GET http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/store/item/search/store?storeId=5&page=0&size=5
+
+### search item by id
+GET http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/store/item/search/detail?itemId=2

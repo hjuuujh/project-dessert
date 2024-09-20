@@ -2,7 +2,7 @@
 POST http://localhost:8080/api/member/signup/seller
 Content-Type: application/json
 
-{dsd
+{
   "email": "user1@gmail.com",
   "name": "user1",
   "password": "qwerty",

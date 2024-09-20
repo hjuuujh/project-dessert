@@ -1,0 +1,51 @@
+### signup seller
+POST http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/member/signup/seller
+Content-Type: application/json
+
+{
+  "email": "user1@gmail.com",
+  "name": "user1",
+  "password": "qwerty",
+  "phone": "01012345678",
+  "roles": ["ROLE_SELLER"]
+}
+
+
+### signin seller
+POST http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/member/signin/seller
+Content-Type: application/json
+
+{
+  "email": "user1@gmail.com",
+  "password": "qwerty"
+}
+
+### signup customer
+POST http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/member/signup/customer
+Content-Type: application/json
+
+{
+  "email": "user2@gmail.com",
+  "name": "user2",
+  "password": "qwerty",
+  "phone": "01012345678",
+  "roles": ["ROLE_CUSTOMER"]
+}
+
+### signin customer
+POST http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/member/signin/customer
+Content-Type: application/json
+
+{
+  "email": "user2@gmail.com",
+  "password": "qwerty"
+}
+
+### charge balance
+POST http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/member/customer/charge
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNjc1MDM4NiwiZXhwIjoxNzI2ODM2Nzg2fQ.7qSsrXXSJHiwwc5jmm042vwDKPjWTUZwaIeI6HGySzpzZWZpm-KZkqLSR99RHk8LXKe0uMQtvWpeTupe6qe7ig
+
+{
+  "amount": 1000000
+}

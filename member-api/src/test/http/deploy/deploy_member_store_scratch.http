@@ -1,0 +1,68 @@
+### follow store
+POST http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/member/customer/follow
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNjgxNjE2OCwiZXhwIjoxNzI2OTAyNTY4fQ.9QEvVhYcZUmnuI3lK-dSaFaz5u5Oh1YMEaomGk0Qg8SgPjb48oT7XIYEdujsXkcJ6Q8szOQt0un9EgOMa88Hhg
+
+{
+  "storeId": 6
+}
+
+### follow store
+POST http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/member/customer/follow
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNjgxNjE2OCwiZXhwIjoxNzI2OTAyNTY4fQ.9QEvVhYcZUmnuI3lK-dSaFaz5u5Oh1YMEaomGk0Qg8SgPjb48oT7XIYEdujsXkcJ6Q8szOQt0un9EgOMa88Hhg
+
+{
+  "storeId": 7
+}
+
+### unfollow store
+POST http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/member/customer/unfollow
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNjgxNjE2OCwiZXhwIjoxNzI2OTAyNTY4fQ.9QEvVhYcZUmnuI3lK-dSaFaz5u5Oh1YMEaomGk0Qg8SgPjb48oT7XIYEdujsXkcJ6Q8szOQt0un9EgOMa88Hhg
+
+{
+  "storeId": 1
+}
+
+### get follow stores
+GET http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/member/customer/stores?page=0&size=5
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNjgxNjE2OCwiZXhwIjoxNzI2OTAyNTY4fQ.9QEvVhYcZUmnuI3lK-dSaFaz5u5Oh1YMEaomGk0Qg8SgPjb48oT7XIYEdujsXkcJ6Q8szOQt0un9EgOMa88Hhg
+
+### heart item
+POST http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/member/customer/heart
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNjgxNjE2OCwiZXhwIjoxNzI2OTAyNTY4fQ.9QEvVhYcZUmnuI3lK-dSaFaz5u5Oh1YMEaomGk0Qg8SgPjb48oT7XIYEdujsXkcJ6Q8szOQt0un9EgOMa88Hhg
+
+{
+  "itemId": 5
+}
+
+### heart item
+POST http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/member/customer/heart
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNjgxNjE2OCwiZXhwIjoxNzI2OTAyNTY4fQ.9QEvVhYcZUmnuI3lK-dSaFaz5u5Oh1YMEaomGk0Qg8SgPjb48oT7XIYEdujsXkcJ6Q8szOQt0un9EgOMa88Hhg
+
+{
+  "itemId": 9
+}
+
+### unheart item
+POST http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/member/customer/unheart
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNjgxNjE2OCwiZXhwIjoxNzI2OTAyNTY4fQ.9QEvVhYcZUmnuI3lK-dSaFaz5u5Oh1YMEaomGk0Qg8SgPjb48oT7XIYEdujsXkcJ6Q8szOQt0un9EgOMa88Hhg
+
+{
+  "itemId": 5
+}
+
+### get heart items
+GET http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/member/customer/items?page=0&size=5
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNjgxNjE2OCwiZXhwIjoxNzI2OTAyNTY4fQ.9QEvVhYcZUmnuI3lK-dSaFaz5u5Oh1YMEaomGk0Qg8SgPjb48oT7XIYEdujsXkcJ6Q8szOQt0un9EgOMa88Hhg
+
+### test delete follow store
+GET http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8090/api/member/customer/delete/follow?storeId=1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNjgxNjE2OCwiZXhwIjoxNzI2OTAyNTY4fQ.9QEvVhYcZUmnuI3lK-dSaFaz5u5Oh1YMEaomGk0Qg8SgPjb48oT7XIYEdujsXkcJ6Q8szOQt0un9EgOMa88Hhg

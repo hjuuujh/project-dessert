@@ -15,27 +15,6 @@ spring:
   config:
     import: optional:configserver:http://localhost:8888
 
-  datasource:
-    # url: jdbc:mysql://localhost:3306/member?userSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
-#    url: jdbc:mysql://dessert-db:3306/member?userSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
-    url: jdbc:mysql://dessert-db.cfm2a6qgmjgw.ap-northeast-2.rds.amazonaws.com:3306/member?userSSL=false&useUnicode=true&allowPublicKeyRetrieval=true
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: admin
-    password: qwer1234
-#    username: root
-#    password: '{cipher}AQAeDtv5DcgoyuaEtKp4+VkBHqcMmI21aSV5ShWhfIM6nZVhCNUzxZmLji039e7PbIMXLNgEcc90lnr/tZulZbgCJYdOYoYvV8TaI6GUtK8hEXUxOp64igwn8fUgVXOhHAPnqcfxtLAb6O5YXtX2hYEKTycB+q+ySXnusE2fkNDaHltU3mxYvoMO/WGv+Wn6RvODctdLutn8atYBj179fcN1JPakhpmT2i1NkfoqOnhBQROmwVvbyNwaPI7r0ywB+pp0zJHwnHGUiUD0Dn7qwRW5oq60RXsRC69FAUq2a/XIj8X+TLBF39wlVcUT1ex0luaFoo8fU5sRNEUuK9Q0+UdEt+x+tIlKduFZZhXs3aN0l9vTDNf+EeTTOIJHN9eZMng='
-
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-  redis:
-    # host: localhost
-    host: redis
-    port: 6379
-  jwt:
-    secret: 4c216af15dddd3987142b0e1a66489f464623a449d4c0d12506fd30b376e6c7dc5c3d9f50adb8b74297a0c2e863203adaf76c4f1f630b3a11902e6dc40151214
-
   main:
     allow-bean-definition-overriding: true
 

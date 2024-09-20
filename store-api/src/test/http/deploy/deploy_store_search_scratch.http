@@ -1,0 +1,8 @@
+### search store by keyword
+GET http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/store/search?keyword=해닮&page=0&size=5
+
+### search store by keyword with follow order
+GET http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/store/search/follow?keyword=&page=0&size=5
+
+### get store detail
+GET http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/store/search/detail?id=6

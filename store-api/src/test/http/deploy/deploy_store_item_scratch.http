@@ -1,0 +1,274 @@
+### create item
+POST http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/store/item
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjY3NTA0NDcsImV4cCI6MTcyNjgzNjg0N30.XiZDgzSDSzLymOIpCE-V-7AblIvOey6bQmPXesJSC3fJSs9r10a5ptJ7L5DJjnfrn3QFRGq7ile_SEdbP09a0Q
+
+{
+  "storeId": 5,
+  "name": "디디얌 마카롱 수제 뚱카롱 32종",
+  "thumbnailUrl": "https://마카롱.png",
+  "description": "마카롱에 최고급프랑스산 발효버터를 사용합니다:)",
+  "descriptionUrl": "https://마카롱.png",
+  "category": "macaron",
+  "options": [
+    {
+      "name": "조리퐁",
+      "quantity": 100,
+      "price": 2500
+    },
+    {
+      "name": "딸기바나나",
+      "quantity": 10,
+      "price": 2500
+    },
+    {
+      "name": "레드벨벳",
+      "quantity": 10,
+      "price": 2500
+    }
+  ]
+}
+
+### create item
+POST http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/store/item
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjY3NTA0NDcsImV4cCI6MTcyNjgzNjg0N30.XiZDgzSDSzLymOIpCE-V-7AblIvOey6bQmPXesJSC3fJSs9r10a5ptJ7L5DJjnfrn3QFRGq7ile_SEdbP09a0Q
+
+{
+  "storeId": 5,
+  "name": "촉촉한 에그타르트",
+  "thumbnailUrl": "https://에그타르트.png",
+  "description": "냉장보관시 전자렌지30초 냉동보관시 전자렌지 1분 10초",
+  "descriptionUrl": "https://에그타르트.png",
+  "category": "tart",
+  "options": [
+    {
+      "name": "에그타르트1개",
+      "quantity": 10,
+      "price": 3000
+    },
+    {
+      "name": "에그타르트6개입(상자포함)",
+      "quantity": 10,
+      "price": 15500
+    }
+  ]
+}
+
+### create item
+POST http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/store/item
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjY3NTA0NDcsImV4cCI6MTcyNjgzNjg0N30.XiZDgzSDSzLymOIpCE-V-7AblIvOey6bQmPXesJSC3fJSs9r10a5ptJ7L5DJjnfrn3QFRGq7ile_SEdbP09a0Q
+
+{
+  "storeId": 5,
+  "name": "새콤달콤😖 레몬케이크",
+  "thumbnailUrl": "https://레몬케이크.png",
+  "description": "레몬맛이 은은하게 나는 레몬케이크에 레몬아이싱을 듬뿍",
+  "descriptionUrl": "https://레몬케이크.png",
+  "category": "cake",
+  "options": [
+    {
+      "name": "레몬케이크1개",
+      "quantity": 10,
+      "price": 2800
+    }
+  ]
+}
+
+### create item
+POST http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/store/item
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjY3NTA0NDcsImV4cCI6MTcyNjgzNjg0N30.XiZDgzSDSzLymOIpCE-V-7AblIvOey6bQmPXesJSC3fJSs9r10a5ptJ7L5DJjnfrn3QFRGq7ile_SEdbP09a0Q
+
+{
+  "storeId": 6,
+  "name": "꿀고구마 티그레",
+  "thumbnailUrl": "https://티그레.png",
+  "description": "꿀고구마티그레 대체당으로 만든4종 얼그레이,흑임자,오리지널,피스타치오",
+  "descriptionUrl": "https://티그레.png",
+  "category": "cookie",
+  "options": [
+    {
+      "name": "6개세트",
+      "quantity": 10,
+      "price": 17000
+    },
+    {
+      "name": "9개세트",
+      "quantity": 10,
+      "price": 21000
+    }
+  ]
+}
+
+### create item
+POST http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/store/item
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjY3NTA0NDcsImV4cCI6MTcyNjgzNjg0N30.XiZDgzSDSzLymOIpCE-V-7AblIvOey6bQmPXesJSC3fJSs9r10a5ptJ7L5DJjnfrn3QFRGq7ile_SEdbP09a0Q
+
+{
+  "storeId": 6,
+  "name": "카라멜버터샌드쿠키세트",
+  "thumbnailUrl": "https://카라멜버터샌드쿠키세트.png",
+  "description": "부드럽고 고급스러운 파트슈크레 쿠키 사이로 겹겹히 올라간. 부드러운 버터와 수제로만든 피넛프랄리네카라멜, 쏠티드카라멜",
+  "descriptionUrl": "https://카라멜버터샌드쿠키세트.png",
+  "category": "cookie",
+  "options": [
+    {
+      "name": "쏠티드카라멜버터샌드10세트",
+      "quantity": 10,
+      "price": 27500
+    }
+  ]
+}
+
+### create item
+POST http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/store/item
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjY3NTA0NDcsImV4cCI6MTcyNjgzNjg0N30.XiZDgzSDSzLymOIpCE-V-7AblIvOey6bQmPXesJSC3fJSs9r10a5ptJ7L5DJjnfrn3QFRGq7ile_SEdbP09a0Q
+
+{
+  "storeId": 6,
+  "name": "샹티크림끌레오르",
+  "thumbnailUrl": "https://샹티크림끌레오르.png",
+  "description": "식이섬유가 풍부한 베니고구마와 아몬드푸들가득 넣어만든 끌레오르와 부드럽고 고급스러운 샹티크림이 만나 귀여운 쿠키케이크",
+  "descriptionUrl": "https://샹티크림끌레오르.png",
+  "category": "cookie",
+  "options": [
+    {
+      "name": "보늬밤샹티크림 끌레오르",
+      "quantity": 10,
+      "price": 26000
+    },
+    {
+      "name": "얼그레이샹티크림 끌레오르",
+      "quantity": 10,
+      "price": 26000
+    },
+    {
+      "name": "블루베리샹티크림 끌레오르",
+      "quantity": 10,
+      "price": 26000
+    }
+  ]
+}
+
+### create item
+POST http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/store/item
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjY3NTA0NDcsImV4cCI6MTcyNjgzNjg0N30.XiZDgzSDSzLymOIpCE-V-7AblIvOey6bQmPXesJSC3fJSs9r10a5ptJ7L5DJjnfrn3QFRGq7ile_SEdbP09a0Q
+
+{
+  "storeId": 7,
+  "name": "노밀가루,글루텐프리 바스켓베이커리 스콘",
+  "thumbnailUrl": "https://스콘.png",
+  "description": "글루텐프리 베이킹파우더 사용",
+  "descriptionUrl": "https://스콘.png",
+  "category": "scone",
+  "options": [
+    {
+      "name": "무화과와인",
+      "quantity": 10,
+      "price": 5200
+    },
+    {
+      "name": "황치즈",
+      "quantity": 10,
+      "price": 5200
+    },
+    {
+      "name": "밀크",
+      "quantity": 10,
+      "price": 4500
+    }
+  ]
+}
+
+### create item
+POST http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/store/item
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjY3NTA0NDcsImV4cCI6MTcyNjgzNjg0N30.XiZDgzSDSzLymOIpCE-V-7AblIvOey6bQmPXesJSC3fJSs9r10a5ptJ7L5DJjnfrn3QFRGq7ile_SEdbP09a0Q
+
+{
+  "storeId": 7,
+  "name": "노밀가루 바스켓베이커리 파운드케이크",
+  "thumbnailUrl": "https://파운드케이크.png",
+  "description": "글루텐프리 베이킹파우더 사용",
+  "descriptionUrl": "https://파운드케이크.png",
+  "category": "cake",
+  "options": [
+    {
+      "name": "블루베리코코넛",
+      "quantity": 10,
+      "price": 6200
+    },
+    {
+      "name": "플레인",
+      "quantity": 10,
+      "price": 5500
+    },
+    {
+      "name": "얼그레이(트와이닝)",
+      "quantity": 10,
+      "price": 6200
+    }
+  ]
+}
+
+### create item
+POST http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/store/item
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjY4MTY3NDQsImV4cCI6MTcyNjkwMzE0NH0.66YrHyy9d8f3uLXSoC2lu4G7Z0HwtO9OzyENj06ssveN6c1mufYDXRZ3jf9JZNTDA26Z3eVnxLWgUsHHR_jXfA
+
+{
+  "storeId": 7,
+  "name": "노밀가루 바스켓베이커리 쌀피칸브라우니",
+  "thumbnailUrl": "https://쌀피칸브라우니.png",
+  "description": "글루텐프리 베이킹파우더 사용",
+  "descriptionUrl": "https://쌀피칸브라우니.png",
+  "category": "bread",
+  "options": [
+    {
+      "name": "쌀피칸브라우니",
+      "quantity": 10,
+      "price": 5500
+    }
+  ]
+}
+
+### update item
+PUT http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/store/item
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjY3NTA0NDcsImV4cCI6MTcyNjgzNjg0N30.XiZDgzSDSzLymOIpCE-V-7AblIvOey6bQmPXesJSC3fJSs9r10a5ptJ7L5DJjnfrn3QFRGq7ile_SEdbP09a0Q
+
+{
+  "id": 8,
+  "storeId": 7,
+  "name": "노밀가루 00 바스켓베이커리 파운드케이크",
+  "thumbnailUrl": "https://파운드케이크.png",
+  "description": "https://파운드케이크.png",
+  "descriptionUrl": "https://파운드케이크.png",
+  "options": [
+    {
+      "name": "00블루베리코코넛",
+      "quantity": 10,
+      "price": 6200
+    },
+    {
+      "name": "플레인",
+      "quantity": 10,
+      "price": 50500
+    },
+    {
+      "name": "얼그레이(트와이닝)",
+      "quantity": 100,
+      "price": 6200
+    }
+  ]
+}
+
+### delete item
+DELETE http://dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/store/item?id=8
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjY3NTA0NDcsImV4cCI6MTcyNjgzNjg0N30.XiZDgzSDSzLymOIpCE-V-7AblIvOey6bQmPXesJSC3fJSs9r10a5ptJ7L5DJjnfrn3QFRGq7ile_SEdbP09a0Q

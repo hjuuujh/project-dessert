@@ -1,0 +1,43 @@
+### get orders period
+GET dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/order/customer/orders?start=2024-08-25&end=2024-09-30&page=0&size=15
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNjc1MTA2MCwiZXhwIjoxNzI2ODM3NDYwfQ.ljPFWS4gFF46WpA4YXlO4bODFSK1fJWqzrnWH57KQWQIwD7dK7KwK0TWjqwvmotYosivo1TKbb-pVQzeSy2ZhA
+
+### get order detail
+GET dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/order/customer/order?id=11
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNjc1MTA2MCwiZXhwIjoxNzI2ODM3NDYwfQ.ljPFWS4gFF46WpA4YXlO4bODFSK1fJWqzrnWH57KQWQIwD7dK7KwK0TWjqwvmotYosivo1TKbb-pVQzeSy2ZhA
+
+### cancel order
+DELETE dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/order/customer/order/cancel?id=10
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNjc1MTA2MCwiZXhwIjoxNzI2ODM3NDYwfQ.ljPFWS4gFF46WpA4YXlO4bODFSK1fJWqzrnWH57KQWQIwD7dK7KwK0TWjqwvmotYosivo1TKbb-pVQzeSy2ZhA
+
+### get orders by store
+GET dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/order/seller/orders?storeId=5&start=2024-08-25&end=2024-09-29&page=0&size=5
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjY3NTE1NTksImV4cCI6MTcyNjgzNzk1OX0.TpPAszMu4woDkJO8LCCHK-ZogXo1jGYFUqZsuT3uq4ncqr8u82kruC2dL4gDrzt7PhvcLDCX_0QK0MFDaojkrw
+
+### request orders refund
+PATCH dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/order/customer/refund/3
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNjc1MTA2MCwiZXhwIjoxNzI2ODM3NDYwfQ.ljPFWS4gFF46WpA4YXlO4bODFSK1fJWqzrnWH57KQWQIwD7dK7KwK0TWjqwvmotYosivo1TKbb-pVQzeSy2ZhA
+
+### orders refund approve
+PATCH dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/order/seller/refund/approve
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjY3NTE1NTksImV4cCI6MTcyNjgzNzk1OX0.TpPAszMu4woDkJO8LCCHK-ZogXo1jGYFUqZsuT3uq4ncqr8u82kruC2dL4gDrzt7PhvcLDCX_0QK0MFDaojkrw
+
+{
+  "id": 3,
+  "date": "2024-09-06"
+}
+
+### orders refund reject
+PATCH dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/order/seller/refund/reject/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjY3NTE1NTksImV4cCI6MTcyNjgzNzk1OX0.TpPAszMu4woDkJO8LCCHK-ZogXo1jGYFUqZsuT3uq4ncqr8u82kruC2dL4gDrzt7PhvcLDCX_0QK0MFDaojkrw
+
+### request settlement
+POST dessert-alb-166253251.ap-northeast-2.elb.amazonaws.com:8080/api/order/seller/settlement?start=2024-09-01&end=2024-09-30
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJDbVlEdjVNSzVZVXlpazhLR05Ed293PT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjY3NTE1NTksImV4cCI6MTcyNjgzNzk1OX0.TpPAszMu4woDkJO8LCCHK-ZogXo1jGYFUqZsuT3uq4ncqr8u82kruC2dL4gDrzt7PhvcLDCX_0QK0MFDaojkrw
