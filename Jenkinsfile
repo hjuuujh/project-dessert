@@ -29,7 +29,7 @@ pipeline {
                     echo "$branch"
                     sh 'ls -al'
                     sh 'chmod +x gradlew'
-                    sh './gradlew '+"$branch"+':build'
+//                    sh './gradlew '+"$branch"+':build'
                     sh './gradlew '+"api-gateway"+':build'
 //                    sh './gradlew '+"$branch"+':openapi3'
 
