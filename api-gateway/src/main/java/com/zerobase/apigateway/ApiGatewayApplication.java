@@ -22,6 +22,6 @@ public class ApiGatewayApplication {
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity security) {
 
-        return security.csrf().disable().cors().disable().build();
+        return security.csrf().disable().build();
     }
 }

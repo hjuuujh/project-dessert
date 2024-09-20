@@ -74,7 +74,7 @@ services:
       - dessert-network
 
   api-gateway:
-    image: hjuuujh/api-gateway:2.0
+    image: hjuuujh/api-gateway:1.0
     #    build:
     #      context: ./api-gateway
     ports:
