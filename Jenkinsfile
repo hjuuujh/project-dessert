@@ -23,14 +23,14 @@ pipeline {
             }
         }
 
-        stage('build') {
+        stage('build and openapi3') {
             steps {
                     echo "$branch"
                     sh 'ls -al'
                     sh 'chmod +x gradlew'
 //                    sh './gradlew '+"$branch"+':build'
                 script{
-                    if ("$branch".contains)
+                    if ("$branch" in ['member-api', 'store-api', 'order-api'])
                     sh './gradlew' +"$branch"+':openapi3'
                 }
 
