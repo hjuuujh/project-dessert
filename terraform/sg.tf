@@ -39,27 +39,6 @@ resource "aws_security_group" "public-sg" {
     ]
   }
 
-  ingress {
-    from_port = 3000
-    to_port   = 3000
-    protocol  = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port = 80
-    to_port   = 80
-    protocol  = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port = 443
-    to_port   = 443
-    protocol  = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
   egress {
     from_port = 0
     to_port   = 0
@@ -82,17 +61,10 @@ resource "aws_security_group" "private-sg" {
     from_port = 22
     to_port   = 22
     protocol = "tcp"
-    #     cidr_blocks = ["0.0.0.0/0"]
 
     security_groups = ["${aws_security_group.public-sg.id}"]
   }
 
-  ingress {
-    from_port = 3000
-    to_port   = 3000
-    protocol  = "tcp"
-    security_groups = ["${aws_security_group.public-sg.id}"]
-  }
 
   ingress {
     from_port = 8080
@@ -106,11 +78,21 @@ resource "aws_security_group" "private-sg" {
 
 
   ingress {
-    from_port = 80
-    to_port   = 80
+    from_port = 8000
+    to_port   = 8000
     protocol  = "tcp"
     security_groups = [
       "${aws_security_group.public-sg.id}",
+      "${aws_security_group.alb-sg.id}"
+    ]
+  }
+
+
+  ingress {
+    from_port = 8761
+    to_port   = 8761
+    protocol  = "tcp"
+    security_groups = [
       "${aws_security_group.alb-sg.id}"
     ]
   }
@@ -167,19 +149,18 @@ resource "aws_security_group" "alb-sg" {
   }
 
   ingress {
-    from_port = 8761
-    to_port   = 8761
+    from_port = 8000
+    to_port   = 8000
     protocol  = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
-    from_port = 80
-    to_port   = 80
+    from_port = 8761
+    to_port   = 8761
     protocol  = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
 
   egress {
     from_port = 0

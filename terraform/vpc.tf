@@ -71,6 +71,7 @@ resource "aws_route_table" "public-route-table" {
   }
 }
 
+# public subnet에 생성한 routing table 연결
 resource "aws_route_table_association" "public-routing" {
   count = length(var.aws_public_subnets)
 
@@ -84,12 +85,16 @@ resource "aws_eip" "eip" {
   domain = "vpc"
 }
 
-# private subnet의 출구역할인 nat gateway 생성
+# private subnet에서 인테넷 접속하기위한 nat gateway 생성
 resource "aws_nat_gateway" "nat" {
   allocation_id     = aws_eip.eip.id
   subnet_id         = aws_subnet.public-subnet.0.id
   depends_on        = [aws_eip.eip]
   connectivity_type = "public"
+
+  tags = {
+    Name = "NAT"
+  }
 }
 
 # private subnet용 routing table 규칙 생성
@@ -115,6 +120,7 @@ resource "aws_route_table_association" "private-routing" {
 
 }
 
+# db subnet에 생성한 routing table 연결
 resource "aws_route_table_association" "db-routing" {
   count = length(var.aws_db_subnets)
 

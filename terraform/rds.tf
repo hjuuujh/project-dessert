@@ -1,67 +1,125 @@
-module "db" {
-  source = "terraform-aws-modules/rds/aws"
+# spring boot 접근위한 타겟 그룹
+# port는 spring boot api gateway의 포트
+resource "aws_alb_target_group" "backend-8080" {
+  name     = "spring-target-group-8080"
+  port     = 8080
+  protocol = "HTTP"
+  vpc_id   = aws_vpc.dessert-vpc.id
 
-  identifier = "dessert-db"
-
-  engine = "mysql"
-  /* engine_version    = "8.0.31" */
-  instance_class    = "db.t3.micro"
-  allocated_storage = 10
-
-  db_name                     = "dessertDB"
-  username                    = "admin"
-  manage_master_user_password = false
-  password                    = "qwer1234"
-  port                        = "3306"
-
-  /* iam_database_authentication_enabled = true */
-
-  vpc_security_group_ids = [aws_security_group.db-sg.id]
-
-  publicly_accessible = true
-
-  tags = {
-    Owner       = "user"
-    Environment = "dev"
+  health_check {
+    interval            = 300
+    path                = "/api/member/signup/health-check"
+    healthy_threshold   = 3
+    unhealthy_threshold = 3
   }
 
-  # DB subnet group
-  create_db_subnet_group = true
-  subnet_ids             = [aws_subnet.db-subnet.0.id, aws_subnet.db-subnet.1.id]
-  # DB parameter group
-  family = "mysql8.0"
+  tags = { Name = "Spring Boot Target Group" }
+}
 
-  # DB option group
-  major_engine_version = "8.0"
+# spring boot ec2 instance와 target group 연결
+resource "aws_alb_target_group_attachment" "backend-8080" {
+  target_group_arn = aws_alb_target_group.backend-8080.arn
+  target_id        = aws_instance.backend.id
+  depends_on       = [aws_alb_target_group.backend-8080]
+  port             = 8080
+}
 
-  # Database Deletion Protection
-  /* deletion_protection = true */
+# swagger-ui 접근위한 타겟 그룹
+# port는 spring boot swagger-ui의 포트
+resource "aws_alb_target_group" "swagger-8000" {
+  name     = "swagger-target-group-8000"
+  port     = 8000
+  protocol = "HTTP"
+  vpc_id   = aws_vpc.dessert-vpc.id
 
-  parameters = [
-    {
-      name  = "character_set_client"
-      value = "utf8mb4"
-    },
-    {
-      name  = "character_set_server"
-      value = "utf8mb4"
-    }
-  ]
+  health_check {
+    interval            = 300
+    path                = "/"
+    healthy_threshold   = 3
+    unhealthy_threshold = 3
+  }
 
-  options = [
-    {
-      option_name = "MARIADB_AUDIT_PLUGIN"
+  tags = { Name = "Swagger Target Group" }
+}
 
-      option_settings = [
-        {
-          name  = "SERVER_AUDIT_EVENTS"
-          value = "CONNECT"
-        },
-        {
-          name  = "SERVER_AUDIT_FILE_ROTATIONS"
-          value = "37"
-        },
-      ]
-    },
-  ]
+# spring boot ec2 instance와 target group 연결
+resource "aws_alb_target_group_attachment" "swagger-8000" {
+  target_group_arn = aws_alb_target_group.swagger-8000.arn
+  target_id        = aws_instance.backend.id
+  depends_on       = [aws_alb_target_group.swagger-8000]
+  port             = 8000
+}
+
+# spring boot eureka server 접근위한 타겟 그룹
+resource "aws_alb_target_group" "eureka-8761" {
+  name     = "eureka-target-group-8761"
+  port     = 8761
+  protocol = "HTTP"
+  vpc_id   = aws_vpc.dessert-vpc.id
+
+  health_check {
+    interval            = 300
+    path                = "/"
+    healthy_threshold   = 3
+    unhealthy_threshold = 3
+  }
+
+  tags = { Name = "Spring Boot Eureka Server" }
+}
+
+# spring boot ec2 instance와 target group 연결
+resource "aws_alb_target_group_attachment" "eureka-8761" {
+  target_group_arn = aws_alb_target_group.eureka-8761.arn
+  target_id        = aws_instance.backend.id
+  depends_on       = [aws_alb_target_group.eureka-8761]
+  port             = 8761
+}
+
+# application load balancer 생성
+resource "aws_alb" "dessert-alb" {
+  name               = "dessert-alb"
+  internal           = false
+  security_groups    = [aws_security_group.alb-sg.id]
+  load_balancer_type = "application"
+  ip_address_type    = "ipv4"
+  subnets            = [aws_subnet.public-subnet.0.id, aws_subnet.public-subnet.1.id]
+
+  tags = {
+    Name = "Dessert Alb"
+  }
+
+
+  lifecycle { create_before_destroy = true }
+}
+
+# alb의 리스너
+# 포트와 포워딩할 타겟그룹 지정
+resource "aws_alb_listener" "listner-8080" {
+  load_balancer_arn = aws_alb.dessert-alb.arn
+  port              = 8080
+  protocol          = "HTTP"
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_alb_target_group.backend-8080.arn
+  }
+}
+
+resource "aws_alb_listener" "listner-8000" {
+  load_balancer_arn = aws_alb.dessert-alb.arn
+  port              = 8000
+  protocol          = "HTTP"
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_alb_target_group.swagger-8000.arn
+  }
+}
+
+resource "aws_alb_listener" "listner-8761" {
+  load_balancer_arn = aws_alb.dessert-alb.arn
+  port              = 8761
+  protocol          = "HTTP"
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_alb_target_group.eureka-8761.arn
+  }
 }
