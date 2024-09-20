@@ -31,7 +31,7 @@ pipeline {
 //                    sh './gradlew '+"$branch"+':build'
 
                 sh '''
-                if [[ "$branch" == *api ]]; then
+                if [[ "$branch" = *api ]]; then
                 bash './gradlew' +"$branch"+':openapi3'
                 fi
                 '''
