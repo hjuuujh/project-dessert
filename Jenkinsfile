@@ -23,15 +23,21 @@ pipeline {
             }
         }
 
-        stage('build and openapi3') {
-            when { expression {return "$branch".contains('api')}}
+        stage('build') {
             steps {
 
-                    echo "$branch"
-                    sh 'ls -al'
-                    sh 'chmod +x gradlew'
+                echo "$branch"
+                sh 'ls -al'
+                sh 'chmod +x gradlew'
 //                    sh './gradlew '+"$branch"+':build'
-                sh './gradlew' +"$branch"+':openapi3'
+
+            }
+        }
+
+        stage('openapi3') {
+            when { expression {return "$branch".contains('api')}}
+            steps {
+                sh './gradlew ' +"$branch"+':openapi3'
 
             }
         }
