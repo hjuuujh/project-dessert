@@ -29,13 +29,10 @@ pipeline {
                     sh 'ls -al'
                     sh 'chmod +x gradlew'
 //                    sh './gradlew '+"$branch"+':build'
-
-                sh '''
-                if [[ "$branch" = *api ]]; then
-                bash './gradlew' +"$branch"+':openapi3'
-                fi
-                '''
-
+                script{
+                    if ("$branch".contains)
+                    sh './gradlew' +"$branch"+':openapi3'
+                }
 
             }
         }
