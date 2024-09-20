@@ -5,12 +5,17 @@ import com.zerobase.orderapi.client.from.Cart;
 import com.zerobase.orderapi.domain.form.RefundForm;
 import com.zerobase.orderapi.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/order")
@@ -21,8 +26,11 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<?> order(@RequestHeader(name = "Authorization") String token,
-                                   @RequestBody Cart cart) {
-
+                                   @RequestBody @Validated Cart cart, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            List<String> errors = bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", "Validation failure", errors));
+        }
         return ResponseEntity.ok(orderService.order(token, cart));
     }
 
@@ -79,7 +87,11 @@ public class OrderController {
     // 환불 수락
     @PatchMapping("/seller/refund/approve")
     public ResponseEntity<?> approveRequestRefund(@RequestHeader(name = "Authorization") String token,
-                                                  @RequestBody RefundForm form){
+                                                  @RequestBody @Validated RefundForm form, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            List<String> errors = bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", "Validation failure", errors));
+        }
         return ResponseEntity.ok(orderService.approveRequestRefund(token, memberClient.getMemberId(token), form));
     }
 

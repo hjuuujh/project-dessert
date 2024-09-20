@@ -1,8 +1,6 @@
-package com.zerobase.storeapi.controller;
+package com.zerobase.memberapi.controller;
 
-import lombok.Getter;
-import lombok.Setter;
-
+import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 

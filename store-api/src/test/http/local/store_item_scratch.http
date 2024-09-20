@@ -1,7 +1,7 @@
 ### create item
 POST http://localhost:8080/api/store/item
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJTdWJIZUtVUlJyZVFZK1dTT25Ca3RnPT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjU3MDk1MzksImV4cCI6MTcyNTc5NTkzOX0.gXQF1uTISmL18UczI45xyWWSBLIQksnWiird9s3_mC1H2suQQaofuuYbaFbhMdd_zrEcadbYnwhhC0Ht4I3DAw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJTdWJIZUtVUlJyZVFZK1dTT25Ca3RnPT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjY4Mjg5MTcsImV4cCI6MTcyNjkxNTMxN30.iF3iCC6HeoxmEXCGpMUPD1IMEHH5fDTiB1ImSG4vNv-pMwcPHfBzOctNKyA4RrH_3ptjiixpt-6GC2DqMlEDgQ
 
 {
   "storeId": 1,
@@ -240,7 +240,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3c
 ### update item
 PUT http://localhost:8080/api/store/item
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJTdWJIZUtVUlJyZVFZK1dTT25Ca3RnPT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjU3MDk1MzksImV4cCI6MTcyNTc5NTkzOX0.gXQF1uTISmL18UczI45xyWWSBLIQksnWiird9s3_mC1H2suQQaofuuYbaFbhMdd_zrEcadbYnwhhC0Ht4I3DAw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3cjdRPT0iLCJqdGkiOiJTdWJIZUtVUlJyZVFZK1dTT25Ca3RnPT0iLCJyb2xlcyI6WyJST0xFX1NFTExFUiJdLCJpYXQiOjE3MjY4Mjg5MTcsImV4cCI6MTcyNjkxNTMxN30.iF3iCC6HeoxmEXCGpMUPD1IMEHH5fDTiB1ImSG4vNv-pMwcPHfBzOctNKyA4RrH_3ptjiixpt-6GC2DqMlEDgQ
 
 {
   "id": 8,
@@ -249,6 +249,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJLei9BSlZhVDlLcHZpQ1ZicGY3c
   "thumbnailUrl": "https://파운드케이크.png",
   "description": "https://파운드케이크.png",
   "descriptionUrl": "https://파운드케이크.png",
+  "category" : "cake",
   "options": [
     {
       "name": "00블루베리코코넛",

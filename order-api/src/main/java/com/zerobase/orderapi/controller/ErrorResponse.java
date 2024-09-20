@@ -1,4 +1,4 @@
-package com.zerobase.storeapi.controller;
+package com.zerobase.orderapi.controller;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -8,15 +8,19 @@ import com.zerobase.storeapi.domain.form.item.UpdateItem;
 import com.zerobase.storeapi.service.StoreItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -28,20 +32,20 @@ public class StoreItemController {
 
     @PostMapping
     public ResponseEntity<?> createItem(@RequestHeader(name = "Authorization") String token,
-                                        @RequestBody CreateItem form, Errors errors) {
-        List<ErrorResponse> errorResponses = checkValidation(errors);
-        if (!errorResponses.isEmpty()) {
-            return new ResponseEntity<>(errorResponses, HttpStatus.BAD_REQUEST);
+                                        @RequestBody @Validated CreateItem form, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            List<String> errors = bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", "Validation failure", errors));
         }
         return ResponseEntity.ok(storeItemService.createItem(memberClient.getMemberId(token), form));
     }
 
     @PutMapping
     public ResponseEntity<?> updateItem(@RequestHeader(name = "Authorization") String token,
-                                        @RequestBody UpdateItem form, Errors errors) {
-        List<ErrorResponse> errorResponses = checkValidation(errors);
-        if (!errorResponses.isEmpty()) {
-            return new ResponseEntity<>(errorResponses, HttpStatus.BAD_REQUEST);
+                                        @RequestBody @Validated UpdateItem form, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            List<String> errors = bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", "Validation failure", errors));
         }
         return ResponseEntity.ok(storeItemService.updateItem(memberClient.getMemberId(token), form));
     }
@@ -55,14 +59,20 @@ public class StoreItemController {
 
 
     @PostMapping("/heart")
-    public ResponseEntity<?> increaseHeart(@RequestBody HeartForm form) {
-
+    public ResponseEntity<?> increaseHeart(@RequestBody @Validated HeartForm form, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            List<String> errors = bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", "Validation failure", errors));
+        }
         return ResponseEntity.ok(storeItemService.increaseHeart(form));
     }
 
     @PostMapping("/unheart")
-    public ResponseEntity<?> decreaseHeart(@RequestBody HeartForm form) {
-
+    public ResponseEntity<?> decreaseHeart(@RequestBody @Validated HeartForm form, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            List<String> errors = bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", "Validation failure", errors));
+        }
         return ResponseEntity.ok(storeItemService.decreaseHeart(form));
     }
 
@@ -71,22 +81,5 @@ public class StoreItemController {
         return ResponseEntity.ok(storeItemService.getItems(form, pageable));
     }
 
-    /**
-     * validation 에러 메세지 리스트를 리턴하는 클래스
-     *
-     * @param errors
-     * @return
-     */
-    private List<ErrorResponse> checkValidation(Errors errors) {
-        List<ErrorResponse> errorResponses = new ArrayList<>();
-
-        if (errors.hasErrors()) {
-            errors.getAllErrors().forEach(error -> {
-                errorResponses.add(ErrorResponse.of((FieldError) error));
-            });
-        }
-
-        return errorResponses;
-    }
 
 }

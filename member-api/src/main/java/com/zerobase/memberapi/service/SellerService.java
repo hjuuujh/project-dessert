@@ -30,6 +30,7 @@ public class SellerService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private final CustomerRepository customerRepository;
     private final SellerRepository sellerRepository;
+
     /**
      * Spring Security를 이용
      * 유저의 정보를 불러오기 위해서 구현

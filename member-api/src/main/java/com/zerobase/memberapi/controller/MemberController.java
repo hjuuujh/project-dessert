@@ -10,13 +10,18 @@ import com.zerobase.memberapi.domain.member.form.TokenResponse;
 import com.zerobase.memberapi.security.TokenProvider;
 import com.zerobase.memberapi.service.CustomerService;
 import com.zerobase.memberapi.service.SellerService;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -32,15 +37,15 @@ public class MemberController {
      * 고객 정보 등록
      *
      * @param form   : email, name, password, phone, roles
-     * @param errors : form의 validation 체크후 잘못된 형식의 메세지 리턴
+     * @param bindingResult : form의 validation 체크후 잘못된 형식의 메세지 리턴
      * @return 저장된 유저 정보
      */
     @PostMapping("/signup/customer")
-    public ResponseEntity<?> registerCustomer(@RequestBody @Valid SignUp form, Errors errors) {
-        List<ResponseError> responseErrors = validationErrorResponse.checkValidation(errors);
-        if (!responseErrors.isEmpty()) {
-            return new ResponseEntity<>(responseErrors, HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<?> registerCustomer(@RequestBody @Validated SignUp form, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            List<String> errors = bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", "Validation failure", errors));
+         }
 
         return ResponseEntity.ok(customerService.registerCustomer(form));
     }
@@ -53,10 +58,10 @@ public class MemberController {
      * @return 저장된 유저 정보
      */
     @PostMapping("/signup/seller")
-    public ResponseEntity<?> registerSeller(@RequestBody @Valid SignUp form, Errors errors) {
-        List<ResponseError> responseErrors = validationErrorResponse.checkValidation(errors);
-        if (!responseErrors.isEmpty()) {
-            return new ResponseEntity<>(responseErrors, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> registerSeller(@RequestBody @Validated SignUp form, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            List<String> errors = bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", "Validation failure", errors));
         }
 
         return ResponseEntity.ok(sellerService.registerSeller(form));
@@ -70,10 +75,10 @@ public class MemberController {
      * @return 토큰
      */
     @PostMapping("/signin/customer")
-    public ResponseEntity<?> signInCustomer(@RequestBody @Valid SignIn form, Errors errors) {
-        List<ResponseError> responseErrors = validationErrorResponse.checkValidation(errors);
-        if (!responseErrors.isEmpty()) {
-            return new ResponseEntity<>(responseErrors, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> signInCustomer(@RequestBody @Validated SignIn form, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            List<String> errors = bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", "Validation failure", errors));
         }
 
         CustomerDto customerDto = customerService.signInMember(form);
@@ -90,10 +95,10 @@ public class MemberController {
      * @return 토큰
      */
     @PostMapping("/signin/seller")
-    public ResponseEntity<?> signInSeller(@RequestBody @Valid SignIn form, Errors errors) {
-        List<ResponseError> responseErrors = validationErrorResponse.checkValidation(errors);
-        if (!responseErrors.isEmpty()) {
-            return new ResponseEntity<>(responseErrors, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> signInSeller(@RequestBody @Validated SignIn form, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            List<String> errors = bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", "Validation failure", errors));
         }
 
         SellerDto sellerDto = sellerService.signInMember(form);

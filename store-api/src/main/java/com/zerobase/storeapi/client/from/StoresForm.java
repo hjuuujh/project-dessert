@@ -12,5 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class StoresForm {
+
     private List<Long> followList;
 }
