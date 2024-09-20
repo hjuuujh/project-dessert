@@ -13,7 +13,7 @@ pipeline {
     }
 
     stages {
-        stage('checkout') {
+        stage('Checkout') {
             steps {
                 script {
                     echo "$ref"
@@ -23,7 +23,7 @@ pipeline {
             }
         }
 
-        stage('build') {
+        stage('Build') {
             steps {
 
                 echo "$branch"
@@ -34,7 +34,7 @@ pipeline {
             }
         }
 
-        stage('openapi3') {
+        stage('Openapi3') {
             when { expression { return "$branch".contains('api') } }
             steps {
                 sh './gradlew ' + "$branch" + ':openapi3'
@@ -42,7 +42,7 @@ pipeline {
             }
         }
 
-        stage('build image and docker hub push') {
+        stage('Build Image And Docker Hub Push') {
             steps {
                 dir("$branch") {
                     script {
@@ -57,14 +57,14 @@ pipeline {
             }
         }
 
-        stage('copy openapi3.yaml') {
+        stage('Copy openapi3.yaml') {
             when { expression { return "$branch".contains('api') } }
             steps {
                 sh 'scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/workspace/dessert-key-pair.pem -r ./' + "$branch" + '/src/main/resources/static/docs/openapi/openapi3.yaml ubuntu@ec2-43-201-61-191.ap-northeast-2.compute.amazonaws.com:/home/ubuntu/spring/openapi/' + "$branch" + '-openapi3.yaml'
             }
         }
 
-        stage('deploy') {
+        stage('Deploy') {
             steps {
                 sh 'ls -al'
                 sh 'scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/workspace/dessert-key-pair.pem -r docker-compose.yml ubuntu@ec2-43-201-61-191.ap-northeast-2.compute.amazonaws.com:/home/ubuntu/spring'
