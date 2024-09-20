@@ -24,7 +24,7 @@ pipeline {
         }
 
         stage('build and openapi3') {
-            when { expression {return "$branch".contains('*api')}}
+            when { expression {return "$branch".contains('api')}}
             steps {
 
                     echo "$branch"
