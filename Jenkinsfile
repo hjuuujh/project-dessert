@@ -24,8 +24,9 @@ pipeline {
         }
 
         stage('build and openapi3') {
+            when { expression {return "$branch".contains('*api')}}
             steps {
-                when { expression {return "$branch".contains('*api')}}
+
                     echo "$branch"
                     sh 'ls -al'
                     sh 'chmod +x gradlew'
