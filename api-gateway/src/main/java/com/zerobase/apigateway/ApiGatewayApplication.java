@@ -14,8 +14,14 @@ public class ApiGatewayApplication {
         SpringApplication.run(ApiGatewayApplication.class, args);
 
     }
+//    @Bean
+//    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity security) {
+//
+//        return security.csrf().disable().build();
+//    }
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity security) {
-        return security.csrf().disable().build();
+
+        return security.csrf().disable().cors().disable().build();
     }
 }
