@@ -148,7 +148,7 @@ services:
       - dessert-network
 
   store-api:
-    image: hjuuujh/store-api:1.0
+    image: hjuuujh/store-api:2.0
     #    build:
     #      context: ./store-api
     ports:
