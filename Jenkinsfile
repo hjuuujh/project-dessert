@@ -13,6 +13,7 @@ pipeline {
         skipDefaultCheckout()
     }
     environment {
+
         // 여기서 설정하면 stage 전체에서 사용가능
         branch = getBranch()
     }
