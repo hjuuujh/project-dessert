@@ -170,18 +170,6 @@ public class CartService {
 
             }
 
-            if (item.getOptions().isEmpty()) {
-                cart.getItems().remove(item);
-                i--;
-                cart.addMessage(item.getName() + " 상품의 옵션이 모두 없어져 구매가 불가능합니다.");
-            } else if (!tmpMessages.isEmpty()) {
-                StringBuilder builder = new StringBuilder();
-                builder.append(item.getName()).append(" 상품의 변동사항 : ");
-                for (String msg : tmpMessages) {
-                    builder.append(msg).append("\n");
-                }
-                cart.addMessage(builder.toString());
-            }
         }
         cart.setTotalPrice(getTotalPrice(cart));
         return cart;

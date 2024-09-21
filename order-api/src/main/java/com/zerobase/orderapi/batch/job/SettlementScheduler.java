@@ -21,19 +21,14 @@ public class SettlementScheduler {
     private final SettleOrderJobConfig settleOrderJobConfig;
 
     // 매일 새벽 4시 정산 계산
-    @Scheduled(cron="0 0 4 * * * ")
+    @Scheduled(cron = "0 0 4 * * * ")
 //    @Scheduled(cron="0/10 * * * * * ")
-    public void runJob(){
-        try {
+    public void runJob() throws JobParametersInvalidException, JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobRestartException {
+
             Map<String, JobParameter> confMap = new HashMap<>();
             confMap.put("time", new JobParameter(System.currentTimeMillis()));
             JobParameters jobParameters = new JobParameters(confMap);
             jobLauncher.run(settleOrderJobConfig.settleOrderJob(), jobParameters);
 
-
-        } catch (JobInstanceAlreadyCompleteException | JobExecutionAlreadyRunningException |
-                 JobParametersInvalidException | JobRestartException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

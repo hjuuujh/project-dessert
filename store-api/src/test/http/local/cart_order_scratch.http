@@ -1,14 +1,30 @@
 ### cart 주문
 POST localhost:8080/api/store/cart/order
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJxaWpTQWpEdVVGUVZ5WmwxZDErbGdRPT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNjgzMDU0NiwiZXhwIjoxNzI2OTE2OTQ2fQ.oYVEV2KANKgZ9MNPmAWl7bvxyk_Fgo3MAxK6WWKsXcvIw9VUFDHLTBVNBJXOFX2F9oyl0RdSa35wy8jhKZmiPw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvRk1nPT0iLCJqdGkiOiJxaWpTQWpEdVVGUVZ5WmwxZDErbGdRPT0iLCJyb2xlcyI6WyJST0xFX0NVU1RPTUVSIl0sImlhdCI6MTcyNjkyMDQ5MCwiZXhwIjoxNzI3MDA2ODkwfQ.sVP9IKVYDvStBFRirFvFQao9sNZB-xBX4eLB7IfizOn72dBnKN8RY1e8gCQEOOIQMTmSuL0pHBDUCMgWeuzpFA
 
 {
+  "customerId": 3,
   "items": [
+    {
+      "id": 1,
+      "storeId": 1,
+      "sellerId": 2,
+      "storeName": "디디얌",
+      "name": "디디얌 마카롱 수제 뚱카롱 32종",
+      "options": [
+        {
+          "id": 2,
+          "name": "딸기바나나",
+          "quantity": 2,
+          "price": 2500
+        }
+      ]
+    },
     {
       "id": 6,
       "storeId": 2,
-      "sellerId": 1,
+      "sellerId": 2,
       "storeName": "달달구리해닮",
       "name": "샹티크림끌레오르",
       "options": [
@@ -17,16 +33,10 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlYWg0WSthVnpjbzNDMDYwYWMvR
           "name": "얼그레이샹티크림 끌레오르",
           "quantity": 2,
           "price": 26000
-        },
-        {
-          "id": 12,
-          "name": "블루베리샹티크림 끌레오르",
-          "quantity": 2,
-          "price": 26000
         }
       ]
     }
   ],
   "messages": [],
-  "totalPrice": 212000
+  "totalPrice": 111500
 }

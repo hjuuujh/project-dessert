@@ -36,9 +36,12 @@ public class LockAopAspect {
     public Object customerAroundMethod(ProceedingJoinPoint joinPoint,
                                String token,
                                BalanceLockIdInterface form) throws Throwable{
+        
+        String withoutBearer = tokenWithoutBearer(token); // Bearer 제외
+
         // 얘가 chrgebalance면 토큰으로 이메일 구해서 바로 락 취득
         if("chargeBalance".equals(joinPoint.getSignature().getName())) {
-            lockService.lock(tokenProvider.getUsernameFromToken(token.substring(7))); // Bearer 제외
+            lockService.lock(tokenProvider.getUsernameFromToken(withoutBearer));
         }else {
             // 그외 넘어온 customerid로 이메일 구해서 락 취득
             Customer customer = customerRepository.findById(form.getCustomerId()).orElseThrow(() -> new MemberException(ErrorCode.NOT_FOUND_USER));
@@ -49,10 +52,14 @@ public class LockAopAspect {
         // lock 취득 시도
         try {
             return joinPoint.proceed();
-        }finally {
-            // lock 해제
-            lockService.unlock(tokenProvider.getUsernameFromToken(token.substring(7)));
+        } catch (Exception e) {
+            return e.fillInStackTrace();
         }
+        finally {
+            // lock 해제
+            lockService.unlock(tokenProvider.getUsernameFromToken(withoutBearer));
+        }
+
     }
 
     @Around(value = "@annotation(com.zerobase.memberapi.aop.IncomeLock) && args(token, ..)")
@@ -60,14 +67,20 @@ public class LockAopAspect {
                                      String token) throws Throwable{
 
         // lock 취득 시도
-        lockService.lock(tokenProvider.getUsernameFromToken(token.substring(7))); // Bearer 제외
+        String withoutBearer = tokenWithoutBearer(token); // Bearer 제외
+        lockService.lock(tokenProvider.getUsernameFromToken(withoutBearer));
 
         try {
             return joinPoint.proceed();
+        } catch (Exception e) {
+            return e.fillInStackTrace();
         }finally {
             // lock 해제
-            lockService.unlock(tokenProvider.getUsernameFromToken(token.substring(7)));
+            lockService.unlock(tokenProvider.getUsernameFromToken(withoutBearer));
         }
     }
 
+    private String tokenWithoutBearer(String token){
+        return token.substring(7);
+    }
 }

@@ -31,7 +31,6 @@ public class MemberController {
     private final CustomerService customerService;
     private final SellerService sellerService;
     private final TokenProvider tokenProvider;
-    private final ValidationErrorResponse validationErrorResponse;
 
     /**
      * 고객 정보 등록
