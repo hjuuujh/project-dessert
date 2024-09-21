@@ -8,6 +8,7 @@ def getBranch() {
 pipeline {
     agent any
     options {
+
         // 푸시한 브랜치로 checkout 해야하므로 scm에서 설정한 branch로 checkout하는 과정 생략
         skipDefaultCheckout()
     }
