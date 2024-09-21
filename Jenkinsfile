@@ -37,6 +37,8 @@ pipeline {
                     // build위한 권한 변경
                     sh 'chmod +x gradlew'
 
+                    // clean
+                    sh './gradlew clean'
                     // 푸시한 서비스만 빌드
                     sh './gradlew ' + "$branch" + ':build'
                 }
