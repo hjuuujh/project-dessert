@@ -114,7 +114,7 @@ public class TokenProvider {
         } catch (MalformedJwtException e) {
             throw new MalformedJwtException(e.getMessage());
         } catch (ExpiredJwtException e) {
-            throw new MemberException(TOKEN_UNAUTHORIZED, "TOKEN이 만료되었습니다.");
+            throw new MemberException(TOKEN_UNAUTHORIZED);
         } catch (UnsupportedJwtException e) {
             throw new UnsupportedJwtException(e.getMessage());
         } catch (IllegalArgumentException e) {

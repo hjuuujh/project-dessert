@@ -22,42 +22,6 @@ public class GlobalExceptionHandler {
         return new ErrorResponse(e.getErrorCode(), e.getErrorMessage());
     }
 
-    @ExceptionHandler(SecurityException.class)
-    public ErrorResponse handleSecurityException(SecurityException e) {
-        log.error("Exception is occurred", e);
-
-        return new ErrorResponse(TOKEN_UNAUTHORIZED, e.getMessage());
-    }
-
-    @ExceptionHandler(MalformedJwtException.class)
-    public ErrorResponse handleMalformedJwtException(MalformedJwtException e) {
-        log.error("Exception is occurred", e);
-
-        return new ErrorResponse(TOKEN_UNAUTHORIZED, e.getMessage());
-    }
-
-    @ExceptionHandler(ExpiredJwtException.class)
-    public ErrorResponse handleExpiredJwtException(ExpiredJwtException e) {
-        log.error("Exception is occurred", e);
-
-        return new ErrorResponse(TOKEN_UNAUTHORIZED, e.getMessage());
-    }
-
-    @ExceptionHandler(UnsupportedJwtException.class)
-    public ErrorResponse handleUnsupportedJwtException(UnsupportedJwtException e) {
-        log.error("Exception is occurred", e);
-
-        return new ErrorResponse(TOKEN_UNAUTHORIZED, e.getMessage());
-    }
-
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ErrorResponse handleIllegalArgumentException(IllegalArgumentException e) {
-        log.error("Exception is occurred", e);
-
-        return new ErrorResponse(TOKEN_UNAUTHORIZED, e.getMessage());
-    }
-
-
     // 그외 에러
     @ExceptionHandler(Exception.class)
     public ErrorResponse handleException(Exception e) {
