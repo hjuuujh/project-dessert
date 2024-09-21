@@ -17,7 +17,7 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
+        stage('Checkout & Git') {
             steps {
                 script {
                     // branch 확인
