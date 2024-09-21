@@ -1,5 +1,7 @@
 package com.zerobase.memberapi.security;
 
+import com.zerobase.memberapi.exception.ErrorCode;
+import com.zerobase.memberapi.exception.MemberException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -20,6 +22,8 @@ import java.security.Key;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+
+import static com.zerobase.memberapi.exception.ErrorCode.TOKEN_UNAUTHORIZED;
 
 @Component
 @RequiredArgsConstructor
@@ -105,10 +109,12 @@ public class TokenProvider {
             Jws<Claims> claimsJws = Jwts.parserBuilder().setSigningKey(keyBytes).build().parseClaimsJws(token);
 
             return !claimsJws.getBody().getExpiration().before(new Date());
-        } catch (SecurityException | MalformedJwtException e) {
+        } catch (SecurityException e) {
             throw new SecurityException(e.getMessage());
+        } catch (MalformedJwtException e) {
+            throw new MalformedJwtException(e.getMessage());
         } catch (ExpiredJwtException e) {
-            throw new ExpiredJwtException(e.getHeader(), e.getClaims(), e.getMessage());
+            throw new MemberException(TOKEN_UNAUTHORIZED, "TOKEN이 만료되었습니다.");
         } catch (UnsupportedJwtException e) {
             throw new UnsupportedJwtException(e.getMessage());
         } catch (IllegalArgumentException e) {
