@@ -69,7 +69,7 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
         };
     }
 
-    // 인증 실패 Response
+    // 인증 실패 Response, 메세지 추가
     private Mono<Void> unauthorizedResponse(ServerWebExchange exchange, String errorMsg) {
         ObjectMapper om = new ObjectMapper();
 
