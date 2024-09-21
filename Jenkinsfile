@@ -25,7 +25,7 @@ pipeline {
 
                     // 푸시한 브랜치로 checkout, credential 에서 설정한 아이디
                     git branch: "dev/$branch", credentialsId: 'github', url: 'https://github.com/hjuuujh/project-dessert'
-//                    sh 'git pull origin '+"dev/$branch"
+                    sh 'git pull origin '+"dev/$branch"
                 }
             }
         }
