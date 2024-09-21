@@ -19,7 +19,6 @@ public class SellerController {
     private final CustomerService customerService;
     private final SellerService sellerService;
     private final TokenProvider tokenProvider;
-    private final ValidationErrorResponse validationErrorResponse;
 
     @GetMapping
     public ResponseEntity<?> getSeller(@RequestHeader(name = "Authorization") String token){

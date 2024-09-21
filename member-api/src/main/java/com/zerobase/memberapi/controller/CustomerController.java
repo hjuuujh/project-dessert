@@ -10,14 +10,18 @@ import com.zerobase.memberapi.service.CustomerService;
 import com.zerobase.memberapi.service.SellerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -26,7 +30,6 @@ import java.util.List;
 public class CustomerController {
     private final CustomerService customerService;
     private final TokenProvider tokenProvider;
-    private final ValidationErrorResponse validationErrorResponse;
 
     /**
      *
@@ -38,12 +41,11 @@ public class CustomerController {
     @PostMapping("/charge")
     @BalanceLock
     public ResponseEntity<?> chargeBalance(@RequestHeader(name = "Authorization") String token,
-                                           @RequestBody @Valid ChargeForm form, Errors errors) {
-        List<ResponseError> responseErrors = validationErrorResponse.checkValidation(errors);
-        if (!responseErrors.isEmpty()) {
-            return new ResponseEntity<>(responseErrors, HttpStatus.BAD_REQUEST);
+                                           @RequestBody @Validated ChargeForm form, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            List<String> errors = bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
+            return ResponseEntity.badRequest().body(new ErrorResponse("400", "Validation failure", errors));
         }
-
         return ResponseEntity.ok(customerService.chargeBalance(tokenProvider.getUserIdFromToken(token), form));
     }
     @GetMapping

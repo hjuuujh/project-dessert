@@ -35,7 +35,7 @@ public class Settlement {
         this.settlementAmount -= totalPrice;
     }
 
-    public void updateStatus() {
+    public void done() {
         this.status = SettlementStatus.DONE;
     }
 }

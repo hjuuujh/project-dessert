@@ -19,6 +19,7 @@ import com.zerobase.orderapi.exception.OrderException;
 import com.zerobase.orderapi.repository.OrdersRepository;
 import com.zerobase.orderapi.repository.SettlementRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,7 @@ import java.util.Optional;
 import static com.zerobase.orderapi.exception.ErrorCode.*;
 import static com.zerobase.orderapi.exception.ErrorCode.ALREADY_REFUND_REJECTED;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class OrderService {
@@ -213,9 +215,9 @@ public class OrderService {
         List<Settlement> settlements = settlementRepository.findBySellerIdAndStatusAndDateBetween(sellerId, SettlementStatus.YET, start, end);
         int settlementAmount = 0;
         for (Settlement settlement : settlements) {
-            System.out.println(settlement.getDate());
+            log.info("Date: {}", settlement.getDate());
             settlementAmount += settlement.getSettlementAmount();
-            settlement.updateStatus();
+            settlement.done();
         }
 
         IncreaseBalanceForm request = IncreaseBalanceForm.builder()
