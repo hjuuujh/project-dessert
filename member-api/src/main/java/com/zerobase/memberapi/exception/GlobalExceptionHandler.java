@@ -1,6 +1,8 @@
 package com.zerobase.memberapi.exception;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -20,36 +22,36 @@ public class GlobalExceptionHandler {
         return new ErrorResponse(e.getErrorCode(), e.getErrorMessage());
     }
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(SecurityException.class)
     public ErrorResponse handleSecurityException(SecurityException e) {
         log.error("Exception is occurred", e);
 
         return new ErrorResponse(TOKEN_UNAUTHORIZED, e.getMessage());
     }
 
-    @ExceptionHandler(Exception.class)
-    public ErrorResponse handleMalformedJwtException(SecurityException e) {
+    @ExceptionHandler(MalformedJwtException.class)
+    public ErrorResponse handleMalformedJwtException(MalformedJwtException e) {
         log.error("Exception is occurred", e);
 
         return new ErrorResponse(TOKEN_UNAUTHORIZED, e.getMessage());
     }
 
-    @ExceptionHandler(Exception.class)
-    public ErrorResponse handleExpiredJwtException(SecurityException e) {
+    @ExceptionHandler(ExpiredJwtException.class)
+    public ErrorResponse handleExpiredJwtException(ExpiredJwtException e) {
         log.error("Exception is occurred", e);
 
         return new ErrorResponse(TOKEN_UNAUTHORIZED, e.getMessage());
     }
 
-    @ExceptionHandler(Exception.class)
-    public ErrorResponse handleUnsupportedJwtException(SecurityException e) {
+    @ExceptionHandler(UnsupportedJwtException.class)
+    public ErrorResponse handleUnsupportedJwtException(UnsupportedJwtException e) {
         log.error("Exception is occurred", e);
 
         return new ErrorResponse(TOKEN_UNAUTHORIZED, e.getMessage());
     }
 
-    @ExceptionHandler(Exception.class)
-    public ErrorResponse handleIllegalArgumentException(SecurityException e) {
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ErrorResponse handleIllegalArgumentException(IllegalArgumentException e) {
         log.error("Exception is occurred", e);
 
         return new ErrorResponse(TOKEN_UNAUTHORIZED, e.getMessage());
