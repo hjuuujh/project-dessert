@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCode {
 
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error"),
+    TOKEN_UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "Token UnAuthorized"),
 
     // 회원가입
     ALREADY_REGISTERED_USER(HttpStatus.BAD_REQUEST, "이미 가입된 이메일입니다."),
