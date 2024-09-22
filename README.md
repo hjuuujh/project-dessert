@@ -138,8 +138,8 @@
   - 개발한 서비스 배포하기위해 가장 많이 사용하는 클라우드 컴퓨팅 서비스인 AWS 사용 
   
 - 구현 
-  - 각 서비스의 src/test/http/deloy의 scratch 파일들 통해 테스트 가능 
   ![aws](img/aws.png)
+  - 각 서비스의 src/test/http/deloy의 scratch 파일들 통해 테스트 가능
 - [AWS 서버 구축 과정](https://awesome-saxophone-bf8.notion.site/AWS-105ad1d5fb0b807f895bca13d61fb224)
 
 - 개선점
