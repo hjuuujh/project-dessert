@@ -6,16 +6,6 @@ spring:
     name: api-gateway
   cloud:
     gateway:
-      globalcors:
-        cors-configurations:
-          "[/**]":
-            allow-credentials: true
-            allowed-origin-patterns:
-              - "*"
-            allowed-headers:
-              - "*"
-            allowed-methods:
-              - "*"
       routes:
         # yml 이용해 선언적 방식으로 라우팅 구현
         # @Configuration 이용해 프로그래밍 방식으로도 라우팅 구현 가능
