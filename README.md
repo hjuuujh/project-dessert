@@ -3,7 +3,7 @@
 
 ## 프로젝트 소개
 - 주제 선정 이유 
-  - 부트캠프에서 공부한 기술들을 개인 프로젝트에 적용해보고자 하였고 이커머스 프로젝트를 개발해보는 것이 적합하다고 생각했습니다.
+  - 부트캠프에서 공부한 기술들을 개인 프로젝트에 적용해보고자 하였고 이커머스 프로젝트를 개발해보는 것이 적합하다고 생각 
 - 기능
   - 회원가입 & 로그인
   - 잔액 충전 
@@ -24,15 +24,24 @@
 - Docker & Docker Compose
 - Jenkins
 - AWS
+- Terraform
 - Github
 
 ## 사용 기술 
-    
-#### Spring Cloud
+[Spring Cloud](#spring-cloud)
+[Spring AOP & Redisson](#spring-aop--redisson)
+[Spring Batch](#spring-batch)
+[Redis](#redis)
+[Spring REST Docs & Open API](#spring-rest-docs--open-api)
+[AWS](#aws)
+[Jenkins](#jenkins)
+
+### Spring Cloud
 - 사용 이유 
- - 프로젝트 규모가 커지면서 기존 모놀리틱 방식으로 개발한 서비스는 한 서비스에서 에러가 발생하면 다른 서비스에도 장애가 발생하는 불편한 경험
- - -> 서비스를 분리해 개발할 필요성을 느껴 현업에서도 많이 사용되는 MSA로 구성된 프로젝트를 구현해보기로 결정
- - -> Spring 에서 MSA 개발을 위해 제공하는 Spring Cloud를 사용해 구현
+  - 프로젝트 규모가 커지면서 기존 모놀리틱 방식으로 개발한 서비스는 한 서비스에서 에러가 발생하면 다른 서비스에도 장애가 발생하는 불편한 경험
+  - -> 서비스를 분리해 개발할 필요성을 느껴 현업에서도 많이 사용되는 MSA로 구성된 프로젝트를 구현해보기로 결정
+  - -> Spring 에서 MSA 개발을 위해 제공하는 Spring Cloud를 사용해 구현
+  
 - 구조
 ![MSA](img/msa.png)
 
@@ -48,24 +57,57 @@
   - 분산 추적, 모니터링 기능
   - Circuit Breaker 사용해 전체 서비스 속도 저하,  중단 방지 
 
-- Spring AOP
-  - 사용 이유
-  - 결과
-- Spring Batch
-  - 사용 이유
-  - 결과
-- Spring REST Docs & Open API
-  - 사용 이유
-  - 결과
-- Redis
-  - 사용 이유
-  - 결과
-- AWS
-  - 사용 이유
-  - 결과
-- Jenkins
-  - 사용 이유
-  - 결과
+### Spring AOP & Redisson
+- 사용 이유
+  - 고객의 포인트 충전/차감/환불시 동시성 문제를 해결할 방법 필요 
+  - redis와 redisson에서 분산락을 이미 구현하여 제공해 별도의 구현 로직이 필요하지 않고 부하가 적기때문에 이용
+  - 고객의 포인트에 접근할때마다 lock을 사용하기보다는 AOP를 이용해 분리하는 것이 핵심 로직을 오염시키지 않는 방법
+  - -> interface를 구현해 고객의 포인트에 접근하는 요청이 있는 컨트롤러에 적용
+  
+- 구현 
+  - @interface, @Aspect, @Around 이용
+  - log에 lock 취득 기록 및 확인
+  - ```2024-09-22 17:43:42.616  INFO 49168 --- [nio-8090-exec-1] c.z.memberapi.service.LockService        : Trying lock for email : user2@gmail.com```
+
+### Spring Batch
+- 사용 이유
+  - 현업에서는 구매후 바로 판매자에게 입금되기보다는 기간별로 정산
+  - 일정 기간동안 쌓인 많은 데이터를 처리할 방법 필요
+  - -> Spring Batch를 이용해 매일 새벽 4시 판매자별 수익을 합산해 정산테이블에 저장 후 판매자가 기간별 정산을 요청하는 방식으로 구현 
+  
+- 구현
+  - 오더시스템에서 주문관련 데이터베이스와 배치 데이터베이스를 분리
+  - group by 이용해 판매자 아이디별로 전날 수익을 합산하는 쿼리 생성    
+  - JdbcTemplate.batchUpdate 이용해 쓰기 속도 향상
+  - Scheduler이용해 새벽 4시에 Batch Job 실행하도록 스케줄러 추가 
+
+- 개선점
+  - group by, sum이용시 데이터베이스 부하증가
+  - -> redis등 다른 기술 이용한 성능 개선 필요 
+  
+### Redis
+- 사용 이유 
+  - 장바구니 서비스를 구현 
+  - 사용하는 데이터 베이스인 MySQL 이용시 장바구니 수정은 빈번히 일어나는 이벤트이기 때문에 속도저하 
+  - -> in memory DB인 Redis를 이용하기로 결정 
+  
+- 구현 
+  - Redis 도커 이용해 구축
+  - RedisTemplate 이용 
+  - customerId를 키로 이용해 아이템과 옵션을 저장
+  - 장바구니에 담은 옵션의 정보가 변경된 경우 카트의 메세지에 추가해 카트 조회시 확인 가능
+  - 주문시 주문하지 않은 아이템과 옵션은 장바구니에 남아있도록 구현 
+  
+### Spring REST Docs & Open API
+- 사용 이유
+  - 현재는 백엔드만 개발하고있지만 
+- 구현
+### AWS
+- 사용 이유
+- 구현 
+### Jenkins
+- 사용 이유
+- 구현 
 
 ## 상세 기능
 - 아래꺼 노션에 정리해서 페이지 링크
