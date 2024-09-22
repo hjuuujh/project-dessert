@@ -1,18 +1,12 @@
 variable "my_ip" {
   type    = string
-  default = "121.88.31.13/32"
+  default = "내 ip/32"
 }
 
 variable "key_pair_name" {
   type    = string
   default = "dessert-key-pair"
 }
-#
-# variable "key_pair_name" {
-#   type    = string
-#   default = "dessert-key-pair"
-# }
-
 
 # public subnet의 cidr 목록
 variable "aws_public_subnets" {

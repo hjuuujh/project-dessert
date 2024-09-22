@@ -8,16 +8,18 @@ def getBranch() {
 pipeline {
     agent any
     options {
+
         // 푸시한 브랜치로 checkout 해야하므로 scm에서 설정한 branch로 checkout하는 과정 생략
         skipDefaultCheckout()
     }
     environment {
+
         // 여기서 설정하면 stage 전체에서 사용가능
         branch = getBranch()
     }
 
     stages {
-        stage('Checkout') {
+        stage('Checkout & Git Pull') {
             steps {
                 script {
                     // branch 확인
@@ -48,14 +50,14 @@ pipeline {
             }
         }
 
-        stage('Openapi3') {
-            // when 이용해 서비스 재배포시에만 openapi3 yaml 생성
-            when { expression { return "$branch".contains('-api') } }
-            steps {
-                sh './gradlew ' + "$branch" + ':openapi3'
-
-            }
-        }
+//        stage('Openapi3') {
+//            // when 이용해 서비스 재배포시에만 openapi3 yaml 생성
+//            when { expression { return "$branch".contains('-api') } }
+//            steps {
+//                sh './gradlew ' + "$branch" + ':openapi3'
+//
+//            }
+//        }
 
         stage('Build Image and Docker Hub Push') {
             steps {
@@ -76,13 +78,13 @@ pipeline {
             }
         }
 
-        stage('Copy openapi3.yaml') {
-            // when 이용해 서비스 재배포시에만 openapi3 yaml 배포 서버로 전송
-            when { expression { return "$branch".contains('-api') } }
-            steps {
-                sh 'scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/workspace/dessert-key-pair.pem -r ./' + "$branch" + '/src/main/resources/static/docs/openapi/openapi3.yaml ubuntu@ec2-43-201-61-191.ap-northeast-2.compute.amazonaws.com:/home/ubuntu/spring/openapi/' + "$branch" + '-openapi3.yaml'
-            }
-        }
+//        stage('Copy openapi3.yaml') {
+//            // when 이용해 서비스 재배포시에만 openapi3 yaml 배포 서버로 전송
+//            when { expression { return "$branch".contains('-api') } }
+//            steps {
+//                sh 'scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/workspace/dessert-key-pair.pem -r ./' + "$branch" + '/src/main/resources/static/docs/openapi/openapi3.yaml ubuntu@ec2-43-201-61-191.ap-northeast-2.compute.amazonaws.com:/home/ubuntu/spring/openapi/' + "$branch" + '-openapi3.yaml'
+//            }
+//        }
 
         stage('Deploy') {
             steps {

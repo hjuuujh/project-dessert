@@ -32,30 +32,45 @@ public class LockAopAspect {
      */
     // args 는 annotaion 붙은 함수의 파리미터와 순서, 개수 맞아야 aop 실행함
     // toekn, .. : 맨 처음이 token이고 뒤에 파라미터가 있는경우
-    @Around(value = "@annotation(com.zerobase.memberapi.aop.BalanceLock) && args(token, form, ..)")
-    public Object customerAroundMethod(ProceedingJoinPoint joinPoint,
-                               String token,
-                               BalanceLockIdInterface form) throws Throwable{
-        
+    @Around(value = "@annotation(com.zerobase.memberapi.aop.BalanceLock) && args(token, ..)")
+    public Object customerChargeAroundMethod(ProceedingJoinPoint joinPoint,
+                                             String token) throws Throwable {
+
         String withoutBearer = tokenWithoutBearer(token); // Bearer 제외
 
-        // 얘가 chrgebalance면 토큰으로 이메일 구해서 바로 락 취득
-        if("chargeBalance".equals(joinPoint.getSignature().getName())) {
-            lockService.lock(tokenProvider.getUsernameFromToken(withoutBearer));
-        }else {
-            // 그외 넘어온 customerid로 이메일 구해서 락 취득
-            Customer customer = customerRepository.findById(form.getCustomerId()).orElseThrow(() -> new MemberException(ErrorCode.NOT_FOUND_USER));
-            lockService.lock(customer.getEmail());
-        }
-
+        // charge balance면 토큰으로 이메일 구해서 바로 락 취득
+        lockService.lock(tokenProvider.getUsernameFromToken(withoutBearer));
 
         // lock 취득 시도
         try {
             return joinPoint.proceed();
         } catch (Exception e) {
             return e.fillInStackTrace();
+        } finally {
+            // lock 해제
+            lockService.unlock(tokenProvider.getUsernameFromToken(withoutBearer));
         }
-        finally {
+
+    }
+
+    @Around(value = "@annotation(com.zerobase.memberapi.aop.BalanceLock) && args(token, form, ..)")
+    public Object customerAroundMethod(ProceedingJoinPoint joinPoint,
+                                       String token,
+                                       BalanceLockIdInterface form) throws Throwable {
+
+        String withoutBearer = tokenWithoutBearer(token); // Bearer 제외
+
+
+        // 그외 넘어온 customerid로 이메일 구해서 락 취득
+        Customer customer = customerRepository.findById(form.getCustomerId()).orElseThrow(() -> new MemberException(ErrorCode.NOT_FOUND_USER));
+        lockService.lock(customer.getEmail());
+
+        // lock 취득 시도
+        try {
+            return joinPoint.proceed();
+        } catch (Exception e) {
+            return e.fillInStackTrace();
+        } finally {
             // lock 해제
             lockService.unlock(tokenProvider.getUsernameFromToken(withoutBearer));
         }
@@ -64,7 +79,7 @@ public class LockAopAspect {
 
     @Around(value = "@annotation(com.zerobase.memberapi.aop.IncomeLock) && args(token, ..)")
     public Object sellerAroundMethod(ProceedingJoinPoint joinPoint,
-                                     String token) throws Throwable{
+                                     String token) throws Throwable {
 
         // lock 취득 시도
         String withoutBearer = tokenWithoutBearer(token); // Bearer 제외
@@ -74,13 +89,13 @@ public class LockAopAspect {
             return joinPoint.proceed();
         } catch (Exception e) {
             return e.fillInStackTrace();
-        }finally {
+        } finally {
             // lock 해제
             lockService.unlock(tokenProvider.getUsernameFromToken(withoutBearer));
         }
     }
 
-    private String tokenWithoutBearer(String token){
+    private String tokenWithoutBearer(String token) {
         return token.substring(7);
     }
 }

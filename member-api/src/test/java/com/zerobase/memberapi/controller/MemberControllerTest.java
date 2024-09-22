@@ -46,9 +46,6 @@ class MemberControllerTest {
     private SellerService sellerService;
     @MockBean
     private TokenProvider tokenProvider;
-    @MockBean
-    private ValidationErrorResponse validationErrorResponse;
-
 
     @Autowired
     private MockMvc mvc;
