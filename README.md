@@ -28,13 +28,13 @@
 - Github
 
 ## 사용 기술 
-[Spring Cloud](#spring-cloud)
-[Spring AOP & Redisson](#spring-aop--redisson)
-[Spring Batch](#spring-batch)
-[Redis](#redis)
-[Spring REST Docs & Open API](#spring-rest-docs--open-api)
-[AWS](#aws)
-[Jenkins](#jenkins)
+- [Spring Cloud](#spring-cloud)
+- [Spring AOP & Redisson](#spring-aop--redisson)
+- [Spring Batch](#spring-batch)
+- [Redis](#redis)
+- [Spring REST Docs & Open API](#spring-rest-docs--open-api)
+- [AWS](#aws)
+- [Jenkins](#jenkins)
 
 ### Spring Cloud
 - 사용 이유 
