@@ -97,25 +97,26 @@
   - 장바구니 서비스를 구현 
   - 사용하는 데이터 베이스인 MySQL 이용시 장바구니 수정은 빈번히 일어나는 이벤트이기 때문에 속도저하  
   ➡️  in memory DB인 Redis를 이용하기로 결정 
-  
-- 구현 
+
+- 구현
   - Redis 도커 이용해 구축
-  - RedisTemplate 이용 
+  - RedisTemplate 이용
   - customerId를 키로 이용해 아이템과 옵션을 저장
   - 장바구니에 담은 옵션의 정보가 변경된 경우 카트의 메세지에 추가해 카트 조회시 확인 가능
-  - 주문시 주문하지 않은 아이템과 옵션은 장바구니에 남아있도록 구현 
-  
+  - 주문시 주문하지 않은 아이템과 옵션은 장바구니에 남아있도록 구현
+
 ### Spring REST Docs & Open API
 - 사용 이유
   - 현재는 백엔드만 개발하고있지만 프론트 엔드에서 API를 이용할때 소통이 필요
   - 기존에 사용하던 Swagger은 부가적인 코드들로 인해 구현 내용을 파악하기 어렵게 만든다고 생각
-  - 비즈니스 코드와는 분리되어 가독성을 상승시키고 테스트 작성을 통해 신뢰도를 상승시키는 REST Docs를 이용 
-  - REST Docs를 생성하고보니 API Test를 지원하지 않는점이 불편할 수 도있다는 생각
-  - 기존에 작성한 테스트 코드와 OpenApi를 이용해 비즈니스 코드와도 분리되고 API Test도 해볼 수 있기때문에 사용 
-  
+  ➡️  비즈니스 코드와는 분리되어 가독성을 상승시키고 테스트 작성을 통해 신뢰도를 상승시키는 REST Docs를 이용
+  ➡️  REST Docs를 생성하고보니 API Test를 지원하지 않는점이 불편할 수도 있다고 생각
+  ➡️  OpenApi는 테스트 코드를 통핸 신뢰도 상승과 비즈니스 코드와의 분리, API Test도 해볼 수 있기때문에 사용
+
 - 구현
   - REST Docs
     ![restdocs](img/restdocs.png)
+  - OpenAPI 
   - restdocs-api-spec 이용해 테스트코드 작성
     ![openapi](img/openapi.png)
 
@@ -127,7 +128,7 @@
 - 구현
   - 서비스마다 Dockerfile 작성
   - 프로젝트에 docker-compose.yml 작성 
-  - ![docker](img/docker.png)
+  ![docker](img/docker.png)
   
 - 개선점
   - 이미지 경량화 
@@ -137,7 +138,7 @@
   - 개발한 서비스 배포하기위해 가장 많이 사용하는 클라우드 컴퓨팅 서비스인 AWS 사용 
   
 - 구현 
-  - ![aws](img/aws.png)
+  ![aws](img/aws.png)
   - [AWS 서버 구축 과정](https://awesome-saxophone-bf8.notion.site/AWS-105ad1d5fb0b807f895bca13d61fb224)
 
 - 개선점
@@ -151,7 +152,7 @@
   - Jenkins를 이용해 자동으로 배포하도록 결정
   
 - 구현 
-  - ![ci-cd](img/ci-cd.png)
+  ![ci-cd](img/ci-cd.png)
   - [Jenkins Pipeline 구축 과정](https://awesome-saxophone-bf8.notion.site/Jenkins-Pipeline-105ad1d5fb0b80ac9d83e919ea144d06)
   
 - 개선점
