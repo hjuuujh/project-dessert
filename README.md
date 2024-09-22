@@ -139,7 +139,7 @@
   
 - 구현 
   ![aws](img/aws.png)
-  - [AWS 서버 구축 과정](https://awesome-saxophone-bf8.notion.site/AWS-105ad1d5fb0b807f895bca13d61fb224)
+- [AWS 서버 구축 과정](https://awesome-saxophone-bf8.notion.site/AWS-105ad1d5fb0b807f895bca13d61fb224)
 
 - 개선점
   - bastion host 추가해 Jenkins를 private subnet으로 이동
@@ -153,7 +153,7 @@
   
 - 구현 
   ![ci-cd](img/ci-cd.png)
-  - [Jenkins Pipeline 구축 과정](https://awesome-saxophone-bf8.notion.site/Jenkins-Pipeline-105ad1d5fb0b80ac9d83e919ea144d06)
+- [Jenkins Pipeline 구축 과정](https://awesome-saxophone-bf8.notion.site/Jenkins-Pipeline-105ad1d5fb0b80ac9d83e919ea144d06)
   
 - 개선점
   - 무중단 배포 : 현재 배포원하는 서비스의 컨테이너 중단후 새로운 이미지 받아 컨테이너 재시작하고 있음
