@@ -35,8 +35,10 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
         return (exchange, chain) -> {
             String requiredRole = config.getRole();
             boolean hasToken = exchange.getRequest().getHeaders().containsKey("Authorization");
+            log.info(String.valueOf(hasToken));
             if (!hasToken) {
                 return unauthorizedResponse(exchange, "Token이 존재하지 않습니다.");
+//                return unauthorizedResponse(exchange);
             }
 
             String authorizationHeader = Objects.requireNonNull(exchange.getRequest().getHeaders().get(config.getHeaderName())).get(0); // Authorization의 value(token) 가져옴 & [] 제외
@@ -51,8 +53,6 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
                     } else {
                         log.error("토큰이 유효하지 않음");
                     }
-                    System.out.println(userRole);
-                    System.out.println(requiredRole);
                     if (requiredRole.contains(userRole)) {
                         log.info("권한 확인 완료");
                         return chain.filter(exchange); // 토큰과 권한이 모두 유효하므로 filter 계속
@@ -65,11 +65,16 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
                 }
             }
             return unauthorizedResponse(exchange, errorMsg); // 토큰이 유효하지 않으므로 인증 실패 응답
+//            return unauthorizedResponse(exchange); // 토큰이 유효하지 않으므로 인증 실패 응답
 
         };
     }
 
     // 인증 실패 Response, 실패 메세지 추가
+//    private Mono<Void> unauthorizedResponse(ServerWebExchange exchange) {
+//        exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+//        return exchange.getResponse().setComplete();
+//    }
     private Mono<Void> unauthorizedResponse(ServerWebExchange exchange, String errorMsg) {
         ObjectMapper om = new ObjectMapper();
 
