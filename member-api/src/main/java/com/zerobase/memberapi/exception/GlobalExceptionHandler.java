@@ -1,10 +1,14 @@
 package com.zerobase.memberapi.exception;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import static com.zerobase.memberapi.exception.ErrorCode.INTERNAL_SERVER_ERROR;
+import static com.zerobase.memberapi.exception.ErrorCode.TOKEN_UNAUTHORIZED;
 
 
 @Slf4j
