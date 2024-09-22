@@ -33,8 +33,6 @@ public class TokenProvider {
 
     private static final long TOKEN_EXPIRE_TIME = 1000L * 60 * 60 * 24; // token 만료시간 : 하루
     private static final String KEY_ROLES = "roles";
-    private final CustomerService customerService;
-    private final SellerService sellerService;
     public static final String TOKEN_PREFIX = "Bearer ";
 
     @Value("${spring.jwt.secret}")
@@ -60,18 +58,6 @@ public class TokenProvider {
 
     }
 
-    // 토큰 이용해 인증 정보 반환
-    public Authentication getAuthentication(String token) {
-        UserDetails userDetails;
-
-        if("[ROLE_CUSTOMER]".equals(this.getUserRole(token))) {
-            userDetails = customerService.loadUserByUsername(this.getUsernameFromToken(token));
-        }else{
-            userDetails = sellerService.loadUserByUsername(this.getUsernameFromToken(token));
-        }
-        log.info("{} {}", userDetails.getAuthorities(), userDetails.getUsername());
-        return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-    }
 
     // 토큰이용해 유저 이메일 복호화해 리턴
     public String getUsernameFromToken(String token) {
@@ -100,25 +86,4 @@ public class TokenProvider {
         }
     }
 
-    // 토큰 만료되었는지 확인 (1일이 지났는지)
-    public boolean validateToken(String token) {
-        if (!StringUtils.hasText(token)) return false;
-
-        try {
-            byte[] keyBytes = Decoders.BASE64.decode(secretKey);
-            Jws<Claims> claimsJws = Jwts.parserBuilder().setSigningKey(keyBytes).build().parseClaimsJws(token);
-
-            return !claimsJws.getBody().getExpiration().before(new Date());
-        } catch (SecurityException e) {
-            throw new SecurityException(e.getMessage());
-        } catch (MalformedJwtException e) {
-            throw new MalformedJwtException(e.getMessage());
-        } catch (ExpiredJwtException e) {
-            throw new MemberException(TOKEN_UNAUTHORIZED);
-        } catch (UnsupportedJwtException e) {
-            throw new UnsupportedJwtException(e.getMessage());
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(e);
-        }
-    }
 }

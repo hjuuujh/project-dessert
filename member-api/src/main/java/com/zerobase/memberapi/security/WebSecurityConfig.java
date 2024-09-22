@@ -12,7 +12,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @Slf4j
@@ -21,7 +20,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     // Spring Security 설정
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final SellerService sellerService;
     private final CustomerService customerService;
 
@@ -36,11 +34,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // jwt token으로 인증하므로 세션은 필요없으므로 생성안함
                     .and()
                     .authorizeRequests() // 다음 리퀘스트에 대한 사용권한 체크
-                    .antMatchers("/api/member/signup/**", "/api/member/signin/**").permitAll() // 가입 및 인증 주소는 누구나 접근가능
-                    .and()
-                    .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                    .antMatchers("/api/member/signup/**", "/api/member/signin/**").permitAll(); // 가입 및 인증 주소는 누구나 접근가능
 
         }
+
         @Override
         protected void configure(AuthenticationManagerBuilder auth) throws Exception {
             auth.userDetailsService(customerService);
@@ -58,11 +55,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // jwt token으로 인증하므로 세션은 필요없으므로 생성안함
                     .and()
                     .authorizeRequests() // 다음 리퀘스트에 대한 사용권한 체크
-                    .antMatchers("/api/member/signup/**", "/api/member/signin/**").permitAll() // 가입 및 인증 주소는 누구나 접근가능
-                    .and()
-                    .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                    .antMatchers("/api/member/signup/**", "/api/member/signin/**").permitAll(); // 가입 및 인증 주소는 누구나 접근가능
 
         }
+
         @Override
         protected void configure(AuthenticationManagerBuilder auth) throws Exception {
             auth.userDetailsService(sellerService);
