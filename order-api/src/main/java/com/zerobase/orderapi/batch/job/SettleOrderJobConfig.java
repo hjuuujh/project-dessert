@@ -74,8 +74,8 @@ public class SettleOrderJobConfig {
     public JpaPagingItemReader<OrderSettleDto> orderItemReader() {
         log.info("=========== RepositoryItemReader Start ===========");
 
-        LocalDateTime yesterday = LocalDateTime.now().minusDays(5);
-        LocalDateTime today = LocalDateTime.now().plusDays(5);
+        LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
+        LocalDateTime today = LocalDateTime.now();
         String query = "select new com.zerobase.orderapi.batch.model.OrderSettleDto(" +
                 " sellerId, sum(totalPrice) as settlementAmount " +
                 ") " +
