@@ -27,7 +27,6 @@ pipeline {
 
                     // 푸시한 브랜치로 checkout, credential 에서 설정한 아이디
                     git branch: "dev/$branch", credentialsId: 'github', url: 'https://github.com/hjuuujh/project-dessert'
-//                    sh 'git pull origin '+"dev/$branch"
                 }
             }
         }
@@ -50,14 +49,14 @@ pipeline {
             }
         }
 
-//        stage('Openapi3') {
-//            // when 이용해 서비스 재배포시에만 openapi3 yaml 생성
-//            when { expression { return "$branch".contains('-api') } }
-//            steps {
-//                sh './gradlew ' + "$branch" + ':openapi3'
-//
-//            }
-//        }
+        stage('Openapi3') {
+            // when 이용해 서비스 재배포시에만 openapi3 yaml 생성
+            when { expression { return "$branch".contains('-api') } }
+            steps {
+                sh './gradlew ' + "$branch" + ':openapi3'
+
+            }
+        }
 
         stage('Build Image and Docker Hub Push') {
             steps {
@@ -78,13 +77,13 @@ pipeline {
             }
         }
 
-//        stage('Copy openapi3.yaml') {
-//            // when 이용해 서비스 재배포시에만 openapi3 yaml 배포 서버로 전송
-//            when { expression { return "$branch".contains('-api') } }
-//            steps {
-//                sh 'scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/workspace/dessert-key-pair.pem -r ./' + "$branch" + '/src/main/resources/static/docs/openapi/openapi3.yaml ubuntu@ec2-43-201-61-191.ap-northeast-2.compute.amazonaws.com:/home/ubuntu/spring/openapi/' + "$branch" + '-openapi3.yaml'
-//            }
-//        }
+        stage('Copy openapi3.yaml') {
+            // when 이용해 서비스 재배포시에만 openapi3 yaml 배포 서버로 전송
+            when { expression { return "$branch".contains('-api') } }
+            steps {
+                sh 'scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/workspace/dessert-key-pair.pem -r ./' + "$branch" + '/src/main/resources/static/docs/openapi/openapi3.yaml ubuntu@ec2-43-201-61-191.ap-northeast-2.compute.amazonaws.com:/home/ubuntu/spring/openapi/' + "$branch" + '-openapi3.yaml'
+            }
+        }
 
         stage('Deploy') {
             steps {
