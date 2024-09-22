@@ -1,16 +1,81 @@
 ## 커머스 서비스
 직접 만든 디저트를 판매하거나 구매할 수 있는 서비스입니다.
 
+## 프로젝트 소개
+- 주제 선정 이유 
+  - 부트캠프에서 공부한 기술들을 개인 프로젝트에 적용해보고자 하였고 이커머스 프로젝트를 개발해보는 것이 적합하다고 생각했습니다.
+- 기능
+  - 회원가입 & 로그인
+  - 잔액 충전 
+  - 스토어 등록/수정/삭제/검색 
+  - 스토어내 아이템 등록/수정/삭제/검색
+  - 스토어 팔로우/언팔로우
+  - 아이템 하트/하트 취소
+  - 장바구니 등록/수정/삭제/조회
+  - 장바구니 주문 
+  - 정산 
+
+## 개발 환경
+- Ubuntu
+- IntelliJ
+- Spring Boot
+- MySQL
+- Redis
+- Docker & Docker Compose
+- Jenkins
+- AWS
+- Github
+
+## 사용 기술 
+    
+#### Spring Cloud
+- 사용 이유 
+ - 프로젝트 규모가 커지면서 기존 모놀리틱 방식으로 개발한 서비스는 한 서비스에서 에러가 발생하면 다른 서비스에도 장애가 발생하는 불편한 경험
+ - -> 서비스를 분리해 개발할 필요성을 느껴 현업에서도 많이 사용되는 MSA로 구성된 프로젝트를 구현해보기로 결정
+ - -> Spring 에서 MSA 개발을 위해 제공하는 Spring Cloud를 사용해 구현
+- 구조
+![MSA](img/msa.png)
+
+- 구현 
+  - Spring Cloud Gateway (api-gateway) : Spring 생태계를 기반으로 하는 API Gateway를 제공, AuthorizationHeaderFilter를 이용해 jwt 토큰인증 & 권한 확인        
+  - Spring Cloud Config (config-server) : 분산 시스템에서 외부화된 설정 정보를 서버 및 클라이언트에게 제공, 공개하면 안되는 설정 정보들은 비대칭키 방식(JDK Keytool) 이용해 관리
+  - Spring Cloud Netflix - Eureka Server (eureka-server) : service discovery 역할, 어플리케이션의 서로간 통신에 이용      
+  - member-api : 회원 정보 관련 어플리케이션   
+  - store-api : 상점/아이템 관련 어플리케이션        
+  - order-api : 주문/정산 관련 어플리케이션 
+
+- 개선점 
+  - 분산 추적, 모니터링 기능
+  - Circuit Breaker 사용해 전체 서비스 속도 저하,  중단 방지 
+
+- Spring AOP
+  - 사용 이유
+  - 결과
+- Spring Batch
+  - 사용 이유
+  - 결과
+- Spring REST Docs & Open API
+  - 사용 이유
+  - 결과
+- Redis
+  - 사용 이유
+  - 결과
+- AWS
+  - 사용 이유
+  - 결과
+- Jenkins
+  - 사용 이유
+  - 결과
+
+## 상세 기능
+- 아래꺼 노션에 정리해서 페이지 링크
+
+## 피드백 
+
 
 ## 프로젝트 구조
-- Spring Cloud Eureka Server로 마이크로 서비스 애플리케이션 구현
-    - api-gateway : AuthorizationHeaderFilter를 이용해 jwt 토큰인증 & 권한 확인
-    - config-server : 공개하면 안되는 설정 정보들을 비대칭키 방식(JDK Keytool) 이용해 관리
-    - eureka-server : service discovery 역할, 어플리케이션의 서로간 통신에 이용
-    - member-api : 회원 정보 관련 어플리케이션
-    - store-api : 상점/디저트 관련 어플리케이션
-    - order-api : 주문 관련 어플리케이션
-    - ![MSA](img/msa.png)
+
+  
 ## 프로젝트 기능 및 설계
 - 회원가입 기능
     - 사용자는 고객/셀러중 가입가능하며 다른 권한을 가진다.
