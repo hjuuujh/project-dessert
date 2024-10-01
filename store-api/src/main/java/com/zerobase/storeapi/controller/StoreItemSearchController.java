@@ -1,5 +1,7 @@
 package com.zerobase.storeapi.controller;
 
+import com.zerobase.storeapi.domain.type.Category;
+import com.zerobase.storeapi.domain.type.OrderBy;
 import com.zerobase.storeapi.service.StoreItemSearchService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/store/item/search")
 public class StoreItemSearchController {
     private final StoreItemSearchService storeItemSearchService;
+
+    @GetMapping
+    public ResponseEntity<?> searchItem(@RequestParam String keyword,
+                                        @RequestParam(required = false) Category category,
+                                        @RequestParam(required = false) OrderBy order,
+                                        final Pageable pageable) {
+        return ResponseEntity.ok(storeItemSearchService.searchItem(keyword, category, order, pageable));
+    }
 
     @GetMapping("/order")
     public ResponseEntity<?> searchItemByKeyword(@RequestParam String keyword, final Pageable pageable) {
@@ -49,7 +59,7 @@ public class StoreItemSearchController {
     }
 
     @GetMapping("/detail")
-    public ResponseEntity<?> searchItem(@RequestParam Long itemId) {
-        return ResponseEntity.ok(storeItemSearchService.searchItem(itemId));
+    public ResponseEntity<?> detailItem(@RequestParam Long itemId) {
+        return ResponseEntity.ok(storeItemSearchService.detailItem(itemId));
     }
 }

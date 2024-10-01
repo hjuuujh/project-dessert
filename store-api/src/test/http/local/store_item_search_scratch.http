@@ -1,3 +1,15 @@
+### querydsl search item by keyword
+GET http://localhost:8080/api/store/item/search?keyword=노밀가루&page=0&size=5
+
+### querydsl search item by keyword + category
+GET http://localhost:8080/api/store/item/search?keyword=노밀가루&category=CAKE&page=0&size=5
+
+### querydsl search item by keyword + order
+GET http://localhost:8080/api/store/item/search?keyword=&order=HEART&page=0&size=5
+
+### querydsl search item by keyword + category + order
+GET http://localhost:8080/api/store/item/search?keyword=노밀가루&category=CAKE&order=HEART&page=0&size=5
+
 ### search item by keyword + order count
 GET http://localhost:8080/api/store/item/search/order?keyword=노밀가루&page=0&size=5
 
