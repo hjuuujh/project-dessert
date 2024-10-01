@@ -55,7 +55,7 @@ public class CartService {
 
             cart.setMessages(new ArrayList<>());
 
-            //추가된 제품의 이름이 기존과 달라진 경우 알림
+            // 추가된 제품의 이름이 기존과 달라진 경우 알림
             if (!redisItem.getName().equals(form.getName())) {
                 cart.addMessage(redisItem.getName() + "의 정보가 변경되었습니다. 확인 부탁드립니다.");
             }
